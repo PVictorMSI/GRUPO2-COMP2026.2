@@ -1,0 +1,1 @@
+Essa pasta possui testes no qual, em algum momento do compilador, deve retornar um erro. Deve estar escrito no arquivo qual erro e em qual fase deve acontecer
