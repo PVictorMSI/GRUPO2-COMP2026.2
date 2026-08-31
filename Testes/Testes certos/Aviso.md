@@ -1,0 +1,1 @@
+Essa pasta possui testes no qual o compilador não deve ter problema de resolver.
