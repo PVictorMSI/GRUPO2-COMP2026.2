@@ -1,5 +1,18 @@
 var1 = 1
 var2 = 2
-var1++
 
--- ++ n é algo do lua, deve voltar erro 
+
+
+
+
+
+
+
+
+
+
+
+var 3 = "Hello
+
+
+--Deve retornar algo na linha 15

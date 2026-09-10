@@ -33,7 +33,7 @@ static void str_buf_append(char c) {
 
 LETRA   [a-zA-Z_]
 DIGITO  [0-9]
-ID      {LETRA}({LETRA}|{DIGITO})*
+ID      {(LETRA|_)}({LETRA}|{DIGITO})*
 INT     [0-9]+
 FLOAT   [0-9]+"."[0-9]+
 STRING_D  \"([^\"\n\\]|\\.)*\"
@@ -193,6 +193,7 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 
  /* qualquer outro caractere não reconhecido: erro léxico */
 .                       {
+
                           fprintf(stderr, "Erro léxico na linha %d: caractere inesperado '%s'\n", linha, yytext);
                         }
 
