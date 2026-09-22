@@ -33,7 +33,7 @@ static void str_buf_append(char c) {
 
 LETRA   [a-zA-Z_]
 DIGITO  [0-9]
-ID      {(LETRA|_)}({LETRA}|{DIGITO})*
+ID      ({LETRA}|_)(({LETRA}|{DIGITO}|_)*)
 INT     [0-9]+
 FLOAT   [0-9]+"."[0-9]+
 STRING_D  \"([^\"\n\\]|\\.)*\"
@@ -159,7 +159,6 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           yylval.intValue = atoi(yytext);
                           return NUM;
                         }
-
  /* literais de string curtas */
 {STRING_D}              {
                           yylval.strValue = strndup(yytext + 1, yyleng - 2);
@@ -180,7 +179,6 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           fprintf(stderr, "Erro léxico na linha %d: string não terminada\n", linha);
                           linha++;
                         }
-
  /* identificadores devem vir DEPOIS das palavras reservadas */
 {ID}                    {
                           yylval.strValue = strdup(yytext);
