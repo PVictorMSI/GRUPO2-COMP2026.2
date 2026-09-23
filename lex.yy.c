@@ -925,249 +925,250 @@ case YY_STATE_EOF(COMMENT_BLOCK):
 case 6:
 YY_RULE_SETUP
 #line 81 "lexer/lexer.l"
-{ return FUNCTION; }
+{ fprintf(stderr,"1\n"); return FUNCTION; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 82 "lexer/lexer.l"
-{ return ELSEIF; }
+{ fprintf(stderr,"2\n");return ELSEIF; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 83 "lexer/lexer.l"
-{ return ELSE; }
+{ fprintf(stderr,"3\n");return ELSE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 84 "lexer/lexer.l"
-{ return IF; }
+{ fprintf(stderr,"4\n");return IF; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 85 "lexer/lexer.l"
-{ return OR; }
+{ fprintf(stderr,"5\n");return OR; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 86 "lexer/lexer.l"
-{ return UNTIL; }
+{ fprintf(stderr,"6\n");return UNTIL; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 87 "lexer/lexer.l"
-{ return WHILE; }
+{ fprintf(stderr,"7\n");return WHILE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 88 "lexer/lexer.l"
-{ return TRUE_VAL; }
+{ fprintf(stderr,"8\n");return TRUE_VAL; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 89 "lexer/lexer.l"
-{ return FALSE_VAL; }
+{ fprintf(stderr,"9\n");return FALSE_VAL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 90 "lexer/lexer.l"
-{ return NOT; }
+{ fprintf(stderr,"10\n");return NOT; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 91 "lexer/lexer.l"
-{ return THEN; }
+{ fprintf(stderr,"11\n");return THEN; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 92 "lexer/lexer.l"
-{ return NIL; }
+{ fprintf(stderr,"12\n");return NIL; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 93 "lexer/lexer.l"
-{ return FOR; }
+{ fprintf(stderr,"13\n");return FOR; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 94 "lexer/lexer.l"
-{ return DO; }
+{ fprintf(stderr,"14\n");return DO; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 95 "lexer/lexer.l"
-{ return RETURN; }
+{ fprintf(stderr,"15\n");return RETURN; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 96 "lexer/lexer.l"
-{ return LOCAL; }
+{ fprintf(stderr,"16\n");return LOCAL; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 97 "lexer/lexer.l"
-{ return BREAK; }
+{ fprintf(stderr,"17\n");return BREAK; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 98 "lexer/lexer.l"
-{ return REPEAT; }
+{ fprintf(stderr,"18\n");return REPEAT; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 99 "lexer/lexer.l"
-{ return IN; }
+{ fprintf(stderr,"19\n");return IN; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 100 "lexer/lexer.l"
-{ return END; }
+{ fprintf(stderr,"20\n");return END; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 101 "lexer/lexer.l"
-{ return AND; }
+{ fprintf(stderr,"21\n");return AND; }
 	YY_BREAK
 /* operadores e pontuação */
 case 27:
 YY_RULE_SETUP
 #line 104 "lexer/lexer.l"
-{ return VARARG; } /* tokenizado, mas fora do escopo da gramática suportada (ver documento de escopo) */
+{ fprintf(stderr,"22\n");return VARARG; } /* tokenizado, mas fora do escopo da gramática suportada (ver documento de escopo) */
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 105 "lexer/lexer.l"
-{ return CONCAT; }
+{ fprintf(stderr,"23\n");return CONCAT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 106 "lexer/lexer.l"
-{ return DOT; }
+{ fprintf(stderr,"24\n");return DOT; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 107 "lexer/lexer.l"
-{ return EQ; }
+{ fprintf(stderr,"25\n");return EQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 108 "lexer/lexer.l"
-{ return NEQ; }
+{ fprintf(stderr,"26\n");return NEQ; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 109 "lexer/lexer.l"
-{ return GE; }
+{ fprintf(stderr,"27\n");return GE; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 110 "lexer/lexer.l"
-{ return LE; }
+{ fprintf(stderr,"28\n");return LE; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 111 "lexer/lexer.l"
-{ return GT; }
+{ fprintf(stderr,"29\n");return GT; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 112 "lexer/lexer.l"
-{ return LT; }
+{ fprintf(stderr,"30\n");return LT; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 113 "lexer/lexer.l"
-{ return ASSIGN; }
+{ fprintf(stderr,"31\n");return ASSIGN; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 114 "lexer/lexer.l"
-{ return PLUS; }
+{ fprintf(stderr,"32\n");return PLUS; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 115 "lexer/lexer.l"
-{ return MINUS; }
+{ fprintf(stderr,"33\n");return MINUS; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 116 "lexer/lexer.l"
-{ return MULT; }
+{ fprintf(stderr,"34\n");return MULT; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 117 "lexer/lexer.l"
-{ return IDIV; } /* NOVO: divisão inteira — adicionar "%token IDIV" no arquivo .y */
+{ fprintf(stderr,"35\n");return IDIV; } /* NOVO: divisão inteira — adicionar "%token IDIV" no arquivo .y */
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 118 "lexer/lexer.l"
-{ return DIV; }
+{ fprintf(stderr,"36\n");return DIV; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 119 "lexer/lexer.l"
-{ return MOD; }
+{ fprintf(stderr,"37\n");return MOD; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 120 "lexer/lexer.l"
-{ return POW; }
+{ fprintf(stderr,"38\n");return POW; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 121 "lexer/lexer.l"
-{ return LEN; }
+{ fprintf(stderr,"39\n");return LEN; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 122 "lexer/lexer.l"
-{ return SEMI; }
+{ fprintf(stderr,"40\n");return SEMI; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
 #line 123 "lexer/lexer.l"
-{ return COLON; }
+{ fprintf(stderr,"41\n");return COLON; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 124 "lexer/lexer.l"
-{ return COMMA; }
+{ fprintf(stderr,"42\n");return COMMA; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 125 "lexer/lexer.l"
-{ return LPAREN; }
+{ fprintf(stderr,"43\n");return LPAREN; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 126 "lexer/lexer.l"
-{ return RPAREN; }
+{ fprintf(stderr,"44\n");return RPAREN; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 127 "lexer/lexer.l"
-{ return RBRACKET; }
+{ fprintf(stderr,"45\n");return RBRACKET; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 128 "lexer/lexer.l"
-{ return LBRACE; }
+{ fprintf(stderr,"46\n");return LBRACE; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 129 "lexer/lexer.l"
-{ return RBRACE; }
+{ fprintf(stderr,"47\n");return RBRACE; }
 	YY_BREAK
 /* strings longas  ...  (NOVO — atende ao RF13) */
 case 53:
 YY_RULE_SETUP
 #line 132 "lexer/lexer.l"
-{ BEGIN(LONGSTRING); str_buf_reset(); }
+{ fprintf(stderr,"48\n");BEGIN(LONGSTRING); str_buf_reset(); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
 #line 133 "lexer/lexer.l"
 {
+                          fprintf(stderr,"49\n");
                           str_buf_append('\0');
                           yylval.strValue = strdup(str_buf);
                           BEGIN(INITIAL);
@@ -1177,16 +1178,16 @@ YY_RULE_SETUP
 case 55:
 /* rule 55 can match eol */
 YY_RULE_SETUP
-#line 139 "lexer/lexer.l"
-{ str_buf_append('\n'); linha++; }
+#line 140 "lexer/lexer.l"
+{ fprintf(stderr,"50\n");str_buf_append('\n'); linha++; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 140 "lexer/lexer.l"
-{ str_buf_append(yytext[0]); }
+#line 141 "lexer/lexer.l"
+{ fprintf(stderr,"51\n");str_buf_append(yytext[0]); }
 	YY_BREAK
 case YY_STATE_EOF(LONGSTRING):
-#line 141 "lexer/lexer.l"
+#line 142 "lexer/lexer.l"
 {
                           fprintf(stderr, "Erro léxico na linha %d: string longa não terminada\n", linha);
                           return 0;
@@ -1194,8 +1195,8 @@ case YY_STATE_EOF(LONGSTRING):
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 146 "lexer/lexer.l"
-{ return LBRACKET; }
+#line 147 "lexer/lexer.l"
+{ fprintf(stderr,"52\n");return LBRACKET; }
 	YY_BREAK
 /* literais numéricos 
     O antigo padrão "[+\-]?[0-9]{1,10}" (com sinal opcional) foi removido:
@@ -1205,16 +1206,18 @@ YY_RULE_SETUP
     tratado pela gramática, nunca parte do literal numérico. */
 case 58:
 YY_RULE_SETUP
-#line 154 "lexer/lexer.l"
+#line 155 "lexer/lexer.l"
 {
+                          fprintf(stderr,"53\n");
                           yylval.floatValue = atof(yytext);
                           return NUM_FLOAT;
                         }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 159 "lexer/lexer.l"
+#line 161 "lexer/lexer.l"
 {
+                          fprintf(stderr,"54\n");
                           yylval.intValue = atoi(yytext);
                           return NUM;
                         }
@@ -1222,16 +1225,18 @@ YY_RULE_SETUP
 /* literais de string curtas */
 case 60:
 YY_RULE_SETUP
-#line 164 "lexer/lexer.l"
+#line 167 "lexer/lexer.l"
 {
+                          fprintf(stderr,"55\n");
                           yylval.strValue = strndup(yytext + 1, yyleng - 2);
                           return STRING;
                         }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 169 "lexer/lexer.l"
+#line 173 "lexer/lexer.l"
 {
+                          fprintf(stderr,"56\n");
                           yylval.strValue = strndup(yytext + 1, yyleng - 2);
                           return STRING;
                         }
@@ -1240,7 +1245,7 @@ YY_RULE_SETUP
 case 62:
 /* rule 62 can match eol */
 YY_RULE_SETUP
-#line 175 "lexer/lexer.l"
+#line 180 "lexer/lexer.l"
 {
                           fprintf(stderr, "Erro léxico na linha %d: string não terminada\n", linha);
                           linha++;
@@ -1249,7 +1254,7 @@ YY_RULE_SETUP
 case 63:
 /* rule 63 can match eol */
 YY_RULE_SETUP
-#line 179 "lexer/lexer.l"
+#line 184 "lexer/lexer.l"
 {
                           fprintf(stderr, "Erro léxico na linha %d: string não terminada\n", linha);
                           linha++;
@@ -1258,8 +1263,9 @@ YY_RULE_SETUP
 /* identificadores devem vir DEPOIS das palavras reservadas */
 case 64:
 YY_RULE_SETUP
-#line 184 "lexer/lexer.l"
+#line 189 "lexer/lexer.l"
 {
+                          fprintf(stderr,"57\n");
                           yylval.strValue = strdup(yytext);
                           return ID;
                         }
@@ -1268,29 +1274,28 @@ YY_RULE_SETUP
 case 65:
 /* rule 65 can match eol */
 YY_RULE_SETUP
-#line 190 "lexer/lexer.l"
+#line 196 "lexer/lexer.l"
 { linha++; }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 191 "lexer/lexer.l"
+#line 197 "lexer/lexer.l"
 { /* ignora espaços e tabs */ }
 	YY_BREAK
 /* qualquer outro caractere não reconhecido: erro léxico */
 case 67:
 YY_RULE_SETUP
-#line 194 "lexer/lexer.l"
+#line 200 "lexer/lexer.l"
 {
-
                           fprintf(stderr, "Erro léxico na linha %d: caractere inesperado '%s'\n", linha, yytext);
                         }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 199 "lexer/lexer.l"
+#line 204 "lexer/lexer.l"
 ECHO;
 	YY_BREAK
-#line 1293 "lex.yy.c"
+#line 1298 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT_LINE):
 	yyterminate();
@@ -2296,7 +2301,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 199 "lexer/lexer.l"
+#line 204 "lexer/lexer.l"
 
 
 /* Função auxiliar do Flex (quando termina o arquivo de entrada) */
@@ -2318,3 +2323,4 @@ int main(int argc, char **argv) {
     }
     return yyparse();
 }
+

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>   /* atoi, atof, malloc, realloc */
 #include <string.h>   /* strdup, strndup */
-#include "exemplo.tab.h"  /* Inclusão do cabeçalho gerado pelo Bison, que contém as definições de tokens */
+#include "teste.tab.h"  /* Inclusão do cabeçalho gerado pelo Bison, que contém as definições de tokens */
 
 /* Contador de linha, usado nas mensagens de erro e nos comentários/strings de bloco.
    CUIDADO: se "linha" já estiver declarada em outro arquivo do projeto (ex.: no .y),
@@ -77,72 +77,73 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           }
 
  /* palavras reservadas */
-"function"              { return FUNCTION; }
-"elseif"                { return ELSEIF; }
-"else"                  { return ELSE; }
-"if"                    { return IF; }
-"or"                    { return OR; }
-"until"                 { return UNTIL; }
-"while"                 { return WHILE; }
-"true"                  { return TRUE_VAL; }
-"false"                 { return FALSE_VAL; }
-"not"                   { return NOT; }
-"then"                  { return THEN; }
-"nil"                   { return NIL; }
-"for"                   { return FOR; }
-"do"                    { return DO; }
-"return"                { return RETURN; }
-"local"                 { return LOCAL; }
-"break"                 { return BREAK; }
-"repeat"                { return REPEAT; }
-"in"                    { return IN; }
-"end"                   { return END; }
-"and"                   { return AND; }
+"function"              { fprintf(stderr,"1\n"); return FUNCTION; }
+"elseif"                { fprintf(stderr,"2\n");return ELSEIF; }
+"else"                  { fprintf(stderr,"3\n");return ELSE; }
+"if"                    { fprintf(stderr,"4\n");return IF; }
+"or"                    { fprintf(stderr,"5\n");return OR; }
+"until"                 { fprintf(stderr,"6\n");return UNTIL; }
+"while"                 { fprintf(stderr,"7\n");return WHILE; }
+"true"                  { fprintf(stderr,"8\n");return TRUE_VAL; }
+"false"                 { fprintf(stderr,"9\n");return FALSE_VAL; }
+"not"                   { fprintf(stderr,"10\n");return NOT; }
+"then"                  { fprintf(stderr,"11\n");return THEN; }
+"nil"                   { fprintf(stderr,"12\n");return NIL; }
+"for"                   { fprintf(stderr,"13\n");return FOR; }
+"do"                    { fprintf(stderr,"14\n");return DO; }
+"return"                { fprintf(stderr,"15\n");return RETURN; }
+"local"                 { fprintf(stderr,"16\n");return LOCAL; }
+"break"                 { fprintf(stderr,"17\n");return BREAK; }
+"repeat"                { fprintf(stderr,"18\n");return REPEAT; }
+"in"                    { fprintf(stderr,"19\n");return IN; }
+"end"                   { fprintf(stderr,"20\n");return END; }
+"and"                   { fprintf(stderr,"21\n");return AND; }
 
  /* operadores e pontuação */
-"..."                   { return VARARG; } /* tokenizado, mas fora do escopo da gramática suportada (ver documento de escopo) */
-".."                    { return CONCAT; }
-"."                     { return DOT; }
-"=="                    { return EQ; }
-"~="                    { return NEQ; }
-">="                    { return GE; }
-"<="                    { return LE; }
-">"                     { return GT; }
-"<"                     { return LT; }
-"="                     { return ASSIGN; }
-"+"                     { return PLUS; }
-"-"                     { return MINUS; }
-"*"                     { return MULT; }
-"//"                    { return IDIV; } /* NOVO: divisão inteira — adicionar "%token IDIV" no arquivo .y */
-"/"                     { return DIV; }
-"%"                     { return MOD; }
-"^"                     { return POW; }
-"#"                     { return LEN; }
-";"                     { return SEMI; }
-":"                     { return COLON; }
-","                     { return COMMA; }
-"("                     { return LPAREN; }
-")"                     { return RPAREN; }
-"]"                     { return RBRACKET; }
-"{"                     { return LBRACE; }
-"}"                     { return RBRACE; }
+"..."                   { fprintf(stderr,"22\n");return VARARG; } /* tokenizado, mas fora do escopo da gramática suportada (ver documento de escopo) */
+".."                    { fprintf(stderr,"23\n");return CONCAT; }
+"."                     { fprintf(stderr,"24\n");return DOT; }
+"=="                    { fprintf(stderr,"25\n");return EQ; }
+"~="                    { fprintf(stderr,"26\n");return NEQ; }
+">="                    { fprintf(stderr,"27\n");return GE; }
+"<="                    { fprintf(stderr,"28\n");return LE; }
+">"                     { fprintf(stderr,"29\n");return GT; }
+"<"                     { fprintf(stderr,"30\n");return LT; }
+"="                     { fprintf(stderr,"31\n");return ASSIGN; }
+"+"                     { fprintf(stderr,"32\n");return PLUS; }
+"-"                     { fprintf(stderr,"33\n");return MINUS; }
+"*"                     { fprintf(stderr,"34\n");return MULT; }
+"//"                    { fprintf(stderr,"35\n");return IDIV; } /* NOVO: divisão inteira — adicionar "%token IDIV" no arquivo .y */
+"/"                     { fprintf(stderr,"36\n");return DIV; }
+"%"                     { fprintf(stderr,"37\n");return MOD; }
+"^"                     { fprintf(stderr,"38\n");return POW; }
+"#"                     { fprintf(stderr,"39\n");return LEN; }
+";"                     { fprintf(stderr,"40\n");return SEMI; }
+":"                     { fprintf(stderr,"41\n");return COLON; }
+","                     { fprintf(stderr,"42\n");return COMMA; }
+"("                     { fprintf(stderr,"43\n");return LPAREN; }
+")"                     { fprintf(stderr,"44\n");return RPAREN; }
+"]"                     { fprintf(stderr,"45\n");return RBRACKET; }
+"{"                     { fprintf(stderr,"46\n");return LBRACE; }
+"}"                     { fprintf(stderr,"47\n");return RBRACE; }
 
  /* strings longas [[ ... ]] (NOVO — atende ao RF13) */
-"[["                    { BEGIN(LONGSTRING); str_buf_reset(); }
+"[["                    { fprintf(stderr,"48\n");BEGIN(LONGSTRING); str_buf_reset(); }
 <LONGSTRING>"]]"        {
+                          fprintf(stderr,"49\n");
                           str_buf_append('\0');
                           yylval.strValue = strdup(str_buf);
                           BEGIN(INITIAL);
                           return STRING;
                         }
-<LONGSTRING>\n          { str_buf_append('\n'); linha++; }
-<LONGSTRING>.           { str_buf_append(yytext[0]); }
+<LONGSTRING>\n          { fprintf(stderr,"50\n");str_buf_append('\n'); linha++; }
+<LONGSTRING>.           { fprintf(stderr,"51\n");str_buf_append(yytext[0]); }
 <LONGSTRING><<EOF>>     {
                           fprintf(stderr, "Erro léxico na linha %d: string longa não terminada\n", linha);
                           return 0;
                         }
 
-"["                     { return LBRACKET; }
+"["                     { fprintf(stderr,"52\n");return LBRACKET; }
 
  /* literais numéricos 
     O antigo padrão "[+\-]?[0-9]{1,10}" (com sinal opcional) foi removido:
@@ -151,21 +152,25 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
     MINUS seguido de NUM(5). O sinal em Lua é sempre operador unário
     tratado pela gramática, nunca parte do literal numérico. */
 {FLOAT}                 {
+                          fprintf(stderr,"53\n");
                           yylval.floatValue = atof(yytext);
                           return NUM_FLOAT;
                         }
 
 {INT}                   {
+                          fprintf(stderr,"54\n");
                           yylval.intValue = atoi(yytext);
                           return NUM;
                         }
  /* literais de string curtas */
 {STRING_D}              {
+                          fprintf(stderr,"55\n");
                           yylval.strValue = strndup(yytext + 1, yyleng - 2);
                           return STRING;
                         }
 
 {STRING_S}               {
+                          fprintf(stderr,"56\n");
                           yylval.strValue = strndup(yytext + 1, yyleng - 2);
                           return STRING;
                         }
@@ -181,6 +186,7 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                         }
  /* identificadores devem vir DEPOIS das palavras reservadas */
 {ID}                    {
+                          fprintf(stderr,"57\n");
                           yylval.strValue = strdup(yytext);
                           return ID;
                         }
@@ -191,7 +197,6 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 
  /* qualquer outro caractere não reconhecido: erro léxico */
 .                       {
-
                           fprintf(stderr, "Erro léxico na linha %d: caractere inesperado '%s'\n", linha, yytext);
                         }
 
