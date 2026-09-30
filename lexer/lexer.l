@@ -162,6 +162,21 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           yylval.intValue = atoi(yytext);
                           return NUM;
                         }
+
+ /* identificadores malformados (ex: 123nome) */
+{DIGITO}+({LETRA}|_)+({LETRA}|{DIGITO}|_)* {
+                          fprintf(stderr, "Erro léxico na linha %d: identificador malformado '%s'\n", linha, yytext);
+                          yylval.strValue = strdup(yytext);
+                          return ID;
+                        }
+
+ /* números malformados (ex: 1.2.3) */
+[0-9]+("."[0-9]+){2,}   {
+                          fprintf(stderr, "Erro léxico na linha %d: número malformado '%s'\n", linha, yytext);
+                          yylval.floatValue = atof(yytext); /* Pega apenas a primeira parte validamente convertível */
+                          return NUM_FLOAT;
+                        }
+
  /* literais de string curtas */
 {STRING_D}              {
                           fprintf(stderr,"55\n");
@@ -179,10 +194,14 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 \"[^\"\n]*\n            {
                           fprintf(stderr, "Erro léxico na linha %d: string não terminada\n", linha);
                           linha++;
+                          yylval.strValue = strdup(yytext);
+                          return STRING;
                         }
 \'[^\'\n]*\n            {
                           fprintf(stderr, "Erro léxico na linha %d: string não terminada\n", linha);
                           linha++;
+                          yylval.strValue = strdup(yytext);
+                          return STRING;
                         }
  /* identificadores devem vir DEPOIS das palavras reservadas */
 {ID}                    {
