@@ -6,7 +6,7 @@ Este guia explica como executar o nosso compilador para testar a etapa de Análi
 Você deve sempre rodar os comandos no **diretório raiz do projeto** (onde fica o arquivo executável `teste`).
 No seu caso, garanta que o terminal esteja no seguinte caminho:
 ```bash
-/home/joao/Documentos/comp/GRUPO2-COMP2026.2
+/home/'insira o seu usuário'/Documentos/comp/GRUPO2-COMP2026.2
 ```
 
 ## Como executar um teste
