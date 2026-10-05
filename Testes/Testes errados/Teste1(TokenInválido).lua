@@ -12,7 +12,7 @@ var2 = 2
 
 
 
-var 3 = "Hello
+var3 = "Hello
 
 
 --Deve retornar algo na linha 15
