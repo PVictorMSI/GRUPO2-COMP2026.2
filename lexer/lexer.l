@@ -2,14 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>   /* atoi, atof, malloc, realloc */
 #include <string.h>   /* strdup, strndup */
-#include "exemplo.tab.h"  /* Inclusão do cabeçalho gerado pelo Bison, que contém as definições de tokens */
+#include "parser.tab.h"  /* Inclusão do cabeçalho gerado pelo Bison, que contém as definições de tokens */
 
-/* Contador de linha, usado nas mensagens de erro e nos comentários/strings de bloco.
-   CUIDADO: se "linha" já estiver declarada em outro arquivo do projeto (ex.: no .y),
-   remova esta linha e troque por "extern int linha;" aqui. */
-int linha = 1;
-
-/* Buffer dinâmico usado para acumular o conteúdo de strings longas [[ ... ]] */
 static char *str_buf = NULL;
 static size_t str_buf_len = 0;
 static size_t str_buf_cap = 0;
@@ -21,7 +15,7 @@ static void str_buf_reset(void) {
 static void str_buf_append(char c) {
     if (str_buf_len + 1 >= str_buf_cap) {
         str_buf_cap = str_buf_cap ? str_buf_cap * 2 : 64;
-        str_buf = realloc(str_buf, str_buf_cap);
+        str_buf = (char*) realloc(str_buf, str_buf_cap);
     }
     str_buf[str_buf_len++] = c;
 }
@@ -42,17 +36,11 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 
 %%
 
- /* comentários 
-    Ao ver "--" precisamos olhar os 2 próximos caracteres para decidir se é
-    comentário de linha ou de bloco "--[[ ... ]]". Isso é feito manualmente
-    com input()/unput() em vez de uma única regex: uma regra só com
-    "--[[" competiria por "casamento mais longo" com "--".* sempre que
-    houver texto na mesma linha do "--[[", perdendo a disputa. Fazendo a
-    checagem manual evitamos essa ambiguidade por completo. */
+
 "--" {
-        int c1 = input();
+        int c1 = yyinput();
         if (c1 == '[') {
-            int c2 = input();
+            int c2 = yyinput();
             if (c2 == '[') {
                 BEGIN(COMMENT_BLOCK);
             } else {
