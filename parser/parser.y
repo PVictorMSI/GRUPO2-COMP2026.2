@@ -1,4 +1,4 @@
-/* exemplo.y - Parser Bison do compilador Lua -> Python (issue #23)
+/* parser.y - Parser Bison do compilador Lua -> Python (issue #23)
  * Cobre o subconjunto definido pela AST (ast.hpp): atribuicao, local, if/elseif/else,
  * while, repeat, for numerico e generico, funcoes, return, break, do, chamadas,
  * metodos (obj:m()), tabelas, indexacao e todos os operadores.
@@ -63,14 +63,20 @@ static bool isLvalue(const Expr* e) {
     std::string* sname;
 }
 
+%define parse.error verbose
+
 %token <intValue>   NUM
 %token <floatValue> NUM_FLOAT
 %token <strValue>   STRING ID
 
-%token FUNCTION ELSEIF ELSE IF OR UNTIL WHILE TRUE_VAL FALSE_VAL NOT THEN NIL
-%token FOR DO RETURN LOCAL BREAK REPEAT IN END AND VARARG
-%token CONCAT DOT EQ NEQ GE LE GT LT ASSIGN PLUS MINUS MULT IDIV DIV MOD POW LEN
-%token SEMI COLON COMMA LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
+%token FUNCTION "function" ELSEIF "elseif" ELSE "else" IF "if" OR "or"
+%token UNTIL "until" WHILE "while" TRUE_VAL "true" FALSE_VAL "false" NOT "not"
+%token THEN "then" NIL "nil" FOR "for" DO "do" RETURN "return" LOCAL "local"
+%token BREAK "break" REPEAT "repeat" IN "in" END "end" AND "and" VARARG "..."
+%token CONCAT ".." DOT "." EQ "==" NEQ "~=" GE ">=" LE "<=" GT ">" LT "<"
+%token ASSIGN "=" PLUS "+" MINUS "-" MULT "*" IDIV "//" DIV "/" MOD "%" POW "^" LEN "#"
+%token SEMI ";" COLON ":" COMMA "," LPAREN "(" RPAREN ")"
+%token LBRACKET "[" RBRACKET "]" LBRACE "{" RBRACE "}"
 
 %type <block>   chunk block stmt_list else_opt
 %type <stmt>    stmt retstat
@@ -82,6 +88,13 @@ static bool isLvalue(const Expr* e) {
 %type <clauses> elseif_list
 %type <fbody>   funcbody
 %type <sname>   funcname dotted_name
+
+/* Destructors: chamados pelo Bison para liberar valores semânticos que
+   ficam na pilha quando o parser aborta por erro sintático (YYERROR ou
+   erro detectado automaticamente). Sem isso, qualquer no de AST já
+   construido no momento do erro vaza (Valgrind acusa em RNF04/RNF11). */
+%destructor { delete $$; }        <expr> <stmt> <block> <exprs> <names> <params> <fields> <clauses> <fbody> <sname>
+%destructor { free($$); }         <strValue>
 
 /* Precedencia do Lua (do mais fraco ao mais forte) */
 %left  OR
@@ -99,7 +112,7 @@ static bool isLvalue(const Expr* e) {
 
 %%
 
-chunk : block                     { root = $1; $$ = $1; }
+chunk : block                     { root = $1; $$ = nullptr; /* posse passa para 'root'; evita o %destructor liberar a AST ao aceitar */ }
       ;
 
 block : stmt_list                 { $$ = $1; }
@@ -130,6 +143,7 @@ stmt  : SEMI                      { $$ = nullptr; }
       | prefixexp                 {
             if ($1->kind != NodeKind::FunctionCall) {
                 yyerror("expressao nao e um comando valido (esperava chamada de funcao ou atribuicao)");
+                delete $1;
                 YYERROR;
             }
             auto* c = at(new CallStmt()); c->call.reset($1); $$ = c;
@@ -233,11 +247,11 @@ namelist : ID                    { $$ = new NameList(); $$->v.push_back($1); fre
          ;
 
 varlist : prefixexp              {
-              if (!isLvalue($1)) { yyerror("alvo de atribuicao invalido"); YYERROR; }
+              if (!isLvalue($1)) { yyerror("alvo de atribuicao invalido"); delete $1; YYERROR; }
               $$ = new ExprList(); $$->v.emplace_back($1);
           }
         | varlist COMMA prefixexp {
-              if (!isLvalue($3)) { yyerror("alvo de atribuicao invalido"); YYERROR; }
+              if (!isLvalue($3)) { yyerror("alvo de atribuicao invalido"); delete $3; delete $1; YYERROR; }
               $1->v.emplace_back($3); $$ = $1;
           }
         ;
@@ -345,5 +359,5 @@ exp   : NIL                      { $$ = at(new NilLiteral()); }
 %%
 
 void yyerror(const char* msg) {
-    std::fprintf(stderr, "erro de sintaxe na linha %d: %s\n", linha, msg);
+    std::fprintf(stderr, "Erro sintático na linha %d: %s\n", linha, msg);
 }

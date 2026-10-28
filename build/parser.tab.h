@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.8.2.  */
+/* A Bison parser, made by GNU Bison 3.7.5.  */
 
 /* Bison interface for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -75,54 +75,54 @@ extern int yydebug;
     NUM_FLOAT = 259,               /* NUM_FLOAT  */
     STRING = 260,                  /* STRING  */
     ID = 261,                      /* ID  */
-    FUNCTION = 262,                /* FUNCTION  */
-    ELSEIF = 263,                  /* ELSEIF  */
-    ELSE = 264,                    /* ELSE  */
-    IF = 265,                      /* IF  */
-    OR = 266,                      /* OR  */
-    UNTIL = 267,                   /* UNTIL  */
-    WHILE = 268,                   /* WHILE  */
-    TRUE_VAL = 269,                /* TRUE_VAL  */
-    FALSE_VAL = 270,               /* FALSE_VAL  */
-    NOT = 271,                     /* NOT  */
-    THEN = 272,                    /* THEN  */
-    NIL = 273,                     /* NIL  */
-    FOR = 274,                     /* FOR  */
-    DO = 275,                      /* DO  */
-    RETURN = 276,                  /* RETURN  */
-    LOCAL = 277,                   /* LOCAL  */
-    BREAK = 278,                   /* BREAK  */
-    REPEAT = 279,                  /* REPEAT  */
-    IN = 280,                      /* IN  */
-    END = 281,                     /* END  */
-    AND = 282,                     /* AND  */
-    VARARG = 283,                  /* VARARG  */
-    CONCAT = 284,                  /* CONCAT  */
-    DOT = 285,                     /* DOT  */
-    EQ = 286,                      /* EQ  */
-    NEQ = 287,                     /* NEQ  */
-    GE = 288,                      /* GE  */
-    LE = 289,                      /* LE  */
-    GT = 290,                      /* GT  */
-    LT = 291,                      /* LT  */
-    ASSIGN = 292,                  /* ASSIGN  */
-    PLUS = 293,                    /* PLUS  */
-    MINUS = 294,                   /* MINUS  */
-    MULT = 295,                    /* MULT  */
-    IDIV = 296,                    /* IDIV  */
-    DIV = 297,                     /* DIV  */
-    MOD = 298,                     /* MOD  */
-    POW = 299,                     /* POW  */
-    LEN = 300,                     /* LEN  */
-    SEMI = 301,                    /* SEMI  */
-    COLON = 302,                   /* COLON  */
-    COMMA = 303,                   /* COMMA  */
-    LPAREN = 304,                  /* LPAREN  */
-    RPAREN = 305,                  /* RPAREN  */
-    LBRACKET = 306,                /* LBRACKET  */
-    RBRACKET = 307,                /* RBRACKET  */
-    LBRACE = 308,                  /* LBRACE  */
-    RBRACE = 309,                  /* RBRACE  */
+    FUNCTION = 262,                /* "function"  */
+    ELSEIF = 263,                  /* "elseif"  */
+    ELSE = 264,                    /* "else"  */
+    IF = 265,                      /* "if"  */
+    OR = 266,                      /* "or"  */
+    UNTIL = 267,                   /* "until"  */
+    WHILE = 268,                   /* "while"  */
+    TRUE_VAL = 269,                /* "true"  */
+    FALSE_VAL = 270,               /* "false"  */
+    NOT = 271,                     /* "not"  */
+    THEN = 272,                    /* "then"  */
+    NIL = 273,                     /* "nil"  */
+    FOR = 274,                     /* "for"  */
+    DO = 275,                      /* "do"  */
+    RETURN = 276,                  /* "return"  */
+    LOCAL = 277,                   /* "local"  */
+    BREAK = 278,                   /* "break"  */
+    REPEAT = 279,                  /* "repeat"  */
+    IN = 280,                      /* "in"  */
+    END = 281,                     /* "end"  */
+    AND = 282,                     /* "and"  */
+    VARARG = 283,                  /* "..."  */
+    CONCAT = 284,                  /* ".."  */
+    DOT = 285,                     /* "."  */
+    EQ = 286,                      /* "=="  */
+    NEQ = 287,                     /* "~="  */
+    GE = 288,                      /* ">="  */
+    LE = 289,                      /* "<="  */
+    GT = 290,                      /* ">"  */
+    LT = 291,                      /* "<"  */
+    ASSIGN = 292,                  /* "="  */
+    PLUS = 293,                    /* "+"  */
+    MINUS = 294,                   /* "-"  */
+    MULT = 295,                    /* "*"  */
+    IDIV = 296,                    /* "//"  */
+    DIV = 297,                     /* "/"  */
+    MOD = 298,                     /* "%"  */
+    POW = 299,                     /* "^"  */
+    LEN = 300,                     /* "#"  */
+    SEMI = 301,                    /* ";"  */
+    COLON = 302,                   /* ":"  */
+    COMMA = 303,                   /* ","  */
+    LPAREN = 304,                  /* "("  */
+    RPAREN = 305,                  /* ")"  */
+    LBRACKET = 306,                /* "["  */
+    RBRACKET = 307,                /* "]"  */
+    LBRACE = 308,                  /* "{"  */
+    RBRACE = 309,                  /* "}"  */
     UMINUS = 310                   /* UMINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
@@ -159,8 +159,6 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE yylval;
 
-
 int yyparse (void);
-
 
 #endif /* !YY_YY_BUILD_PARSER_TAB_H_INCLUDED  */
