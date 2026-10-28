@@ -4,9 +4,12 @@
 #include <string.h>   /* strdup, strndup */
 #include "parser.tab.h"  /* Inclusão do cabeçalho gerado pelo Bison, que contém as definições de tokens */
 
+int linha = 1;  /* contador de linhas — definido aqui e compartilhado com o parser via extern */
+
 static char *str_buf = NULL;
 static size_t str_buf_len = 0;
 static size_t str_buf_cap = 0;
+
 
 static void str_buf_reset(void) {
     str_buf_len = 0;
