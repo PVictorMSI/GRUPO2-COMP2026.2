@@ -32,4 +32,8 @@ struct SemanticInfo {
 // "info" deve estar vazio (chame uma vez por programa).
 void analyze(const Block& root, SemanticInfo& info);
 
+// Número de erros semânticos detectados na última chamada a analyze().
+// O main.cpp usa isso para decidir o código de saída.
+extern int sem_errors;
+
 }  // namespace lua2py
