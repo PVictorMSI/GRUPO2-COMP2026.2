@@ -1,94 +1,86 @@
-# ==============================================================================
-# Makefile — Compilador Lua → Python (GRUPO2-COMP2026.2)
-# Ferramentas: Flex + Bison + g++
+# Makefile do transpilador Lua -> Python (RNF09: compilar em Linux via make)
+#
 # Uso:
-#   make          → compila e gera o executável em build/lua2py
-#   make test     → roda toda a suíte de testes
-#   make clean    → apaga os arquivos gerados
-# ==============================================================================
+#   make                  compila o compilador         -> build/lua2py
+#   make check            compila e roda as verificações automáticas ([OK]/[FALHA])
+#   make test-simbolos    compila e MOSTRA a tabela de símbolos dos 3 programas de teste
+#   make TRACE=1          liga o rastreio de tokens do lexer (números no stderr)
+#                         (para trocar de modo: make clean && make TRACE=1)
+#   make clean            apaga tudo que foi gerado
+#
+# Requisitos: g++ (C++17), bison, flex.
+#
+# Tudo é compilado como C++ (-x c++), inclusive os .c gerados pelo Flex/Bison,
+# porque o %union e o ast.hpp usam tipos C++ (std::string, std::vector...).
 
-# --- Ferramentas ---
-CC      = g++
-FLEX    = flex
-BISON   = bison
+CXX      := g++
+CXXFLAGS := -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP
+ifdef TRACE
+CXXFLAGS += -DTRACE_TOKENS
+endif
+BISON    := bison
+FLEX     := flex
 
-# --- Diretórios ---
-BUILD   = build
-LEXDIR  = lexer
-PARDIR  = parser
-SRCDIR  = src
+BIN      := build/lua2py
+TEST_BIN := build/test_symbols
 
-# --- Arquivos fonte ---
-LEXER_L  = $(LEXDIR)/lexer.l
-PARSER_Y = $(PARDIR)/parser.y
+# main: aceita src/main.cpp ou src/main.c
+MAIN_SRC := $(if $(wildcard src/main.cpp),src/main.cpp,src/main.c)
 
-# --- Arquivos gerados (ficam em build/) ---
-LEX_C    = $(BUILD)/lex.yy.c
-PARSE_C  = $(BUILD)/parser.tab.c
-PARSE_H  = $(BUILD)/parser.tab.h
-TARGET   = $(BUILD)/lua2py
+# Demais fontes escritos à mão em src/ (symbol_table, resolver, e o que vier depois)
+LIB_SRC  := $(filter-out src/main.cpp src/main.c,$(wildcard src/*.cpp))
+LIB_OBJ  := $(patsubst src/%.cpp,build/%.o,$(LIB_SRC))
 
-# --- Flags de compilação ---
-CFLAGS  = -Wall -Wno-unused-function -I$(BUILD) -I$(SRCDIR)
+# Código gerado pelo Bison e pelo Flex
+GEN_OBJ  := build/parser.tab.o build/lex.yy.o
 
-# ==============================================================================
-# Regra padrão: compilar tudo
-# ==============================================================================
-all: $(TARGET)
+.PHONY: all test-simbolos check clean
+all: $(BIN)
 
-$(TARGET): $(LEX_C) $(PARSE_C)
-	$(CC) $(CFLAGS) $(PARSE_C) $(LEX_C) -o $(TARGET)
-	@echo ""
-	@echo "✅ Build concluído! Executável gerado em: $(TARGET)"
-	@echo "   Para usar: ./$(TARGET) < arquivo.lua"
-	@echo ""
+$(BIN): build/main.o $(LIB_OBJ) $(GEN_OBJ)
+	$(CXX) $^ -o $@
 
-# Gera o parser C a partir do arquivo .y do Bison
-$(PARSE_C) $(PARSE_H): $(PARSER_Y) | $(BUILD)
-	$(BISON) -d -o $(PARSE_C) $(PARSER_Y)
+# ---------- geração do parser e do lexer ----------
+build:
+	mkdir -p build
 
-# Gera o lexer C a partir do arquivo .l do Flex
-# Depende do header do Bison (parser.tab.h) para conhecer os tokens
-$(LEX_C): $(LEXER_L) $(PARSE_H) | $(BUILD)
-	$(FLEX) -o $(LEX_C) $(LEXER_L)
+build/parser.tab.c: parser/parser.y | build
+	$(BISON) -d $< -o $@
 
-# Garante que a pasta build/ existe
-$(BUILD):
-	mkdir -p $(BUILD)
+# o .h sai junto com o .c (-d); esta regra só avisa o make disso
+build/parser.tab.h: build/parser.tab.c ;
 
-# ==============================================================================
-# Suíte de testes: roda todos os arquivos de teste e filtra os números de debug
-# ==============================================================================
-FILTER = 2>&1 | grep -v '^[0-9]\+$$'
+build/lex.yy.c: lexer/lexer.l build/parser.tab.h | build
+	$(FLEX) -o $@ $<
 
-test: $(TARGET)
-	@echo "=========================================="
-	@echo "  SUÍTE DE TESTES — Lua → Python"
-	@echo "=========================================="
-	@echo ""
-	@echo "--- TESTES CORRETOS (devem passar sem erro) ---"
-	@for f in "Testes/Testes certos"/*.lua; do \
-		echo ""; \
-		echo "  ✔ $$(basename "$$f")"; \
-		./$(TARGET) < "$$f" $(FILTER) || true; \
+# ---------- compilação ----------
+build/lex.yy.o: build/parser.tab.h
+
+build/%.o: build/%.c
+	$(CXX) $(CXXFLAGS) -x c++ -c $< -o $@
+
+build/%.o: src/%.cpp | build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+build/main.o: $(MAIN_SRC) build/parser.tab.h | build
+	$(CXX) $(CXXFLAGS) -x c++ -c $< -o $@
+
+# ---------- teste da tabela de símbolos ----------
+$(TEST_BIN): build/test_symbols.o $(LIB_OBJ) $(GEN_OBJ)
+	$(CXX) $^ -o $@
+
+build/test_symbols.o: Testes/unitarios/test_symbols.cpp build/parser.tab.h | build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+test-simbolos: $(TEST_BIN)
+	@for f in Testes/unitarios/teste_simbolos_*.lua; do \
+	  echo "=== $$f ==="; $(TEST_BIN) "$$f" || exit 1; echo; \
 	done
-	@echo ""
-	@echo "--- TESTES DE ERRO (devem reportar erro léxico) ---"
-	@for f in "Testes/Testes errados"/*.lua; do \
-		echo ""; \
-		echo "  ✘ $$(basename "$$f")"; \
-		./$(TARGET) < "$$f" $(FILTER) || true; \
-	done
-	@echo ""
-	@echo "=========================================="
-	@echo "  Testes finalizados."
-	@echo "=========================================="
 
-# ==============================================================================
-# Limpeza: remove apenas os arquivos GERADOS (nunca os fontes .l e .y)
-# ==============================================================================
+check: all $(TEST_BIN)
+	@bash Testes/unitarios/rodar_checks.sh
+
 clean:
-	rm -f $(LEX_C) $(PARSE_C) $(PARSE_H) $(TARGET)
-	@echo "Arquivos gerados removidos."
+	rm -f build/*.o build/*.d build/parser.tab.c build/parser.tab.h build/lex.yy.c $(BIN) $(TEST_BIN)
 
-.PHONY: all test clean
+-include $(wildcard build/*.d)

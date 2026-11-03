@@ -1,4 +1,4 @@
-/* A Bison parser, made by GNU Bison 3.7.5.  */
+/* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
@@ -16,7 +16,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -46,10 +46,10 @@
    USER NAME SPACE" below.  */
 
 /* Identify Bison output, and Bison version.  */
-#define YYBISON 30705
+#define YYBISON 30802
 
 /* Bison version string.  */
-#define YYBISON_VERSION "3.7.5"
+#define YYBISON_VERSION "3.8.2"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -359,12 +359,18 @@ typedef int yy_state_fast_t;
 # define YY_USE(E) /* empty */
 #endif
 
-#if defined __GNUC__ && ! defined __ICC && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
 /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
-# define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                            \
+#if defined __GNUC__ && ! defined __ICC && 406 <= __GNUC__ * 100 + __GNUC_MINOR__
+# if __GNUC__ * 100 + __GNUC_MINOR__ < 407
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
+    _Pragma ("GCC diagnostic push")                                     \
+    _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")
+# else
+#  define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN                           \
     _Pragma ("GCC diagnostic push")                                     \
     _Pragma ("GCC diagnostic ignored \"-Wuninitialized\"")              \
     _Pragma ("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
+# endif
 # define YY_IGNORE_MAYBE_UNINITIALIZED_END      \
     _Pragma ("GCC diagnostic pop")
 #else
@@ -584,7 +590,7 @@ static const yytype_int8 yytranslate[] =
 };
 
 #if YYDEBUG
-  /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
+/* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
        0,   115,   115,   118,   119,   122,   123,   126,   127,   134,
@@ -634,20 +640,6 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#ifdef YYPRINT
-/* YYTOKNUM[NUM] -- (External) token number corresponding to the
-   (internal) symbol number NUM (which must be that of a token).  */
-static const yytype_int16 yytoknum[] =
-{
-       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
-     295,   296,   297,   298,   299,   300,   301,   302,   303,   304,
-     305,   306,   307,   308,   309,   310
-};
-#endif
-
 #define YYPACT_NINF (-30)
 
 #define yypact_value_is_default(Yyn) \
@@ -658,8 +650,8 @@ static const yytype_int16 yytoknum[] =
 #define yytable_value_is_error(Yyn) \
   0
 
-  /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
-     STATE-NUM.  */
+/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
+   STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
      -30,    24,   -30,   248,   -30,   -30,    28,   235,   235,    38,
@@ -683,9 +675,9 @@ static const yytype_int16 yypact[] =
      -30,   120,   -30
 };
 
-  /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
-     Performed when YYTABLE does not specify something else to do.  Zero
-     means the default is an error.  */
+/* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
+   Performed when YYTABLE does not specify something else to do.  Zero
+   means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
        5,     0,     2,     3,     1,    45,     0,     0,     0,     0,
@@ -709,7 +701,7 @@ static const yytype_int8 yydefact[] =
        5,     0,    19
 };
 
-  /* YYPGOTO[NTERM-NUM].  */
+/* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
      -30,   -30,   -10,   -30,   -30,   104,   -30,   -30,   -30,   -30,
@@ -717,7 +709,7 @@ static const yytype_int8 yypgoto[] =
      -30,    31,     6
 };
 
-  /* YYDEFGOTO[NTERM-NUM].  */
+/* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_uint8 yydefgoto[] =
 {
        0,     1,     2,     3,    17,    44,    18,   155,   164,    22,
@@ -725,9 +717,9 @@ static const yytype_uint8 yydefgoto[] =
      120,    73,    46
 };
 
-  /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
-     positive, shift that token.  If negative, reduce the rule whose
-     number is the opposite.  If YYTABLE_NINF, syntax error.  */
+/* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
+   positive, shift that token.  If negative, reduce the rule whose
+   number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
       42,    65,    54,    20,    50,   158,    24,    25,    26,    69,
@@ -856,8 +848,8 @@ static const yytype_int16 yycheck[] =
       42,    43,    44
 };
 
-  /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
-     symbol of state STATE-NUM.  */
+/* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
+   state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
        0,    57,    58,    59,     0,     6,     7,    10,    13,    19,
@@ -881,7 +873,7 @@ static const yytype_int8 yystos[] =
       20,    58,    26
 };
 
-  /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
+/* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    56,    57,    58,    58,    59,    59,    60,    60,    61,
@@ -896,7 +888,7 @@ static const yytype_int8 yyr1[] =
       78,    78,    78,    78
 };
 
-  /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
+/* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     2,     0,     2,     2,     3,     0,
@@ -920,6 +912,7 @@ enum { YYENOMEM = -2 };
 #define YYACCEPT        goto yyacceptlab
 #define YYABORT         goto yyabortlab
 #define YYERROR         goto yyerrorlab
+#define YYNOMEM         goto yyexhaustedlab
 
 
 #define YYRECOVERING()  (!!yyerrstatus)
@@ -960,10 +953,7 @@ do {                                            \
     YYFPRINTF Args;                             \
 } while (0)
 
-/* This macro is provided for backward compatibility. */
-# ifndef YY_LOCATION_PRINT
-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
-# endif
+
 
 
 # define YY_SYMBOL_PRINT(Title, Kind, Value, Location)                    \
@@ -990,10 +980,6 @@ yy_symbol_value_print (FILE *yyo,
   YY_USE (yyoutput);
   if (!yyvaluep)
     return;
-# ifdef YYPRINT
-  if (yykind < YYNTOKENS)
-    YYPRINT (yyo, yytoknum[yykind], *yyvaluep);
-# endif
   YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN
   YY_USE (yykind);
   YY_IGNORE_MAYBE_UNINITIALIZED_END
@@ -1387,133 +1373,133 @@ yydestruct (const char *yymsg,
     case YYSYMBOL_STRING: /* STRING  */
 #line 97 "parser/parser.y"
             { free(((*yyvaluep).strValue)); }
-#line 1391 "build/parser.tab.c"
+#line 1377 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_ID: /* ID  */
 #line 97 "parser/parser.y"
             { free(((*yyvaluep).strValue)); }
-#line 1397 "build/parser.tab.c"
+#line 1383 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_chunk: /* chunk  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).block); }
-#line 1403 "build/parser.tab.c"
+#line 1389 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_block: /* block  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).block); }
-#line 1409 "build/parser.tab.c"
+#line 1395 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_stmt_list: /* stmt_list  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).block); }
-#line 1415 "build/parser.tab.c"
+#line 1401 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_retstat: /* retstat  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).stmt); }
-#line 1421 "build/parser.tab.c"
+#line 1407 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_stmt: /* stmt  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).stmt); }
-#line 1427 "build/parser.tab.c"
+#line 1413 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_elseif_list: /* elseif_list  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).clauses); }
-#line 1433 "build/parser.tab.c"
+#line 1419 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_else_opt: /* else_opt  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).block); }
-#line 1439 "build/parser.tab.c"
+#line 1425 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_funcname: /* funcname  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).sname); }
-#line 1445 "build/parser.tab.c"
+#line 1431 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_dotted_name: /* dotted_name  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).sname); }
-#line 1451 "build/parser.tab.c"
+#line 1437 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_funcbody: /* funcbody  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).fbody); }
-#line 1457 "build/parser.tab.c"
+#line 1443 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_parlist: /* parlist  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).params); }
-#line 1463 "build/parser.tab.c"
+#line 1449 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_namelist: /* namelist  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).names); }
-#line 1469 "build/parser.tab.c"
+#line 1455 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_varlist: /* varlist  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).exprs); }
-#line 1475 "build/parser.tab.c"
+#line 1461 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_explist: /* explist  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).exprs); }
-#line 1481 "build/parser.tab.c"
+#line 1467 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_prefixexp: /* prefixexp  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).expr); }
-#line 1487 "build/parser.tab.c"
+#line 1473 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_args: /* args  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).exprs); }
-#line 1493 "build/parser.tab.c"
+#line 1479 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_tableconstructor: /* tableconstructor  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).expr); }
-#line 1499 "build/parser.tab.c"
+#line 1485 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_fieldlist: /* fieldlist  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).fields); }
-#line 1505 "build/parser.tab.c"
+#line 1491 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_field: /* field  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).fields); }
-#line 1511 "build/parser.tab.c"
+#line 1497 "build/parser.tab.c"
         break;
 
     case YYSYMBOL_exp: /* exp  */
 #line 96 "parser/parser.y"
             { delete ((*yyvaluep).expr); }
-#line 1517 "build/parser.tab.c"
+#line 1503 "build/parser.tab.c"
         break;
 
       default:
@@ -1584,6 +1570,7 @@ yyparse (void)
   YYDPRINTF ((stderr, "Starting parse\n"));
 
   yychar = YYEMPTY; /* Cause a token to be read.  */
+
   goto yysetstate;
 
 
@@ -1609,7 +1596,7 @@ yysetstate:
 
   if (yyss + yystacksize - 1 <= yyssp)
 #if !defined yyoverflow && !defined YYSTACK_RELOCATE
-    goto yyexhaustedlab;
+    YYNOMEM;
 #else
     {
       /* Get the current used size of the three stacks, in elements.  */
@@ -1637,7 +1624,7 @@ yysetstate:
 # else /* defined YYSTACK_RELOCATE */
       /* Extend the stack our own way.  */
       if (YYMAXDEPTH <= yystacksize)
-        goto yyexhaustedlab;
+        YYNOMEM;
       yystacksize *= 2;
       if (YYMAXDEPTH < yystacksize)
         yystacksize = YYMAXDEPTH;
@@ -1648,7 +1635,7 @@ yysetstate:
           YY_CAST (union yyalloc *,
                    YYSTACK_ALLOC (YY_CAST (YYSIZE_T, YYSTACK_BYTES (yystacksize))));
         if (! yyptr)
-          goto yyexhaustedlab;
+          YYNOMEM;
         YYSTACK_RELOCATE (yyss_alloc, yyss);
         YYSTACK_RELOCATE (yyvs_alloc, yyvs);
 #  undef YYSTACK_RELOCATE
@@ -1669,6 +1656,7 @@ yysetstate:
         YYABORT;
     }
 #endif /* !defined yyoverflow && !defined YYSTACK_RELOCATE */
+
 
   if (yystate == YYFINAL)
     YYACCEPT;
@@ -1784,37 +1772,37 @@ yyreduce:
   case 2: /* chunk: block  */
 #line 115 "parser/parser.y"
                                   { root = (yyvsp[0].block); (yyval.block) = nullptr; /* posse passa para 'root'; evita o %destructor liberar a AST ao aceitar */ }
-#line 1788 "build/parser.tab.c"
+#line 1776 "build/parser.tab.c"
     break;
 
   case 3: /* block: stmt_list  */
 #line 118 "parser/parser.y"
                                   { (yyval.block) = (yyvsp[0].block); }
-#line 1794 "build/parser.tab.c"
+#line 1782 "build/parser.tab.c"
     break;
 
   case 4: /* block: stmt_list retstat  */
 #line 119 "parser/parser.y"
                                   { (yyvsp[-1].block)->statements.emplace_back((yyvsp[0].stmt)); (yyval.block) = (yyvsp[-1].block); }
-#line 1800 "build/parser.tab.c"
+#line 1788 "build/parser.tab.c"
     break;
 
   case 5: /* stmt_list: %empty  */
 #line 122 "parser/parser.y"
                                   { (yyval.block) = at(new Block()); }
-#line 1806 "build/parser.tab.c"
+#line 1794 "build/parser.tab.c"
     break;
 
   case 6: /* stmt_list: stmt_list stmt  */
 #line 123 "parser/parser.y"
                                   { if ((yyvsp[0].stmt)) (yyvsp[-1].block)->statements.emplace_back((yyvsp[0].stmt)); (yyval.block) = (yyvsp[-1].block); }
-#line 1812 "build/parser.tab.c"
+#line 1800 "build/parser.tab.c"
     break;
 
   case 7: /* retstat: "return" opt_semi  */
 #line 126 "parser/parser.y"
                                   { (yyval.stmt) = at(new Return()); }
-#line 1818 "build/parser.tab.c"
+#line 1806 "build/parser.tab.c"
     break;
 
   case 8: /* retstat: "return" explist opt_semi  */
@@ -1824,13 +1812,13 @@ yyreduce:
               r->values = std::move((yyvsp[-1].exprs)->v); delete (yyvsp[-1].exprs);
               (yyval.stmt) = r;
           }
-#line 1828 "build/parser.tab.c"
+#line 1816 "build/parser.tab.c"
     break;
 
   case 11: /* stmt: ";"  */
 #line 136 "parser/parser.y"
                                   { (yyval.stmt) = nullptr; }
-#line 1834 "build/parser.tab.c"
+#line 1822 "build/parser.tab.c"
     break;
 
   case 12: /* stmt: varlist "=" explist  */
@@ -1841,7 +1829,7 @@ yyreduce:
             a->values  = std::move((yyvsp[0].exprs)->v); delete (yyvsp[0].exprs);
             (yyval.stmt) = a;
         }
-#line 1845 "build/parser.tab.c"
+#line 1833 "build/parser.tab.c"
     break;
 
   case 13: /* stmt: prefixexp  */
@@ -1854,13 +1842,13 @@ yyreduce:
             }
             auto* c = at(new CallStmt()); c->call.reset((yyvsp[0].expr)); (yyval.stmt) = c;
         }
-#line 1858 "build/parser.tab.c"
+#line 1846 "build/parser.tab.c"
     break;
 
   case 14: /* stmt: "do" block "end"  */
 #line 151 "parser/parser.y"
                                  { auto* d = at(new Do()); d->body.reset((yyvsp[-1].block)); (yyval.stmt) = d; }
-#line 1864 "build/parser.tab.c"
+#line 1852 "build/parser.tab.c"
     break;
 
   case 15: /* stmt: "while" exp "do" block "end"  */
@@ -1868,7 +1856,7 @@ yyreduce:
                                  {
             auto* w = at(new While()); w->condition.reset((yyvsp[-3].expr)); w->body.reset((yyvsp[-1].block)); (yyval.stmt) = w;
         }
-#line 1872 "build/parser.tab.c"
+#line 1860 "build/parser.tab.c"
     break;
 
   case 16: /* stmt: "repeat" block "until" exp  */
@@ -1876,7 +1864,7 @@ yyreduce:
                                  {
             auto* r = at(new RepeatUntil()); r->body.reset((yyvsp[-2].block)); r->condition.reset((yyvsp[0].expr)); (yyval.stmt) = r;
         }
-#line 1880 "build/parser.tab.c"
+#line 1868 "build/parser.tab.c"
     break;
 
   case 17: /* stmt: "if" exp "then" block elseif_list else_opt "end"  */
@@ -1889,7 +1877,7 @@ yyreduce:
             if ((yyvsp[-1].block)) n->clauses.push_back(IfClause{nullptr, BlockPtr((yyvsp[-1].block))});
             (yyval.stmt) = n;
         }
-#line 1893 "build/parser.tab.c"
+#line 1881 "build/parser.tab.c"
     break;
 
   case 18: /* stmt: "for" ID "=" exp "," exp "do" block "end"  */
@@ -1900,7 +1888,7 @@ yyreduce:
             f->start.reset((yyvsp[-5].expr)); f->stop.reset((yyvsp[-3].expr)); f->body.reset((yyvsp[-1].block));
             (yyval.stmt) = f;
         }
-#line 1904 "build/parser.tab.c"
+#line 1892 "build/parser.tab.c"
     break;
 
   case 19: /* stmt: "for" ID "=" exp "," exp "," exp "do" block "end"  */
@@ -1911,7 +1899,7 @@ yyreduce:
             f->start.reset((yyvsp[-7].expr)); f->stop.reset((yyvsp[-5].expr)); f->step.reset((yyvsp[-3].expr)); f->body.reset((yyvsp[-1].block));
             (yyval.stmt) = f;
         }
-#line 1915 "build/parser.tab.c"
+#line 1903 "build/parser.tab.c"
     break;
 
   case 20: /* stmt: "for" namelist "in" explist "do" block "end"  */
@@ -1923,7 +1911,7 @@ yyreduce:
             f->body.reset((yyvsp[-1].block));
             (yyval.stmt) = f;
         }
-#line 1927 "build/parser.tab.c"
+#line 1915 "build/parser.tab.c"
     break;
 
   case 21: /* stmt: "function" funcname funcbody  */
@@ -1935,7 +1923,7 @@ yyreduce:
             f->body = std::move((yyvsp[0].fbody)->body); delete (yyvsp[0].fbody);
             (yyval.stmt) = f;
         }
-#line 1939 "build/parser.tab.c"
+#line 1927 "build/parser.tab.c"
     break;
 
   case 22: /* stmt: "local" "function" ID funcbody  */
@@ -1947,7 +1935,7 @@ yyreduce:
             f->body = std::move((yyvsp[0].fbody)->body); delete (yyvsp[0].fbody);
             (yyval.stmt) = f;
         }
-#line 1951 "build/parser.tab.c"
+#line 1939 "build/parser.tab.c"
     break;
 
   case 23: /* stmt: "local" namelist  */
@@ -1957,7 +1945,7 @@ yyreduce:
             d->names = std::move((yyvsp[0].names)->v); delete (yyvsp[0].names);
             (yyval.stmt) = d;
         }
-#line 1961 "build/parser.tab.c"
+#line 1949 "build/parser.tab.c"
     break;
 
   case 24: /* stmt: "local" namelist "=" explist  */
@@ -1968,19 +1956,19 @@ yyreduce:
             d->values = std::move((yyvsp[0].exprs)->v); delete (yyvsp[0].exprs);
             (yyval.stmt) = d;
         }
-#line 1972 "build/parser.tab.c"
+#line 1960 "build/parser.tab.c"
     break;
 
   case 25: /* stmt: "break"  */
 #line 210 "parser/parser.y"
                                  { (yyval.stmt) = at(new Break()); }
-#line 1978 "build/parser.tab.c"
+#line 1966 "build/parser.tab.c"
     break;
 
   case 26: /* elseif_list: %empty  */
 #line 213 "parser/parser.y"
                                  { (yyval.clauses) = new ClauseList(); }
-#line 1984 "build/parser.tab.c"
+#line 1972 "build/parser.tab.c"
     break;
 
   case 27: /* elseif_list: elseif_list "elseif" exp "then" block  */
@@ -1988,43 +1976,43 @@ yyreduce:
                                                 {
                   (yyvsp[-4].clauses)->v.push_back(IfClause{ExprPtr((yyvsp[-2].expr)), BlockPtr((yyvsp[0].block))}); (yyval.clauses) = (yyvsp[-4].clauses);
               }
-#line 1992 "build/parser.tab.c"
+#line 1980 "build/parser.tab.c"
     break;
 
   case 28: /* else_opt: %empty  */
 #line 219 "parser/parser.y"
                                  { (yyval.block) = nullptr; }
-#line 1998 "build/parser.tab.c"
+#line 1986 "build/parser.tab.c"
     break;
 
   case 29: /* else_opt: "else" block  */
 #line 220 "parser/parser.y"
                                  { (yyval.block) = (yyvsp[0].block); }
-#line 2004 "build/parser.tab.c"
+#line 1992 "build/parser.tab.c"
     break;
 
   case 30: /* funcname: dotted_name  */
 #line 223 "parser/parser.y"
                                  { (yyval.sname) = (yyvsp[0].sname); }
-#line 2010 "build/parser.tab.c"
+#line 1998 "build/parser.tab.c"
     break;
 
   case 31: /* funcname: dotted_name ":" ID  */
 #line 224 "parser/parser.y"
                                  { *(yyvsp[-2].sname) += ":"; *(yyvsp[-2].sname) += (yyvsp[0].strValue); free((yyvsp[0].strValue)); (yyval.sname) = (yyvsp[-2].sname); }
-#line 2016 "build/parser.tab.c"
+#line 2004 "build/parser.tab.c"
     break;
 
   case 32: /* dotted_name: ID  */
 #line 227 "parser/parser.y"
                                  { (yyval.sname) = new std::string((yyvsp[0].strValue)); free((yyvsp[0].strValue)); }
-#line 2022 "build/parser.tab.c"
+#line 2010 "build/parser.tab.c"
     break;
 
   case 33: /* dotted_name: dotted_name "." ID  */
 #line 228 "parser/parser.y"
                                  { *(yyvsp[-2].sname) += "."; *(yyvsp[-2].sname) += (yyvsp[0].strValue); free((yyvsp[0].strValue)); (yyval.sname) = (yyvsp[-2].sname); }
-#line 2028 "build/parser.tab.c"
+#line 2016 "build/parser.tab.c"
     break;
 
   case 34: /* funcbody: "(" parlist ")" block "end"  */
@@ -2035,43 +2023,43 @@ yyreduce:
                f->body.reset((yyvsp[-1].block));
                (yyval.fbody) = f;
            }
-#line 2039 "build/parser.tab.c"
+#line 2027 "build/parser.tab.c"
     break;
 
   case 35: /* parlist: %empty  */
 #line 239 "parser/parser.y"
                                  { (yyval.params) = new ParamList(); }
-#line 2045 "build/parser.tab.c"
+#line 2033 "build/parser.tab.c"
     break;
 
   case 36: /* parlist: namelist  */
 #line 240 "parser/parser.y"
                                  { (yyval.params) = new ParamList(); (yyval.params)->names = std::move((yyvsp[0].names)->v); delete (yyvsp[0].names); }
-#line 2051 "build/parser.tab.c"
+#line 2039 "build/parser.tab.c"
     break;
 
   case 37: /* parlist: namelist "," "..."  */
 #line 241 "parser/parser.y"
                                  { (yyval.params) = new ParamList(); (yyval.params)->names = std::move((yyvsp[-2].names)->v); delete (yyvsp[-2].names); (yyval.params)->vararg = true; }
-#line 2057 "build/parser.tab.c"
+#line 2045 "build/parser.tab.c"
     break;
 
   case 38: /* parlist: "..."  */
 #line 242 "parser/parser.y"
                                  { (yyval.params) = new ParamList(); (yyval.params)->vararg = true; }
-#line 2063 "build/parser.tab.c"
+#line 2051 "build/parser.tab.c"
     break;
 
   case 39: /* namelist: ID  */
 #line 245 "parser/parser.y"
                                  { (yyval.names) = new NameList(); (yyval.names)->v.push_back((yyvsp[0].strValue)); free((yyvsp[0].strValue)); }
-#line 2069 "build/parser.tab.c"
+#line 2057 "build/parser.tab.c"
     break;
 
   case 40: /* namelist: namelist "," ID  */
 #line 246 "parser/parser.y"
                                  { (yyvsp[-2].names)->v.push_back((yyvsp[0].strValue)); free((yyvsp[0].strValue)); (yyval.names) = (yyvsp[-2].names); }
-#line 2075 "build/parser.tab.c"
+#line 2063 "build/parser.tab.c"
     break;
 
   case 41: /* varlist: prefixexp  */
@@ -2080,7 +2068,7 @@ yyreduce:
               if (!isLvalue((yyvsp[0].expr))) { yyerror("alvo de atribuicao invalido"); delete (yyvsp[0].expr); YYERROR; }
               (yyval.exprs) = new ExprList(); (yyval.exprs)->v.emplace_back((yyvsp[0].expr));
           }
-#line 2084 "build/parser.tab.c"
+#line 2072 "build/parser.tab.c"
     break;
 
   case 42: /* varlist: varlist "," prefixexp  */
@@ -2089,25 +2077,25 @@ yyreduce:
               if (!isLvalue((yyvsp[0].expr))) { yyerror("alvo de atribuicao invalido"); delete (yyvsp[0].expr); delete (yyvsp[-2].exprs); YYERROR; }
               (yyvsp[-2].exprs)->v.emplace_back((yyvsp[0].expr)); (yyval.exprs) = (yyvsp[-2].exprs);
           }
-#line 2093 "build/parser.tab.c"
+#line 2081 "build/parser.tab.c"
     break;
 
   case 43: /* explist: exp  */
 #line 259 "parser/parser.y"
                                  { (yyval.exprs) = new ExprList(); (yyval.exprs)->v.emplace_back((yyvsp[0].expr)); }
-#line 2099 "build/parser.tab.c"
+#line 2087 "build/parser.tab.c"
     break;
 
   case 44: /* explist: explist "," exp  */
 #line 260 "parser/parser.y"
                                  { (yyvsp[-2].exprs)->v.emplace_back((yyvsp[0].expr)); (yyval.exprs) = (yyvsp[-2].exprs); }
-#line 2105 "build/parser.tab.c"
+#line 2093 "build/parser.tab.c"
     break;
 
   case 45: /* prefixexp: ID  */
 #line 264 "parser/parser.y"
                                  { (yyval.expr) = at(new Identifier((yyvsp[0].strValue))); free((yyvsp[0].strValue)); }
-#line 2111 "build/parser.tab.c"
+#line 2099 "build/parser.tab.c"
     break;
 
   case 46: /* prefixexp: prefixexp "[" exp "]"  */
@@ -2115,7 +2103,7 @@ yyreduce:
                                             {
                 auto* i = at(new Index()); i->object.reset((yyvsp[-3].expr)); i->key.reset((yyvsp[-1].expr)); (yyval.expr) = i;
             }
-#line 2119 "build/parser.tab.c"
+#line 2107 "build/parser.tab.c"
     break;
 
   case 47: /* prefixexp: prefixexp "." ID  */
@@ -2124,7 +2112,7 @@ yyreduce:
                 auto* i = at(new Index()); i->object.reset((yyvsp[-2].expr));
                 i->key.reset(at(new StringLiteral((yyvsp[0].strValue)))); free((yyvsp[0].strValue)); (yyval.expr) = i;
             }
-#line 2128 "build/parser.tab.c"
+#line 2116 "build/parser.tab.c"
     break;
 
   case 48: /* prefixexp: prefixexp args  */
@@ -2133,7 +2121,7 @@ yyreduce:
                 auto* c = at(new FunctionCall()); c->callee.reset((yyvsp[-1].expr));
                 c->args = std::move((yyvsp[0].exprs)->v); delete (yyvsp[0].exprs); (yyval.expr) = c;
             }
-#line 2137 "build/parser.tab.c"
+#line 2125 "build/parser.tab.c"
     break;
 
   case 49: /* prefixexp: prefixexp ":" ID args  */
@@ -2143,43 +2131,43 @@ yyreduce:
                 c->isMethodCall = true; c->methodName = (yyvsp[-1].strValue); free((yyvsp[-1].strValue));
                 c->args = std::move((yyvsp[0].exprs)->v); delete (yyvsp[0].exprs); (yyval.expr) = c;
             }
-#line 2147 "build/parser.tab.c"
+#line 2135 "build/parser.tab.c"
     break;
 
   case 50: /* prefixexp: "(" exp ")"  */
 #line 281 "parser/parser.y"
                                  { (yyval.expr) = (yyvsp[-1].expr); }
-#line 2153 "build/parser.tab.c"
+#line 2141 "build/parser.tab.c"
     break;
 
   case 51: /* args: "(" ")"  */
 #line 284 "parser/parser.y"
                                  { (yyval.exprs) = new ExprList(); }
-#line 2159 "build/parser.tab.c"
+#line 2147 "build/parser.tab.c"
     break;
 
   case 52: /* args: "(" explist ")"  */
 #line 285 "parser/parser.y"
                                  { (yyval.exprs) = (yyvsp[-1].exprs); }
-#line 2165 "build/parser.tab.c"
+#line 2153 "build/parser.tab.c"
     break;
 
   case 53: /* args: tableconstructor  */
 #line 286 "parser/parser.y"
                                  { (yyval.exprs) = new ExprList(); (yyval.exprs)->v.emplace_back((yyvsp[0].expr)); }
-#line 2171 "build/parser.tab.c"
+#line 2159 "build/parser.tab.c"
     break;
 
   case 54: /* args: STRING  */
 #line 287 "parser/parser.y"
                                  { (yyval.exprs) = new ExprList(); (yyval.exprs)->v.emplace_back(at(new StringLiteral((yyvsp[0].strValue)))); free((yyvsp[0].strValue)); }
-#line 2177 "build/parser.tab.c"
+#line 2165 "build/parser.tab.c"
     break;
 
   case 55: /* tableconstructor: "{" "}"  */
 #line 290 "parser/parser.y"
                                  { (yyval.expr) = at(new TableConstructor()); }
-#line 2183 "build/parser.tab.c"
+#line 2171 "build/parser.tab.c"
     break;
 
   case 56: /* tableconstructor: "{" fieldlist "}"  */
@@ -2188,7 +2176,7 @@ yyreduce:
                        auto* t = at(new TableConstructor());
                        t->fields = std::move((yyvsp[-1].fields)->v); delete (yyvsp[-1].fields); (yyval.expr) = t;
                    }
-#line 2192 "build/parser.tab.c"
+#line 2180 "build/parser.tab.c"
     break;
 
   case 57: /* tableconstructor: "{" fieldlist fieldsep "}"  */
@@ -2197,13 +2185,13 @@ yyreduce:
                        auto* t = at(new TableConstructor());
                        t->fields = std::move((yyvsp[-2].fields)->v); delete (yyvsp[-2].fields); (yyval.expr) = t;
                    }
-#line 2201 "build/parser.tab.c"
+#line 2189 "build/parser.tab.c"
     break;
 
   case 58: /* fieldlist: field  */
 #line 301 "parser/parser.y"
                                  { (yyval.fields) = (yyvsp[0].fields); }
-#line 2207 "build/parser.tab.c"
+#line 2195 "build/parser.tab.c"
     break;
 
   case 59: /* fieldlist: fieldlist fieldsep field  */
@@ -2212,7 +2200,7 @@ yyreduce:
                 for (auto& f : (yyvsp[0].fields)->v) (yyvsp[-2].fields)->v.push_back(std::move(f));
                 delete (yyvsp[0].fields); (yyval.fields) = (yyvsp[-2].fields);
             }
-#line 2216 "build/parser.tab.c"
+#line 2204 "build/parser.tab.c"
     break;
 
   case 62: /* field: "[" exp "]" "=" exp  */
@@ -2220,7 +2208,7 @@ yyreduce:
                                          {
             (yyval.fields) = new FieldList(); (yyval.fields)->v.push_back(TableField{ExprPtr((yyvsp[-3].expr)), ExprPtr((yyvsp[0].expr))});
         }
-#line 2224 "build/parser.tab.c"
+#line 2212 "build/parser.tab.c"
     break;
 
   case 63: /* field: ID "=" exp  */
@@ -2230,7 +2218,7 @@ yyreduce:
             (yyval.fields)->v.push_back(TableField{ExprPtr(at(new StringLiteral((yyvsp[-2].strValue)))), ExprPtr((yyvsp[0].expr))});
             free((yyvsp[-2].strValue));
         }
-#line 2234 "build/parser.tab.c"
+#line 2222 "build/parser.tab.c"
     break;
 
   case 64: /* field: exp  */
@@ -2238,49 +2226,49 @@ yyreduce:
             {
             (yyval.fields) = new FieldList(); (yyval.fields)->v.push_back(TableField{nullptr, ExprPtr((yyvsp[0].expr))});
         }
-#line 2242 "build/parser.tab.c"
+#line 2230 "build/parser.tab.c"
     break;
 
   case 65: /* exp: "nil"  */
 #line 323 "parser/parser.y"
                                  { (yyval.expr) = at(new NilLiteral()); }
-#line 2248 "build/parser.tab.c"
+#line 2236 "build/parser.tab.c"
     break;
 
   case 66: /* exp: "false"  */
 #line 324 "parser/parser.y"
                                  { (yyval.expr) = at(new BoolLiteral(false)); }
-#line 2254 "build/parser.tab.c"
+#line 2242 "build/parser.tab.c"
     break;
 
   case 67: /* exp: "true"  */
 #line 325 "parser/parser.y"
                                  { (yyval.expr) = at(new BoolLiteral(true)); }
-#line 2260 "build/parser.tab.c"
+#line 2248 "build/parser.tab.c"
     break;
 
   case 68: /* exp: NUM  */
 #line 326 "parser/parser.y"
                                  { (yyval.expr) = at(new NumberLiteral((yyvsp[0].intValue))); }
-#line 2266 "build/parser.tab.c"
+#line 2254 "build/parser.tab.c"
     break;
 
   case 69: /* exp: NUM_FLOAT  */
 #line 327 "parser/parser.y"
                                  { (yyval.expr) = at(new NumberLiteral((yyvsp[0].floatValue))); }
-#line 2272 "build/parser.tab.c"
+#line 2260 "build/parser.tab.c"
     break;
 
   case 70: /* exp: STRING  */
 #line 328 "parser/parser.y"
                                  { (yyval.expr) = at(new StringLiteral((yyvsp[0].strValue))); free((yyvsp[0].strValue)); }
-#line 2278 "build/parser.tab.c"
+#line 2266 "build/parser.tab.c"
     break;
 
   case 71: /* exp: "..."  */
 #line 329 "parser/parser.y"
                                  { (yyval.expr) = at(new Vararg()); }
-#line 2284 "build/parser.tab.c"
+#line 2272 "build/parser.tab.c"
     break;
 
   case 72: /* exp: "function" funcbody  */
@@ -2291,137 +2279,137 @@ yyreduce:
             f->body = std::move((yyvsp[0].fbody)->body); delete (yyvsp[0].fbody);
             (yyval.expr) = f;
         }
-#line 2295 "build/parser.tab.c"
+#line 2283 "build/parser.tab.c"
     break;
 
   case 73: /* exp: prefixexp  */
 #line 336 "parser/parser.y"
                                  { (yyval.expr) = (yyvsp[0].expr); }
-#line 2301 "build/parser.tab.c"
+#line 2289 "build/parser.tab.c"
     break;
 
   case 74: /* exp: tableconstructor  */
 #line 337 "parser/parser.y"
                                  { (yyval.expr) = (yyvsp[0].expr); }
-#line 2307 "build/parser.tab.c"
+#line 2295 "build/parser.tab.c"
     break;
 
   case 75: /* exp: exp "+" exp  */
 #line 338 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Add,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2313 "build/parser.tab.c"
+#line 2301 "build/parser.tab.c"
     break;
 
   case 76: /* exp: exp "-" exp  */
 #line 339 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Sub,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2319 "build/parser.tab.c"
+#line 2307 "build/parser.tab.c"
     break;
 
   case 77: /* exp: exp "*" exp  */
 #line 340 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Mul,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2325 "build/parser.tab.c"
+#line 2313 "build/parser.tab.c"
     break;
 
   case 78: /* exp: exp "/" exp  */
 #line 341 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Div,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2331 "build/parser.tab.c"
+#line 2319 "build/parser.tab.c"
     break;
 
   case 79: /* exp: exp "//" exp  */
 #line 342 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::FloorDiv, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2337 "build/parser.tab.c"
+#line 2325 "build/parser.tab.c"
     break;
 
   case 80: /* exp: exp "%" exp  */
 #line 343 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Mod,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2343 "build/parser.tab.c"
+#line 2331 "build/parser.tab.c"
     break;
 
   case 81: /* exp: exp "^" exp  */
 #line 344 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Pow,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2349 "build/parser.tab.c"
+#line 2337 "build/parser.tab.c"
     break;
 
   case 82: /* exp: exp ".." exp  */
 #line 345 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Concat,   (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2355 "build/parser.tab.c"
+#line 2343 "build/parser.tab.c"
     break;
 
   case 83: /* exp: exp "==" exp  */
 #line 346 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Eq,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2361 "build/parser.tab.c"
+#line 2349 "build/parser.tab.c"
     break;
 
   case 84: /* exp: exp "~=" exp  */
 #line 347 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Ne,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2367 "build/parser.tab.c"
+#line 2355 "build/parser.tab.c"
     break;
 
   case 85: /* exp: exp "<" exp  */
 #line 348 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Lt,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2373 "build/parser.tab.c"
+#line 2361 "build/parser.tab.c"
     break;
 
   case 86: /* exp: exp "<=" exp  */
 #line 349 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Le,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2379 "build/parser.tab.c"
+#line 2367 "build/parser.tab.c"
     break;
 
   case 87: /* exp: exp ">" exp  */
 #line 350 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Gt,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2385 "build/parser.tab.c"
+#line 2373 "build/parser.tab.c"
     break;
 
   case 88: /* exp: exp ">=" exp  */
 #line 351 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Ge,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2391 "build/parser.tab.c"
+#line 2379 "build/parser.tab.c"
     break;
 
   case 89: /* exp: exp "and" exp  */
 #line 352 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::And,      (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2397 "build/parser.tab.c"
+#line 2385 "build/parser.tab.c"
     break;
 
   case 90: /* exp: exp "or" exp  */
 #line 353 "parser/parser.y"
                                  { (yyval.expr) = bin(BinOp::Or,       (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 2403 "build/parser.tab.c"
+#line 2391 "build/parser.tab.c"
     break;
 
   case 91: /* exp: "-" exp  */
 #line 354 "parser/parser.y"
                                  { (yyval.expr) = un(UnOp::Neg, (yyvsp[0].expr)); }
-#line 2409 "build/parser.tab.c"
+#line 2397 "build/parser.tab.c"
     break;
 
   case 92: /* exp: "not" exp  */
 #line 355 "parser/parser.y"
                                  { (yyval.expr) = un(UnOp::Not, (yyvsp[0].expr)); }
-#line 2415 "build/parser.tab.c"
+#line 2403 "build/parser.tab.c"
     break;
 
   case 93: /* exp: "#" exp  */
 #line 356 "parser/parser.y"
                                  { (yyval.expr) = un(UnOp::Len, (yyvsp[0].expr)); }
-#line 2421 "build/parser.tab.c"
+#line 2409 "build/parser.tab.c"
     break;
 
 
-#line 2425 "build/parser.tab.c"
+#line 2413 "build/parser.tab.c"
 
       default: break;
     }
@@ -2497,7 +2485,7 @@ yyerrlab:
           }
         yyerror (yymsgp);
         if (yysyntax_error_status == YYENOMEM)
-          goto yyexhaustedlab;
+          YYNOMEM;
       }
     }
 
@@ -2533,6 +2521,7 @@ yyerrorlab:
      label yyerrorlab therefore never appears in user code.  */
   if (0)
     YYERROR;
+  ++yynerrs;
 
   /* Do not reclaim the symbols of the rule whose action triggered
      this YYERROR.  */
@@ -2593,7 +2582,7 @@ yyerrlab1:
 `-------------------------------------*/
 yyacceptlab:
   yyresult = 0;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
 /*-----------------------------------.
@@ -2601,24 +2590,22 @@ yyacceptlab:
 `-----------------------------------*/
 yyabortlab:
   yyresult = 1;
-  goto yyreturn;
+  goto yyreturnlab;
 
 
-#if 1
-/*-------------------------------------------------.
-| yyexhaustedlab -- memory exhaustion comes here.  |
-`-------------------------------------------------*/
+/*-----------------------------------------------------------.
+| yyexhaustedlab -- YYNOMEM (memory exhaustion) comes here.  |
+`-----------------------------------------------------------*/
 yyexhaustedlab:
   yyerror (YY_("memory exhausted"));
   yyresult = 2;
-  goto yyreturn;
-#endif
+  goto yyreturnlab;
 
 
-/*-------------------------------------------------------.
-| yyreturn -- parsing is finished, clean up and return.  |
-`-------------------------------------------------------*/
-yyreturn:
+/*----------------------------------------------------------.
+| yyreturnlab -- parsing is finished, clean up and return.  |
+`----------------------------------------------------------*/
+yyreturnlab:
   if (yychar != YYEMPTY)
     {
       /* Make sure we have latest lookahead translation.  See comments at
