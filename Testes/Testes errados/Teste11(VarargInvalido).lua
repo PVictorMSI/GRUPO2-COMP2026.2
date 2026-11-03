@@ -1,5 +1,5 @@
---teste de Erro Semântico: uso de vararg (...) fora de função vararg
---deve acusar erro semântico na linha 3
+-- Teste de Erro Semântico: uso de vararg (...) fora de função vararg
+-- Deve acusar erro semântico na linha 5
 
 function soma(a, b)
     local v = ...
