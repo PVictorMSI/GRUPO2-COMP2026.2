@@ -1,9 +1,3 @@
-/* parser.y - Parser Bison do compilador Lua -> Python (issue #23)
- * Cobre o subconjunto definido pela AST (ast.hpp): atribuicao, local, if/elseif/else,
- * while, repeat, for numerico e generico, funcoes, return, break, do, chamadas,
- * metodos (obj:m()), tabelas, indexacao e todos os operadores.
- * Fora do escopo (conforme ast.hpp): goto e rotulos.
- */
 %code requires {
     #include "ast.hpp"
     #include <string>
