@@ -43,6 +43,14 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // Análise e reporte de erros semânticos (Issue #28)
+    lua2py::checkSemantics(*root);
+
+    if (lua2py::sem_errors > 0) {            // erro semântico: encerra com código 1
+        delete root;
+        return 1;
+    }
+
     // próximo passo: gerar a IR e o código Python a partir de root + info
 
     delete root;   // quem consome a AST é dono dela (o parser nunca a libera)
