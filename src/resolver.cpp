@@ -1,10 +1,7 @@
-#include <cstdio>
 #include "resolver.hpp"
+#include "semantic_checker.hpp"   // reportSemanticError / sem_errors (contador único)
 
 namespace lua2py {
-
-// Contador de erros semânticos: acessado pelo main.cpp para decidir o exit code.
-int sem_errors = 0;
 
 namespace {
 
@@ -83,10 +80,7 @@ private:
             return t_.global(name, line);
         } else {
             // Leitura de variável não declarada → erro semântico estrito.
-            std::fprintf(stderr,
-                "Erro semântico na linha %d: variável '%s' não foi declarada\n",
-                line, name.c_str());
-            ++sem_errors;
+            reportSemanticError(line, "variável '" + name + "' não foi declarada");
             // Ainda registra como global para não travar o restante da análise.
             return t_.global(name, line);
         }
