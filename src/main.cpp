@@ -34,6 +34,11 @@ int main(int argc, char** argv) {
     lua2py::SemanticInfo info;
     lua2py::analyze(*root, info);
 
+    if (lua2py::sem_errors > 0) {   // erro semântico: variável não declarada (issue #27)
+        delete root;
+        return 1;
+    }
+
     // próximo passo: gerar a IR e o código Python a partir de root + info
 
     delete root;   // quem consome a AST é dono dela (o parser nunca a libera)
