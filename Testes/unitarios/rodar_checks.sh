@@ -26,7 +26,9 @@ done
 # ---------------------------------------------------------------- compilador
 echo "== Compilador (build/lua2py) =="
 
-out=$("$LUA2PY" < "$DIR/valido_basico.lua" 2>&1); rc=$?
+# Programa válido: o Python gerado vai para a saída padrão; mensagens (erros)
+# só na saída de erro. "Nenhuma mensagem" = saída de erro vazia.
+out=$("$LUA2PY" < "$DIR/valido_basico.lua" 2>&1 >/dev/null); rc=$?
 expect "programa válido via '<' : exit 0 e nenhuma mensagem" \
     test "$rc" -eq 0 -a -z "$out"
 
@@ -87,14 +89,14 @@ ERRADOS="Testes/Testes errados"
 
 find_test() {   # find_test <pasta> <prefixo>  -> imprime o caminho do arquivo, ou nada
     local f
-    for f in "$1"/"$2"*.lua; do [ -f "$f" ] && { printf '%s' "$f"; return; }; done
+    for f in "$1"/"$2("*.lua; do [ -f "$f" ] && { printf '%s' "$f"; return; }; done
 }
 
 # certo <prefixo>: deve compilar sem nenhuma mensagem
 certo() {
     local f; f=$(find_test "$CERTOS" "$1")
     [ -z "$f" ] && { echo "  (pulado: $CERTOS/$1* não encontrado)"; return; }
-    local o rc; o=$("$LUA2PY" < "$f" 2>&1); rc=$?
+    local o rc; o=$("$LUA2PY" < "$f" 2>&1 >/dev/null); rc=$?
     expect "certo   $1: exit 0 e sem mensagens" test "$rc" -eq 0 -a -z "$o"
 }
 # errado <prefixo> <padrão extra de mensagem> ...: deve falhar (exit 1) e conter cada padrão
@@ -114,6 +116,8 @@ errado() {
 certo Teste1
 certo Teste2
 certo Teste3
+certo Teste4
+certo Teste5
 errado Teste1 "Erro léxico na linha 15:"                       # arquivo: "deve retornar algo na linha 15"
 errado Teste2 "Erro léxico na linha 5:"                        # arquivo: "retorna algo na linha 5"
 errado Teste3 "Erro léxico na linha 1:"                        # arquivo: "retorna erro na linha 1"
@@ -123,12 +127,53 @@ errado Teste6 "Erro sintático na linha 3:"
 errado Teste7 "Erro sintático na linha 5:"
 errado Teste8 "Erro sintático na linha 5:"
 errado Teste9 "Erro sintático na linha 7:"
+errado Teste10 "Erro semântico na linha 6:"
+errado Teste11 "Erro semântico na linha 5:"
+errado Teste12 "Erro semântico na linha 6:"
+errado Teste13 "Erro semântico na linha 3:" "variável 'z' não foi declarada"
+errado Teste14 "Erro semântico na linha 6:"
+
+# ----------------------------------------------- geração de código (#54)
+# Todo programa válido é traduzido e o .py gerado precisa:
+#   1. compilar com "python3 -m py_compile" (sintaxe e indentação válidas, sem avisos);
+#   2. quando existe um .esperado ao lado do .lua (saída do Lua 5.4 real), produzir
+#      EXATAMENTE a mesma saída ao ser executado.
+echo "== Geração de código Python (#54: py_compile e execução) =="
+GERACAO="Testes/geracao"
+PYTHON="${PYTHON:-python3}"
+if command -v "$PYTHON" >/dev/null 2>&1; then
+    tmp=$(mktemp -d)
+    # (teste_simbolos_3 fica de fora: ele lê de propósito um "self" global que nunca
+    #  recebe valor, para testar a tabela de símbolos; pela #27 não é programa válido)
+    validos=("$DIR/valido_basico.lua" "$DIR/teste_simbolos_1_criterio.lua"
+             "$DIR/teste_simbolos_2_sombra.lua" "$CERTOS"/*.lua "$GERACAO"/*.lua)
+    for f in "${validos[@]}"; do
+        [ -f "$f" ] || continue
+        nome=$(basename "$f" .lua)
+        py="$tmp/$nome.py"
+        if ! "$LUA2PY" "$f" -o "$py" 2>"$tmp/erro.txt"; then
+            nok "$nome: o compilador falhou ($(head -1 "$tmp/erro.txt"))"
+            continue
+        fi
+        expect "$nome: .py passa no py_compile" \
+            "$PYTHON" -W error -m py_compile "$py"
+        esperado="${f%.lua}.esperado"
+        if [ -f "$esperado" ]; then
+            (cd "$tmp" && "$PYTHON" "$py" >"$tmp/saida.txt" 2>&1)
+            expect "$nome: saída do Python == saída do Lua (.esperado)" \
+                diff -q "$esperado" "$tmp/saida.txt"
+        fi
+    done
+    rm -rf "$tmp"
+else
+    echo "  ($PYTHON não instalado — pulando; instale com: sudo apt install python3)"
+fi
 
 # ------------------------------------------------------------------- memória
 echo "== Memória (Valgrind) =="
 if command -v valgrind >/dev/null 2>&1; then
     mem_files=("$DIR/valido_basico.lua" "$DIR/erro_sintatico.lua" "$DIR/teste_simbolos_3_lua.lua")
-    for f in "$CERTOS"/*.lua "$ERRADOS"/*.lua; do [ -f "$f" ] && mem_files+=("$f"); done
+    for f in "$CERTOS"/*.lua "$ERRADOS"/*.lua "$GERACAO"/*.lua; do [ -f "$f" ] && mem_files+=("$f"); done
     for f in "${mem_files[@]}"; do
         v=$(valgrind --leak-check=full "$LUA2PY" < "$f" 2>&1 >/dev/null)
         expect "$(basename "$f"): sem vazamento e sem acesso inválido" \

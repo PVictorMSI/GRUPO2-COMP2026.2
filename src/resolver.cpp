@@ -1,5 +1,9 @@
 #include "resolver.hpp"
 
+#include <algorithm>
+
+#include "semantic_checker.hpp"   // reportSemanticError / sem_errors (contador único)
+
 namespace lua2py {
 
 namespace {
@@ -10,12 +14,36 @@ public:
 
     void run(const Block& root) {
         t_.enterScope();   // escopo do chunk principal (função 0, profundidade 1)
+        registerBuiltins();
         blockBody(root);
+        reportUndeclared();
         t_.exitScope();
         t_.assignCodegenNames();
     }
 
 private:
+    // Registra os nomes globais do Lua padrão (built-ins) para que não sejam
+    // reportados como "variável não declarada" (issue #27).
+    void registerBuiltins() {
+        static const char* builtins[] = {
+            // funções básicas do Lua 5.4
+            "print", "type", "tostring", "tonumber", "ipairs", "pairs",
+            "next", "select", "error", "assert", "pcall", "xpcall",
+            "rawget", "rawset", "rawequal", "rawlen",
+            "setmetatable", "getmetatable",
+            "require", "load", "loadfile", "dofile",
+            "collectgarbage", "unpack", "table.unpack",
+            // bibliotecas padrão
+            "math", "string", "table", "io", "os", "coroutine", "package",
+            // variáveis globais especiais
+            "_G", "_VERSION", "arg",
+            nullptr
+        };
+        for (int i = 0; builtins[i]; ++i)
+            t_.global(builtins[i], 0);  // registra como global conhecida (não dispara erro de leitura)
+    }
+
+
     SemanticInfo& info_;
     SymbolTable& t_;
 
@@ -45,13 +73,33 @@ private:
     }
 
     // Acha o símbolo visível para "name"; se não existe, é uma global.
-    Symbol* find(const std::string& name, int line) {
+    // write=true  → atribuição global implícita (comportamento Lua: x = 1 cria global).
+    // write=false → LEITURA de um nome ainda não visto: guarda a linha. Só é erro
+    //               (issue #27) se a global nunca receber valor em lugar nenhum do
+    //               programa — decidido no fim, em reportUndeclared(). Assim funções
+    //               que se chamam mutuamente (par/impar) continuam válidas.
+    Symbol* find(const std::string& name, int line, bool write) {
         Symbol* s = t_.lookup(name);
-        return s ? s : t_.global(name, line);
+        if (s) return s;
+        s = t_.global(name, line);
+        if (!write) firstRead_.push_back({s, line});
+        return s;
     }
 
+    // Issue #27: leitura de variável que não foi declarada com "local" nem recebeu
+    // valor (como global) em nenhum ponto do programa.
+    void reportUndeclared() {
+        std::stable_sort(firstRead_.begin(), firstRead_.end(),
+                         [](const auto& a, const auto& b) { return a.second < b.second; });
+        for (const auto& [s, line] : firstRead_)
+            if (s->writes == 0)
+                reportSemanticError(line, "variável '" + s->name + "' não foi declarada");
+    }
+
+    std::vector<std::pair<Symbol*, int>> firstRead_;  // global criada por leitura -> linha
+
     void use(const Identifier& id, bool write) {
-        Symbol* s = find(id.name, id.line);
+        Symbol* s = find(id.name, id.line, write);
         touch(s, write);
         info_.uses[&id] = s;
     }
@@ -164,8 +212,11 @@ private:
             // "function a:m()"   -> idem, e o corpo ganha "self" como 1º parâmetro
             auto sep = n.name.find_first_of(".:");
             std::string base = n.name.substr(0, sep);
-            Symbol* sym = find(base, n.line);
-            touch(sym, /*write=*/sep == std::string::npos);
+            bool isSimple = (sep == std::string::npos);
+            // Função simples "function f()" → escreve em f (cria global se não existir).
+            // Função dotted "function a.b()" → lê "a"; erro se não declarado.
+            Symbol* sym = find(base, n.line, /*write=*/isSimple);
+            touch(sym, /*write=*/isSimple);
             info_.funcName[&n] = sym;
             bool hasSelf = n.name.find(':') != std::string::npos;
             functionBody(n, n.params, n.body.get(), hasSelf);

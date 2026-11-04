@@ -18,13 +18,25 @@ const char* const kPythonKeywords[] = {
     "not", "or", "pass", "raise", "return", "try", "while", "with", "yield",
 };
 
-// Nomes que o GERADOR DE CÓDIGO provavelmente vai emitir (runtime e builtins).
-// Uma variável local com esse nome os esconderia dentro da função.
-// AJUSTAR esta lista conforme o gerador passar a usar outros nomes.
+// Nomes que o GERADOR DE CÓDIGO emite e que o código Python gerado usa diretamente:
+// builtins do Python chamados pelo runtime (src/runtime_py.cpp) e pelo código gerado.
+// Uma variável Lua com um desses nomes os esconderia, então ela é renomeada
+// (locais: x_1, x_2...; globais: x_). Além desta lista, todo nome que começa com
+// "lua_" é reservado ao runtime (ver isReservedName).
 const char* const kRuntimeNames[] = {
-    "LuaTable", "range", "len", "isinstance", "str", "int", "float",
-    "list", "dict", "tuple", "enumerate",
+    "LuaError", "LuaTable", "range", "len", "isinstance", "str", "int", "float",
+    "list", "dict", "tuple", "enumerate", "print", "repr", "bool", "callable",
+    "chr", "ord", "id", "max", "min", "abs", "iter", "super", "sorted", "type",
+    "next", "Exception", "ValueError", "TypeError", "SystemExit", "RecursionError",
 };
+
+// Nome que não pode ser usado como está no Python gerado.
+bool isReservedName(const std::string& s) {
+    if (s.rfind("lua_", 0) == 0) return true;   // prefixo do runtime
+    for (const char* n : kRuntimeNames)
+        if (s == n) return true;
+    return false;
+}
 
 bool isPythonKeyword(const std::string& s) {
     for (const char* k : kPythonKeywords)
@@ -106,16 +118,19 @@ void SymbolTable::assignCodegenNames() {
     for (const char* n : kRuntimeNames) taken.insert(n);
 
     // Passo 1: globais primeiro, para que nenhuma local "roube" o nome delas.
+    // Uma global que colide com palavra reservada ou com nome do runtime ganha "_".
     for (auto& s : all_) {
         if (s->kind != SymbolKind::Global) continue;
-        s->codegenName = isPythonKeyword(s->name) ? s->name + "_" : s->name;
+        bool clash = isPythonKeyword(s->name) || isReservedName(s->name);
+        s->codegenName = clash ? s->name + "_" : s->name;
         taken.insert(s->codegenName);
     }
 
     // Passo 2: locais e parâmetros, na ordem de criação.
     for (auto& s : all_) {
         if (s->kind == SymbolKind::Global) continue;
-        std::string base = isPythonKeyword(s->name) ? s->name + "_" : s->name;
+        bool lua = s->name.rfind("lua_", 0) == 0;
+        std::string base = (isPythonKeyword(s->name) || lua) ? s->name + "_" : s->name;
         std::string candidate = base;
         for (int n = 1; taken.count(candidate); ++n)
             candidate = base + "_" + std::to_string(n);

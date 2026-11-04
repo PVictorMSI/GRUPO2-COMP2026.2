@@ -32,4 +32,7 @@ struct SemanticInfo {
 // "info" deve estar vazio (chame uma vez por programa).
 void analyze(const Block& root, SemanticInfo& info);
 
+// Erros semânticos encontrados aqui (variável não declarada, #27) são reportados
+// por reportSemanticError() e contados em sem_errors (ver semantic_checker.hpp).
+
 }  // namespace lua2py

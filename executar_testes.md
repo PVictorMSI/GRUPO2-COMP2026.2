@@ -1,3 +1,19 @@
+# Como Rodar e Testar o Compilador
+
+## Gerando o Python (compilador completo)
+
+```bash
+make                                         # compila o lua2py (precisa de g++, flex, bison)
+./build/lua2py programa.lua -o programa.py   # traduz para Python
+python3 programa.py                          # executa
+make check                                   # todos os testes (inclui py_compile, #54)
+```
+
+Sem `-o`, o Python sai na saída padrão (`./build/lua2py < programa.lua > programa.py`).
+Detalhes da tradução e limitações: [docs/geracao_codigo.md](docs/geracao_codigo.md).
+
+> Os comandos abaixo, com `./teste`, são do analisador léxico antigo (Issue #22).
+
 # Como Rodar e Testar o Analisador Léxico
 
 Este guia explica como executar o nosso compilador para testar a etapa de Análise Léxica, focando na **Issue #22 (Tratamento de erros léxicos)**.
