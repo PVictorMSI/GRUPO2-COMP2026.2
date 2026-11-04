@@ -1,13 +1,21 @@
 // Ponto de entrada do compilador Lua -> Python.
 //
-// Uso:  ./build/lua2py < programa.lua        (como em executar_testes.md)
-//       ./build/lua2py programa.lua          (também aceita o nome do arquivo)
+// Uso:  ./build/lua2py < programa.lua                  Python sai na saída padrão
+//       ./build/lua2py programa.lua                    idem, lendo do arquivo
+//       ./build/lua2py programa.lua -o programa.py     grava o Python no arquivo
 //
-// Etapas já ligadas: léxico -> sintático (AST) -> resolução de escopos (RF06)
-//                    -> análise semântica (#27 variáveis não declaradas, #28 erros semânticos).
-// Código de saída: 0 = ok, 1 = erro (léxico, sintático, semântico ou arquivo ilegível).
+// Etapas: léxico -> sintático (AST) -> resolução de escopos (RF06)
+//         -> análise semântica (#27 variáveis não declaradas, #28 erros semânticos)
+//         -> geração de código Python (codegen).
+// Erros vão para a saída de erro (stderr); só o código Python vai para a saída padrão.
+// Código de saída: 0 = ok, 1 = erro (léxico, sintático, semântico ou de arquivo).
 #include <cstdio>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
+#include "codegen.hpp"
 #include "parser.tab.h"
 #include "resolver.hpp"
 #include "semantic_checker.hpp"
@@ -18,10 +26,21 @@ extern lua2py::Block* root;   // definido em parser/parser.y
 extern int lex_errors;        // definido em lexer/lexer.l (erros léxicos já reportados)
 
 int main(int argc, char** argv) {
-    if (argc > 1) {
-        FILE* f = std::fopen(argv[1], "r");
+    const char* input = nullptr;
+    const char* output = nullptr;
+    for (int i = 1; i < argc; ++i) {
+        if (std::strcmp(argv[i], "-o") == 0 && i + 1 < argc) output = argv[++i];
+        else if (!input) input = argv[i];
+        else {
+            std::fprintf(stderr, "Uso: %s [entrada.lua] [-o saida.py]\n", argv[0]);
+            return 1;
+        }
+    }
+
+    if (input) {
+        FILE* f = std::fopen(input, "r");
         if (!f) {
-            std::fprintf(stderr, "Não foi possível abrir o arquivo: %s\n", argv[1]);
+            std::fprintf(stderr, "Não foi possível abrir o arquivo: %s\n", input);
             return 1;
         }
         yyin = f;
@@ -47,8 +66,18 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // próximo passo: gerar a IR e o código Python a partir de root + info
-
+    std::ostringstream py;
+    lua2py::generatePython(*root, info, py);
     delete root;   // quem consome a AST é dono dela (o parser nunca a libera)
+
+    if (output) {
+        std::ofstream out(output);
+        if (!(out << py.str())) {
+            std::fprintf(stderr, "Não foi possível gravar o arquivo: %s\n", output);
+            return 1;
+        }
+    } else {
+        std::cout << py.str();
+    }
     return 0;
 }
