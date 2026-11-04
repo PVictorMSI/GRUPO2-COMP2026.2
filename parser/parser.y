@@ -272,7 +272,11 @@ prefixexp : ID                   { $$ = at(new Identifier($1)); free($1); }
                 c->isMethodCall = true; c->methodName = $3; free($3);
                 c->args = std::move($4->v); delete $4; $$ = c;
             }
-          | LPAREN exp RPAREN    { $$ = $2; }
+          | LPAREN exp RPAREN    {
+                /* (f(x)) descarta os valores extras de f: o gerador precisa saber disso */
+                if ($2->kind == NodeKind::FunctionCall) static_cast<FunctionCall*>($2)->parenthesized = true;
+                $$ = $2;
+            }
           ;
 
 args : LPAREN RPAREN             { $$ = new ExprList(); }
@@ -317,7 +321,7 @@ field : LBRACKET exp RBRACKET ASSIGN exp {
 exp   : NIL                      { $$ = at(new NilLiteral()); }
       | FALSE_VAL                { $$ = at(new BoolLiteral(false)); }
       | TRUE_VAL                 { $$ = at(new BoolLiteral(true)); }
-      | NUM                      { $$ = at(new NumberLiteral($1)); }
+      | NUM                      { auto* n = at(new NumberLiteral($1)); n->isInteger = true; $$ = n; }
       | NUM_FLOAT                { $$ = at(new NumberLiteral($1)); }
       | STRING                   { $$ = at(new StringLiteral($1)); free($1); }
       | VARARG                   { $$ = at(new Vararg()); }
