@@ -115,6 +115,7 @@ certo Teste1
 certo Teste2
 certo Teste3
 certo Teste4
+certo Teste5
 errado Teste1 "Erro léxico na linha 15:"                       # arquivo: "deve retornar algo na linha 15"
 errado Teste2 "Erro léxico na linha 5:"                        # arquivo: "retorna algo na linha 5"
 errado Teste3 "Erro léxico na linha 1:"                        # arquivo: "retorna erro na linha 1"

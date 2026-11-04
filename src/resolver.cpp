@@ -1,4 +1,7 @@
 #include "resolver.hpp"
+
+#include <algorithm>
+
 #include "semantic_checker.hpp"   // reportSemanticError / sem_errors (contador único)
 
 namespace lua2py {
@@ -13,6 +16,7 @@ public:
         t_.enterScope();   // escopo do chunk principal (função 0, profundidade 1)
         registerBuiltins();
         blockBody(root);
+        reportUndeclared();
         t_.exitScope();
         t_.assignCodegenNames();
     }
@@ -68,23 +72,31 @@ private:
             s->captured = true;
     }
 
-    // Acha o símbolo visível para "name".
+    // Acha o símbolo visível para "name"; se não existe, é uma global.
     // write=true  → atribuição global implícita (comportamento Lua: x = 1 cria global).
-    // write=false → LEITURA: se o nome não foi declarado/usado antes, é erro semântico (issue #27).
+    // write=false → LEITURA de um nome ainda não visto: guarda a linha. Só é erro
+    //               (issue #27) se a global nunca receber valor em lugar nenhum do
+    //               programa — decidido no fim, em reportUndeclared(). Assim funções
+    //               que se chamam mutuamente (par/impar) continuam válidas.
     Symbol* find(const std::string& name, int line, bool write) {
         Symbol* s = t_.lookup(name);
         if (s) return s;
-
-        if (write) {
-            // Atribuição a variável não declarada → cria global implícita (padrão Lua).
-            return t_.global(name, line);
-        } else {
-            // Leitura de variável não declarada → erro semântico estrito.
-            reportSemanticError(line, "variável '" + name + "' não foi declarada");
-            // Ainda registra como global para não travar o restante da análise.
-            return t_.global(name, line);
-        }
+        s = t_.global(name, line);
+        if (!write) firstRead_.push_back({s, line});
+        return s;
     }
+
+    // Issue #27: leitura de variável que não foi declarada com "local" nem recebeu
+    // valor (como global) em nenhum ponto do programa.
+    void reportUndeclared() {
+        std::stable_sort(firstRead_.begin(), firstRead_.end(),
+                         [](const auto& a, const auto& b) { return a.second < b.second; });
+        for (const auto& [s, line] : firstRead_)
+            if (s->writes == 0)
+                reportSemanticError(line, "variável '" + s->name + "' não foi declarada");
+    }
+
+    std::vector<std::pair<Symbol*, int>> firstRead_;  // global criada por leitura -> linha
 
     void use(const Identifier& id, bool write) {
         Symbol* s = find(id.name, id.line, write);
