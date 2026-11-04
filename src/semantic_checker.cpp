@@ -92,20 +92,14 @@ private:
             case NodeKind::FunctionDecl: {
                 const auto& n = static_cast<const FunctionDecl&>(s);
                 validateParams(n.params, n.line);
-                bool prev = inVarargFunc;
-                inVarargFunc = n.isVararg;
-                if (n.body) checkBlock(*n.body);
-                inVarargFunc = prev;
+                functionBody(n.isVararg, n.body.get());
                 break;
             }
 
             case NodeKind::LocalFunctionDecl: {
                 const auto& n = static_cast<const LocalFunctionDecl&>(s);
                 validateParams(n.params, n.line);
-                bool prev = inVarargFunc;
-                inVarargFunc = n.isVararg;
-                if (n.body) checkBlock(*n.body);
-                inVarargFunc = prev;
+                functionBody(n.isVararg, n.body.get());
                 break;
             }
 
@@ -200,16 +194,25 @@ private:
             case NodeKind::FunctionExpr: {
                 const auto& f = static_cast<const FunctionExpr&>(e);
                 validateParams(f.params, f.line);
-                bool prev = inVarargFunc;
-                inVarargFunc = f.isVararg;
-                if (f.body) checkBlock(*f.body);
-                inVarargFunc = prev;
+                functionBody(f.isVararg, f.body.get());
                 break;
             }
 
             default:
                 break;
         }
+    }
+
+    // Corpo de função: "break" não atravessa a fronteira da função (um laço de
+    // fora não vale aqui dentro), e o "..." depende só desta função.
+    void functionBody(bool isVararg, const Block* body) {
+        bool prevVararg = inVarargFunc;
+        int prevLoop = loopDepth;
+        inVarargFunc = isVararg;
+        loopDepth = 0;
+        if (body) checkBlock(*body);
+        inVarargFunc = prevVararg;
+        loopDepth = prevLoop;
     }
 
     //critério de aceitação: não pode haver parâmetros duplicados na declaração da função
