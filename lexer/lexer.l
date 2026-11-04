@@ -37,6 +37,78 @@ static void str_buf_append(char c) {
     }
     str_buf[str_buf_len++] = c;
 }
+
+/* String longa: o Lua ignora a quebra de linha logo depois de "[[". */
+static int longstring_start = 0;
+
+/* Converte as sequências de escape de uma string curta ("..." ou '...') no valor
+   real da string, como o Lua faz: \n, \t, \\, \", \ddd, \xHH, \z, \u{XXX}...
+   Assim a AST guarda o VALOR da string e o gerador de código não precisa saber se
+   ela veio de aspas ou de [[ ]]. Devolve uma string alocada com malloc. */
+static void utf8_append(unsigned long cp) {
+    if (cp < 0x80) { str_buf_append((char)cp); }
+    else if (cp < 0x800) { str_buf_append((char)(0xC0 | (cp >> 6))); str_buf_append((char)(0x80 | (cp & 0x3F))); }
+    else if (cp < 0x10000) { str_buf_append((char)(0xE0 | (cp >> 12))); str_buf_append((char)(0x80 | ((cp >> 6) & 0x3F)));
+                             str_buf_append((char)(0x80 | (cp & 0x3F))); }
+    else { str_buf_append((char)(0xF0 | (cp >> 18))); str_buf_append((char)(0x80 | ((cp >> 12) & 0x3F)));
+           str_buf_append((char)(0x80 | ((cp >> 6) & 0x3F))); str_buf_append((char)(0x80 | (cp & 0x3F))); }
+}
+
+static int hexval(char c) {
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+    return -1;
+}
+
+static char* unescape_string(const char* s, size_t n) {
+    str_buf_reset();
+    for (size_t i = 0; i < n; ++i) {
+        char c = s[i];
+        if (c != '\\' || i + 1 >= n) { str_buf_append(c); continue; }
+        char e = s[++i];
+        switch (e) {
+        case 'n': str_buf_append('\n'); break;
+        case 't': str_buf_append('\t'); break;
+        case 'r': str_buf_append('\r'); break;
+        case 'a': str_buf_append('\a'); break;
+        case 'b': str_buf_append('\b'); break;
+        case 'f': str_buf_append('\f'); break;
+        case 'v': str_buf_append('\v'); break;
+        case '\\': case '"': case '\'': case '\n': str_buf_append(e); break;
+        case 'x':
+            if (i + 2 < n && hexval(s[i + 1]) >= 0 && hexval(s[i + 2]) >= 0) {
+                str_buf_append((char)(hexval(s[i + 1]) * 16 + hexval(s[i + 2])));
+                i += 2;
+            } else {
+                str_buf_append('\\'); str_buf_append(e);
+            }
+            break;
+        case 'z':   /* pula os espaços seguintes */
+            while (i + 1 < n && (s[i + 1] == ' ' || s[i + 1] == '\t' || s[i + 1] == '\r')) ++i;
+            break;
+        case 'u':
+            if (i + 1 < n && s[i + 1] == '{') {
+                unsigned long cp = 0; size_t j = i + 2;
+                while (j < n && hexval(s[j]) >= 0) cp = cp * 16 + hexval(s[j++]);
+                if (j < n && s[j] == '}') { utf8_append(cp); i = j; break; }
+            }
+            str_buf_append('\\'); str_buf_append(e);
+            break;
+        default:
+            if (e >= '0' && e <= '9') {   /* \ddd: até 3 dígitos decimais */
+                int v = 0, k = 0;
+                while (k < 3 && i < n && s[i] >= '0' && s[i] <= '9') { v = v * 10 + (s[i] - '0'); ++i; ++k; }
+                --i;
+                str_buf_append((char)v);
+            } else {                       /* escape desconhecido: mantém como está */
+                str_buf_append('\\'); str_buf_append(e);
+            }
+        }
+    }
+    str_buf_append('\0');
+    return strdup(str_buf);
+}
 %}
 
 %x COMMENT_LINE
@@ -47,7 +119,9 @@ LETRA   [a-zA-Z_]
 DIGITO  [0-9]
 ID      ({LETRA}|_)(({LETRA}|{DIGITO}|_)*)
 INT     [0-9]+
-FLOAT   [0-9]+"."[0-9]+
+EXP     [eE][+-]?[0-9]+
+FLOAT   ([0-9]+"."[0-9]+{EXP}?)|([0-9]+{EXP})|("."[0-9]+{EXP}?)
+HEX     0[xX][0-9a-fA-F]+
 STRING_D  \"([^\"\n\\]|\\.)*\"
 STRING_S  \'([^\'\n\\]|\\.)*\'
 /* Definições de padrões de token e ações */
@@ -134,7 +208,7 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 "}"                     { TRACE(47);return RBRACE; }
 
  /* strings longas [[ ... ]] (NOVO — atende ao RF13) */
-"[["                    { TRACE(48);BEGIN(LONGSTRING); str_buf_reset(); }
+"[["                    { TRACE(48);BEGIN(LONGSTRING); str_buf_reset(); longstring_start = 1; }
 <LONGSTRING>"]]"        {
                           TRACE(49);
                           str_buf_append('\0');
@@ -142,8 +216,8 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           BEGIN(INITIAL);
                           return STRING;
                         }
-<LONGSTRING>\n          { TRACE(50);str_buf_append('\n'); linha++; }
-<LONGSTRING>.           { TRACE(51);str_buf_append(yytext[0]); }
+<LONGSTRING>\n          { TRACE(50); if (!longstring_start) str_buf_append('\n'); longstring_start = 0; linha++; }
+<LONGSTRING>.           { TRACE(51); longstring_start = 0; str_buf_append(yytext[0]); }
 <LONGSTRING><<EOF>>     {
                           LEX_ERROR(); fprintf(stderr, "Erro léxico na linha %d: string longa não terminada\n", linha);
                           return 0;
@@ -161,6 +235,12 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
                           TRACE(53);
                           yylval.floatValue = atof(yytext);
                           return NUM_FLOAT;
+                        }
+
+{HEX}                   {
+                          TRACE(54);
+                          yylval.intValue = (int) strtol(yytext, NULL, 16);
+                          return NUM;
                         }
 
 {INT}                   {
@@ -186,13 +266,13 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
  /* literais de string curtas */
 {STRING_D}              {
                           TRACE(55);
-                          yylval.strValue = strndup(yytext + 1, yyleng - 2);
+                          yylval.strValue = unescape_string(yytext + 1, yyleng - 2);
                           return STRING;
                         }
 
 {STRING_S}               {
                           TRACE(56);
-                          yylval.strValue = strndup(yytext + 1, yyleng - 2);
+                          yylval.strValue = unescape_string(yytext + 1, yyleng - 2);
                           return STRING;
                         }
 

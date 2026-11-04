@@ -188,6 +188,7 @@ struct BoolLiteral : Expr {
 
 struct NumberLiteral : Expr {
     double value;
+    bool isInteger = false;  // "10" (inteiro) x "10.0" (float): no Lua 5.4 são subtipos diferentes
     explicit NumberLiteral(double v) : Expr(NodeKind::NumberLiteral), value(v) {}
 };
 
@@ -234,6 +235,7 @@ struct FunctionCall : Expr {
     std::vector<ExprPtr> args;
     bool isMethodCall = false;
     std::string methodName; // usado apenas quando isMethodCall == true
+    bool parenthesized = false; // (f(x)) entre parênteses: só o primeiro valor de retorno
     FunctionCall() : Expr(NodeKind::FunctionCall) {}
 };
 
