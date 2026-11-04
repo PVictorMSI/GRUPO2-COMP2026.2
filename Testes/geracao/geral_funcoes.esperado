@@ -1,0 +1,23 @@
+3628800
+610
+1	2	1
+12
+dentro	2
+fora	1
+150	150
+COMPILADORES	12	Com	ab-ab-ab
+3 itens a R$ 9.50 (ok)
+   42|ab   |ff
+nil	true	12	31	nil
+number	string	table	function	nil
+5.0	3	1000.0	0.3
+3	9	inf	-inf	3.1415926535898
+linha1
+linha2	[tab]	aspas "duplas"	barra \
+texto
+longo
+42
+10	4
+6
+false	falhou
+true	5
