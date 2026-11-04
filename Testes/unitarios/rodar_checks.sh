@@ -87,7 +87,7 @@ ERRADOS="Testes/Testes errados"
 
 find_test() {   # find_test <pasta> <prefixo>  -> imprime o caminho do arquivo, ou nada
     local f
-    for f in "$1"/"$2"*.lua; do [ -f "$f" ] && { printf '%s' "$f"; return; }; done
+    for f in "$1"/"$2("*.lua; do [ -f "$f" ] && { printf '%s' "$f"; return; }; done
 }
 
 # certo <prefixo>: deve compilar sem nenhuma mensagem
