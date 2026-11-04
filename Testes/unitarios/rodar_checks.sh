@@ -123,6 +123,9 @@ errado Teste6 "Erro sintático na linha 3:"
 errado Teste7 "Erro sintático na linha 5:"
 errado Teste8 "Erro sintático na linha 5:"
 errado Teste9 "Erro sintático na linha 7:"
+errado Teste10 "Erro semântico na linha 6:"
+errado Teste11 "Erro semântico na linha 5:"
+errado Teste12 "Erro semântico na linha 6:"
 
 # ------------------------------------------------------------------- memória
 echo "== Memória (Valgrind) =="
