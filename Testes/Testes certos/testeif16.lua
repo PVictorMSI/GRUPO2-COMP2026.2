@@ -1,10 +1,6 @@
-local x = nil
-if not x then
-    print("x e falso")
+local x = 5
+local y = 10
+if x > 0 and (y > 5 or x < 10) then
+    print("composta")
 end
-if not (x == nil) then
-    print("nao")
-else
-    print("x e nil")
-end
--- deve printar "x e falso" e "x e nil" em ambos.
+-- deve printar "composta" em ambos.

@@ -1,6 +1,7 @@
-local x = 5
-local y = 10
-if x > 0 and (y > 5 or x < 10) then
-    print("composta")
-end
--- deve printar "composta" em ambos.
+local a = {}
+local b = {}
+local c = a
+if a == b then print("iguais") end
+if a == c then print("mesma") end
+-- deve printar "mesma" em ambos.
+-- a e b são tabelas diferentes, enquanto c possui a tabela de a.

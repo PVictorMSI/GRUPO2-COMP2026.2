@@ -1,6 +1,7 @@
-local s = ""
-if s then
-    print("s e verdadeira")
+local a = false
+local b = 5
+if a or b > 3 then
+    print("or avaliou b")
 end
--- deve printar "s e verdadeira" em ambos.
--- ser local não deve gerar problemas em python, mesmo que não possua localidade
+-- deve printar "or avaliou b" em ambos.
+-- a é falso, logo precisa ver se b não for falso ou nil para continuar

@@ -1,9 +1,10 @@
-local a = nil
-local b = 5
-if a and b > 3 then
+local x = nil
+if not x then
+    print("x e falso")
+end
+if not (x == nil) then
     print("nao")
 else
-    print("and curto-circuitou")
+    print("x e nil")
 end
--- deve printar "and curto-circuitou" em ambos.
--- nil já é falso, logo não tem pra que ver o valor de b
+-- deve printar "x e falso" e "x e nil" em ambos.

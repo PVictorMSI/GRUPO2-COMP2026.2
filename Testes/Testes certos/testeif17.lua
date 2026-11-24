@@ -1,8 +1,5 @@
 local x = 5
-if x == 5 then print("eq") end
-if x ~= 6 then print("ne") end
-if x >  4 then print("gt") end
-if x >= 5 then print("ge") end
-if x <  6 then print("lt") end
-if x <= 5 then print("le") end
--- deve printar "eq","ne","gt","ge","lt" e "le" em ambos.
+local y = x > 3 and "grande" or "pequeno"
+print(y)
+-- deve printar "grande" em ambos.
+-- a condição é: se x > 3, valor de y é "grande", se não, "pequeno"

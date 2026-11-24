@@ -1,6 +1,9 @@
-local x = 0
-if x then
-    print("x e verdadeiro")
+local a = nil
+local b = 5
+if a and b > 3 then
+    print("nao")
+else
+    print("and curto-circuitou")
 end
--- deve printar "x e verdadeiro" em ambos.
--- x é local, porém python não possui localidade, não deve deixar de printar x e verdadeiro
+-- deve printar "and curto-circuitou" em ambos.
+-- nil já é falso, logo não tem pra que ver o valor de b

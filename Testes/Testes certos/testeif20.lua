@@ -1,7 +1,7 @@
-local a = {}
-local b = {}
-local c = a
-if a == b then print("iguais") end
-if a == c then print("mesma") end
--- deve printar "mesma" em ambos.
--- a e b são tabelas diferentes, enquanto c possui a tabela c
+local function get0()
+    return 0
+end
+if get0() then
+    print("retorno 0 e verdadeiro")
+end
+-- deve printar "retorno 0 é verdadeiro" em ambos.
