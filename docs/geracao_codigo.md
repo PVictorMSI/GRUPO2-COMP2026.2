@@ -76,6 +76,14 @@ aleatórias e compara com o `lua5.4`.
 uma só. Uma função criada no laço que usa uma variável da volta (que nunca é reatribuída)
 recebe o valor como parâmetro só-nomeado: `def lua_fn2(*lua_extra, j=j):`.
 
+## #31 — Indentação Python válida
+
+- Todo bloco gerado utiliza recuo uniforme de **4 espaços** por nível de aninhamento (padrão PEP 8).
+- **Blocos vazios:** estruturas como `if`, `elif`, `else`, `while`, `for` e funções sem comandos (ou apenas `;`) recebem automaticamente um comando `pass` com a indentação exata do bloco, evitando `IndentationError` no Python.
+- Cláusulas encadeadas (`if` / `elif` / `else`) mantêm alinhamento uniforme.
+- Funções anônimas içadas (`def lua_fn...:`) são emitidas no mesmo nível de recuo do comando que as utiliza.
+- O critério de aceitação é validado automaticamente pelo `make check` via `python3 -W error -m py_compile` sobre todos os programas gerados.
+
 ## #39 — Retorno múltiplo
 
 Vários valores são uma `tuple` do Python (nenhum valor Lua comum é tupla).

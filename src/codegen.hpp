@@ -8,6 +8,7 @@
 //
 // Issues cobertas aqui:
 //   #30  laços de repetição (while, repeat, for numérico, for genérico)
+//   #31  garantir indentação Python válida (4 espaços, pass em blocos vazios, if/elif/else)
 //   #36  operadores Lua -> Python (aritméticos, relacionais, lógicos, .., #)
 //   #39  retorno múltiplo de valores
 //   #41  tabelas com base 1 (Lua) -> base 0 (Python)
