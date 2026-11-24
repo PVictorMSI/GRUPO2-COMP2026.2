@@ -153,6 +153,50 @@ def lua_tonumber(v, base=None):
 )PY"},
 
 // ----------------------------------------------------- operadores (#36)
+{"lua_add", "LuaError lua_tonumber", R"PY(
+def lua_add(a, b):
+    """+ do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na + nb
+    return a + b
+)PY"},
+
+{"lua_sub", "LuaError lua_tonumber", R"PY(
+def lua_sub(a, b):
+    """- do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na - nb
+    return a - b
+)PY"},
+
+{"lua_mul", "LuaError lua_tonumber", R"PY(
+def lua_mul(a, b):
+    """* do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na * nb
+    return a * b
+)PY"},
+
+{"lua_neg", "LuaError lua_tonumber", R"PY(
+def lua_neg(a):
+    """- unário do Lua: converte string para número (coerção automática)."""
+    if isinstance(a, str):
+        na = lua_tonumber(a)
+        if na is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return -na
+    return -a
+)PY"},
+
 {"lua_eq", "", R"PY(
 def lua_eq(a, b):
     """== do Lua: tabelas comparam identidade e true nunca é igual a 1."""
@@ -165,9 +209,14 @@ def lua_eq(a, b):
     return a == b
 )PY"},
 
-{"lua_div", "lua_pymath", R"PY(
+{"lua_div", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_div(a, b):
     """/ do Lua: sempre float, e divisão por zero dá inf/-inf/nan (não é erro)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     a, b = float(a), float(b)
     if b == 0.0:
         if a == 0.0 or a != a:
@@ -176,9 +225,14 @@ def lua_div(a, b):
     return a / b
 )PY"},
 
-{"lua_idiv", "LuaError lua_div lua_pymath", R"PY(
+{"lua_idiv", "LuaError lua_tonumber lua_div lua_pymath", R"PY(
 def lua_idiv(a, b):
     """// do Lua: piso da divisão (inteiros: erro se b == 0; floats: inf/nan)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     if isinstance(a, int) and isinstance(b, int):
         if b == 0:
             raise LuaError("attempt to perform 'n//0'")
@@ -187,9 +241,14 @@ def lua_idiv(a, b):
     return float(lua_pymath.floor(q)) if lua_pymath.isfinite(q) else q
 )PY"},
 
-{"lua_mod", "LuaError lua_pymath", R"PY(
+{"lua_mod", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_mod(a, b):
     """% do Lua: resto com o sinal do divisor (inteiros: erro se b == 0)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     if isinstance(a, int) and isinstance(b, int):
         if b == 0:
             raise LuaError("attempt to perform 'n%%0'")
@@ -203,9 +262,14 @@ def lua_mod(a, b):
     return m
 )PY"},
 
-{"lua_pow", "lua_pymath", R"PY(
+{"lua_pow", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_pow(a, b):
     """^ do Lua: sempre float; casos sem resultado real dão nan/inf (não é erro)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     a, b = float(a), float(b)
     try:
         return lua_pymath.pow(a, b)

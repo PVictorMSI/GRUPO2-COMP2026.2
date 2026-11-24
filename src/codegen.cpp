@@ -197,6 +197,14 @@ bool isBoolean(const Expr* e) {
     return false;
 }
 
+// Expressão cujo valor é sempre string.
+bool isString(const Expr* e) {
+    if (!e) return false;
+    if (e->kind == NodeKind::StringLiteral) return true;
+    if (e->kind == NodeKind::BinaryOp && static_cast<const BinaryOp*>(e)->op == BinOp::Concat) return true;
+    return false;
+}
+
 // Pode ser avaliada duas vezes sem custo nem efeito colateral.
 bool isSimple(const Expr* e) {
     switch (e->kind) {
@@ -1394,26 +1402,33 @@ private:
         const Expr& L = *b.left;
         const Expr& R = *b.right;
         switch (b.op) {
-        // + - * : mesmos operadores do Python.
-        case BinOp::Add: return arith(L, R, " + ", P_ADD);
-        case BinOp::Sub: return arith(L, R, " - ", P_ADD);
-        case BinOp::Mul: return arith(L, R, " * ", P_MUL);
+        // + - * : mesmos operadores do Python, exceto quando há string (coerção do Lua #36).
+        case BinOp::Add:
+            if (isString(&L) || isString(&R)) return helper("lua_add", L, R);
+            return arith(L, R, " + ", P_ADD);
+        case BinOp::Sub:
+            if (isString(&L) || isString(&R)) return helper("lua_sub", L, R);
+            return arith(L, R, " - ", P_ADD);
+        case BinOp::Mul:
+            if (isString(&L) || isString(&R)) return helper("lua_mul", L, R);
+            return arith(L, R, " * ", P_MUL);
 
         // / // % : o Python já faz divisão "piso" e resto com o sinal do divisor,
         // como o Lua. A diferença é a divisão por zero com float (Lua: inf/nan;
         // Python: erro). Com divisor literal diferente de zero o operador do Python
         // serve; nos outros casos usa o helper do runtime.
         case BinOp::Div:
-            if (isNonZeroLiteral(&R, false)) return arith(L, R, " / ", P_MUL);
+            if (!isString(&L) && isNonZeroLiteral(&R, false)) return arith(L, R, " / ", P_MUL);
             return helper("lua_div", L, R);
         case BinOp::FloorDiv:
-            if (isNonZeroLiteral(&R, true)) return arith(L, R, " // ", P_MUL);
+            if (!isString(&L) && isNonZeroLiteral(&R, true)) return arith(L, R, " // ", P_MUL);
             return helper("lua_idiv", L, R);
         case BinOp::Mod:
-            if (isNonZeroLiteral(&R, true)) return arith(L, R, " % ", P_MUL);
+            if (!isString(&L) && isNonZeroLiteral(&R, true)) return arith(L, R, " % ", P_MUL);
             return helper("lua_mod", L, R);
 
         case BinOp::Pow: {
+            if (isString(&L) || isString(&R)) return helper("lua_pow", L, R);
             // a ^ b sempre dá float no Lua (2^3 == 8.0): float(a) ** b. Expoente
             // negativo/fracionário com base qualquer pode dar complexo ou erro no
             // Python, então nesses casos usa lua_pow.
@@ -1548,7 +1563,9 @@ private:
     PyExpr unary(const UnaryOp& u) {
         const Expr& x = *u.operand;
         switch (u.op) {
-        case UnOp::Neg: return {"-" + wrap(single(x), P_UNARY), P_UNARY};
+        case UnOp::Neg:
+            if (isString(&x)) return {rt("lua_neg") + "(" + single1(x) + ")", P_ATOM};
+            return {"-" + wrap(single(x), P_UNARY), P_UNARY};
         case UnOp::Not: return {"not " + wrap(cond(x), P_NOT), P_NOT};
         case UnOp::Len: return {rt("lua_len") + "(" + single1(x) + ")", P_ATOM};
         }

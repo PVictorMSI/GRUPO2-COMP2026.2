@@ -43,3 +43,9 @@ print(#"hello", #{10, 20, 30}, #"")
 print(not true == false)             -- (not true) == false
 print(1 .. 2 == "12")
 print(-a ^ 2, 2 * -3)
+
+-- coerção de strings em operações aritméticas (#36)
+print("10" + 1, 1 + "10", "20" - "5", "10" * 3)
+print("10" / 2, "10" // 3, "10" % 3, "2" ^ 3)
+print(-"10", -"-5")
+

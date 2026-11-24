@@ -38,7 +38,7 @@ nesse caso nenhum Python é gerado.
 
 | Lua | Python gerado | Por quê |
 |---|---|---|
-| `a + b`, `a - b`, `a * b`, `-a` | igual | mesma semântica para int/float |
+| `a + b`, `a - b`, `a * b`, `-a` | igual (ou `lua_add`, `lua_sub`, `lua_mul`, `lua_neg` se operando é string) | mesma semântica para int/float; coerção automática de string para número (#36) |
 | `a / b` | `a / b` se `b` é literal ≠ 0, senão `lua_div(a, b)` | no Lua `x / 0` dá `inf`/`nan`, no Python é erro |
 | `a // b`, `a % b` | `a // 2`, `a % 2` com divisor inteiro literal ≠ 0, senão `lua_idiv` / `lua_mod` | piso e sinal do divisor já iguais; diferem na divisão por zero |
 | `a ^ b` | `float(a) ** 2` (expoente inteiro ≥ 0 ou base positiva literal), senão `lua_pow(a, b)` | `^` sempre dá float; `(-8) ** (1/3)` seria complexo no Python |
@@ -125,7 +125,6 @@ Para criar um teste novo: coloque `nome.lua` em `Testes/geracao/` e rode
 ## Limitações conhecidas
 
 - `pcall`/`error` não acrescentam a posição (`arquivo:linha:`) à mensagem.
-- `"10" + 1` (string convertida em número na aritmética) não é suportado.
 - Com divisor inteiro literal, `x % 3` com `x` float negativo múltiplo de 3 dá `0.0`
   em vez de `-0.0` (só o sinal do zero).
 - Comparar com `==` um número literal e uma variável que guarda `true`/`false`
