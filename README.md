@@ -24,7 +24,7 @@ O compilador lê um arquivo de origem `.lua`, analisa sua estrutura gramatical e
 
 *   [ ] Declaração e atribuição de variáveis.
 *   [ ] Operações aritméticas e lógicas básicas.
-*   [ ] Estruturas condicionais (`if`, `elseif`, `else`).
-*   [ ] Estruturas de repetição (`while`, `for`).
+*   [X] Estruturas condicionais (`if`, `elseif`, `else`).
+*   [X] Estruturas de repetição (`while`, `for`).
 *   [ ] Declaração de funções (opcional/a ser implementado).
 *   [ ] Tabelas/Vetores (opcional/a ser implementado).
