@@ -156,3 +156,4 @@ local pares = filtra_pares({1, 2, 3, 4, 5, 6})
 for _, v in ipairs(pares) do
     print(v)
 end
+
