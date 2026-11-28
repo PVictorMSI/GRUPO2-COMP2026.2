@@ -152,7 +152,7 @@ Testes: `Testes/geracao/biblioteca_42.lua` (saída igual à do Lua) e
 
 1. `python3 -W error -m py_compile` aceite o `.py` (sintaxe, indentação, sem avisos);
 2. quando existe `.esperado` (saída do `lua5.4`), a execução do Python dê saída idêntica;
-3. o compilador rode sem vazamento no Valgrind também nesses programas.
+3. quando Valgrind está instalado, os casos da etapa de memória atendam às verificações implementadas pelo script. Se a ferramenta não estiver disponível, essa etapa é pulada. Consulte a [evidência de Valgrind](qualidade/valgrind.md).
 
 Para criar um teste novo: coloque `nome.lua` em `Testes/geracao/` e rode
 `bash Testes/geracao/gerar_esperados.sh` (precisa do `lua5.4`).

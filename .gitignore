@@ -1,1 +1,6 @@
 build/
+
+# Documentação gerada e ambiente local
+site/
+.venv-docs/
+__pycache__/

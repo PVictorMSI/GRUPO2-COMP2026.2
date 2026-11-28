@@ -1,0 +1,165 @@
+bison -d parser/parser.y -o build/parser.tab.c
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -x c++ -c src/main.cpp -o build/main.o
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -c src/codegen.cpp -o build/codegen.o
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -c src/resolver.cpp -o build/resolver.o
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -c src/semantic_checker.cpp -o build/semantic_checker.o
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -c src/stdlib_subset.cpp -o build/stdlib_subset.o
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -x c++ -c build/parser.tab.c -o build/parser.tab.o
+flex -o build/lex.yy.c lexer/lexer.l
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -x c++ -c build/lex.yy.c -o build/lex.yy.o
+g++ build/main.o build/codegen.o build/resolver.o build/runtime_py.o build/semantic_checker.o build/stdlib_subset.o build/symbol_table.o build/parser.tab.o build/lex.yy.o -o build/lua2py
+g++ -std=c++17 -Wall -Wextra -g -O0 -Isrc -Ibuild -MMD -MP -c Testes/unitarios/test_symbols.cpp -o build/test_symbols.o
+g++ build/test_symbols.o build/codegen.o build/resolver.o build/runtime_py.o build/semantic_checker.o build/stdlib_subset.o build/symbol_table.o build/parser.tab.o build/lex.yy.o -o build/test_symbols
+== Compilador (build/lua2py) ==
+  [OK]    programa válido via '<' : exit 0 e nenhuma mensagem
+  [OK]    programa válido via argumento de arquivo: exit 0
+  [OK]    erro sintático: exit 1 (sem crash)
+  [OK]    erro sintático: mensagem traz 'Erro sintático na linha N'
+  [OK]    arquivo inexistente: exit 1 (sem crash)
+== Tabela de símbolos (RF06) ==
+  [OK]    critério: existe um 'x' GLOBAL e um 'x' LOCAL (entidades distintas)
+  [OK]    critério: os usos de 'x' apontam para 2 símbolos diferentes
+  [OK]    critério: o local vira 'x_1' no Python e a global continua 'x'
+  [OK]    critério: nomes Python todos distintos
+  [OK]    sombreamento: três 'x' locais distintos
+  [OK]    sombreamento: os usos de 'x' apontam para 3 símbolos diferentes
+  [OK]    sombreamento: nomes Python todos distintos
+  [OK]    recursão: 'fat' é local e capturado pelo próprio corpo
+  [OK]    closure: 'c' é marcado como capturado
+  [OK]    palavras reservadas do Python: 'class' -> class_ e 'def' -> def_
+  [OK]    function a:m() cria o parâmetro 'self'; function a.m() usa 'self' global
+  [OK]    nomes Python todos distintos
+== Testes do grupo (Testes/Testes certos e Testes/Testes errados) ==
+  [OK]    certo   Teste1: exit 0 e sem mensagens
+  [OK]    certo   Teste2: exit 0 e sem mensagens
+  [OK]    certo   Teste3: exit 0 e sem mensagens
+  [OK]    certo   Teste4: exit 0 e sem mensagens
+  [OK]    certo   Teste5: exit 0 e sem mensagens
+  [OK]    errado  Teste1: não compila (exit 1)
+  [OK]    errado  Teste1: reporta 'Erro léxico na linha 15:'
+  [OK]    errado  Teste2: não compila (exit 1)
+  [OK]    errado  Teste2: reporta 'Erro léxico na linha 5:'
+  [OK]    errado  Teste3: não compila (exit 1)
+  [OK]    errado  Teste3: reporta 'Erro léxico na linha 1:'
+  [OK]    errado  Teste4: não compila (exit 1)
+  [OK]    errado  Teste4: reporta 'Erro léxico na linha 9:'
+  [OK]    errado  Teste5: não compila (exit 1)
+  [OK]    errado  Teste5: reporta 'Erro léxico na linha 1:'
+  [OK]    errado  Teste5: reporta 'Erro léxico na linha 2:'
+  [OK]    errado  Teste6: não compila (exit 1)
+  [OK]    errado  Teste6: reporta 'Erro sintático na linha 3:'
+  [OK]    errado  Teste7: não compila (exit 1)
+  [OK]    errado  Teste7: reporta 'Erro sintático na linha 5:'
+  [OK]    errado  Teste8: não compila (exit 1)
+  [OK]    errado  Teste8: reporta 'Erro sintático na linha 5:'
+  [OK]    errado  Teste9: não compila (exit 1)
+  [OK]    errado  Teste9: reporta 'Erro sintático na linha 7:'
+  [OK]    errado  Teste10: não compila (exit 1)
+  [OK]    errado  Teste10: reporta 'Erro semântico na linha 6:'
+  [OK]    errado  Teste11: não compila (exit 1)
+  [OK]    errado  Teste11: reporta 'Erro semântico na linha 5:'
+  [OK]    errado  Teste12: não compila (exit 1)
+  [OK]    errado  Teste12: reporta 'Erro semântico na linha 6:'
+  [OK]    errado  Teste13: não compila (exit 1)
+  [OK]    errado  Teste13: reporta 'Erro semântico na linha 3:'
+  [OK]    errado  Teste13: reporta 'variável 'z' não foi declarada'
+  [OK]    errado  Teste14: não compila (exit 1)
+  [OK]    errado  Teste14: reporta 'Erro semântico na linha 6:'
+  [OK]    errado  Teste15: não compila (exit 1)
+  [OK]    errado  Teste15: reporta 'Erro semântico na linha 5:'
+  [OK]    errado  Teste15: reporta ''os.time' não é suportado'
+  [OK]    errado  Teste16: não compila (exit 1)
+  [OK]    errado  Teste16: reporta 'Erro semântico na linha 4:'
+  [OK]    errado  Teste16: reporta ''setmetatable' não é suportado'
+  [OK]    errado  Teste16: reporta 'Erro semântico na linha 5:'
+  [OK]    errado  Teste16: reporta ''string.gsub' não é suportado'
+== Critérios de aceitação (funções, tabelas, biblioteca padrão) ==
+  [OK]    function soma(a, b) ... end vira 'def soma(a, b)'
+  [OK]    local function fatorial(n) vira 'def fatorial(n)'
+  [OK]    tabela usada como array vira list: nums = [10, 20, 30]
+  [OK]    tabela vazia usada como array vira list: pilha = []
+  [OK]    tabela usada como mapa vira dict: pessoa = {"nome": ...}
+  [OK]    funções e tabelas traduzidas funcionam no Python
+  [OK]    método fora do subconjunto (s:gsub) dá erro 'não suportado' na execução
+== Geração de código Python (#54: py_compile e execução) ==
+  [OK]    valido_basico: .py passa no py_compile
+  [OK]    teste_simbolos_1_criterio: .py passa no py_compile
+  [OK]    teste_simbolos_2_sombra: .py passa no py_compile
+  [OK]    Teste1(HelloWorld): .py passa no py_compile
+  [OK]    Teste2(Variáveis): .py passa no py_compile
+  [OK]    Teste3(Tokens válidos): .py passa no py_compile
+  [OK]    Teste4(VariavelDeclarada): .py passa no py_compile
+  [OK]    Teste5(RecursaoMutua): .py passa no py_compile
+  [OK]    TesteFuncao: .py passa no py_compile
+  [OK]    TesteLiteral: .py passa no py_compile
+  [OK]    testeTable: .py passa no py_compile
+  [OK]    testeif01: .py passa no py_compile
+  [OK]    testeif02: .py passa no py_compile
+  [OK]    testeif03: .py passa no py_compile
+  [OK]    testeif04: .py passa no py_compile
+  [OK]    testeif05: .py passa no py_compile
+  [OK]    testeif06: .py passa no py_compile
+  [OK]    testeif07: .py passa no py_compile
+  [OK]    testeif08: .py passa no py_compile
+  [OK]    testeif09: .py passa no py_compile
+  [OK]    testeif10: .py passa no py_compile
+  [OK]    testeif11: .py passa no py_compile
+  [OK]    testeif12: .py passa no py_compile
+  [OK]    testeif13: .py passa no py_compile
+  [OK]    testeif14: .py passa no py_compile
+  [OK]    testeif15: .py passa no py_compile
+  [OK]    testeif16: .py passa no py_compile
+  [OK]    testeif17: .py passa no py_compile
+  [OK]    testeif18: .py passa no py_compile
+  [OK]    testeif19: .py passa no py_compile
+  [OK]    testeif20: .py passa no py_compile
+  [OK]    testelaco01: .py passa no py_compile
+  [OK]    testelaco02: .py passa no py_compile
+  [OK]    testelaco03: .py passa no py_compile
+  [OK]    testelaco04: .py passa no py_compile
+  [OK]    testelaco05: .py passa no py_compile
+  [OK]    testelaco06: .py passa no py_compile
+  [OK]    testelaco07: .py passa no py_compile
+  [OK]    testelaco08: .py passa no py_compile
+  [OK]    testelaco09: .py passa no py_compile
+  [OK]    testelaco10: .py passa no py_compile
+  [OK]    testelaco11: .py passa no py_compile
+  [OK]    testelaco12: .py passa no py_compile
+  [OK]    testelaco13: .py passa no py_compile
+  [OK]    testelaco14: .py passa no py_compile
+  [OK]    testelaco15: .py passa no py_compile
+  [OK]    testelaco16: .py passa no py_compile
+  [OK]    testelaco17: .py passa no py_compile
+  [OK]    testelaco18: .py passa no py_compile
+  [OK]    testelaco19: .py passa no py_compile
+  [OK]    testelaco20: .py passa no py_compile
+  [OK]    testelaco21: .py passa no py_compile
+  [OK]    testelaco22: .py passa no py_compile
+  [OK]    testelaco23: .py passa no py_compile
+  [OK]    testelaco24: .py passa no py_compile
+  [OK]    algoritmos: .py passa no py_compile
+  [OK]    algoritmos: saída do Python == saída do Lua (.esperado)
+  [OK]    biblioteca_42: .py passa no py_compile
+  [OK]    biblioteca_42: saída do Python == saída do Lua (.esperado)
+  [OK]    casos_dificeis: .py passa no py_compile
+  [OK]    casos_dificeis: saída do Python == saída do Lua (.esperado)
+  [OK]    geral_funcoes: .py passa no py_compile
+  [OK]    geral_funcoes: saída do Python == saída do Lua (.esperado)
+  [OK]    indentacao_31: .py passa no py_compile
+  [OK]    indentacao_31: saída do Python == saída do Lua (.esperado)
+  [OK]    indentacao_31b: .py passa no py_compile
+  [OK]    indentacao_31b: saída do Python == saída do Lua (.esperado)
+  [OK]    lacos_30: .py passa no py_compile
+  [OK]    lacos_30: saída do Python == saída do Lua (.esperado)
+  [OK]    literais_37: .py passa no py_compile
+  [OK]    literais_37: saída do Python == saída do Lua (.esperado)
+  [OK]    operadores_36: .py passa no py_compile
+  [OK]    operadores_36: saída do Python == saída do Lua (.esperado)
+  [OK]    retorno_multiplo_39: .py passa no py_compile
+  [OK]    retorno_multiplo_39: saída do Python == saída do Lua (.esperado)
+  [OK]    tabelas_base1_41: .py passa no py_compile
+  [OK]    tabelas_base1_41: saída do Python == saída do Lua (.esperado)
+== Memória (Valgrind) ==
+  (valgrind não instalado — pulando; instale com: sudo apt install valgrind)
+
+Resultado: 144 passaram, 0 falharam.

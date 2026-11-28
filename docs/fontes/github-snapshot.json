@@ -1,0 +1,1595 @@
+{
+  "data_referencia": "2026-11-27",
+  "fuso": "America/Bahia",
+  "commit": "1c5e2e3bcb7de59f86bffb9cf0c527081a313a43",
+  "issues": [
+    {
+      "number": 1,
+      "title": "testforwebhook",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/1",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": "this is a blank for testing an external functionality and should be ignored",
+      "created_at": "2026-08-13T18:31:22Z",
+      "updated_at": "2026-08-13T18:32:25Z",
+      "closed_at": "2026-08-13T18:32:25Z",
+      "assignees": [],
+      "labels": [],
+      "milestone": null
+    },
+    {
+      "number": 2,
+      "title": "Gerenciamento",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/2",
+      "state": "open",
+      "state_reason": null,
+      "body": "Agrupa as issues de Gerenciamento do Projeto.",
+      "created_at": "2026-08-30T20:12:56Z",
+      "updated_at": "2026-08-30T20:48:34Z",
+      "closed_at": null,
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [
+        "Épico"
+      ],
+      "milestone": {
+        "number": 5,
+        "title": "T (Apresentação)",
+        "due_on": "2026-11-30T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/5"
+      }
+    },
+    {
+      "number": 3,
+      "title": "Especificação",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/3",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "Agrupa as issues de Especificação e Design.",
+      "created_at": "2026-08-30T20:14:22Z",
+      "updated_at": "2026-11-28T00:58:16Z",
+      "closed_at": "2026-11-28T00:58:16Z",
+      "assignees": [],
+      "labels": [
+        "Épico"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 4,
+      "title": "Implementação",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/4",
+      "state": "open",
+      "state_reason": null,
+      "body": null,
+      "created_at": "2026-08-30T20:16:01Z",
+      "updated_at": "2026-08-30T20:38:49Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [
+        "Épico"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 5,
+      "title": "Testes e Documentação",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/5",
+      "state": "open",
+      "state_reason": null,
+      "body": "Agrupa as issues de Testes, Documentação e Entrega.",
+      "created_at": "2026-08-30T20:16:39Z",
+      "updated_at": "2026-08-31T01:25:46Z",
+      "closed_at": null,
+      "assignees": [
+        "ChickRicks"
+      ],
+      "labels": [
+        "Épico"
+      ],
+      "milestone": {
+        "number": 5,
+        "title": "T (Apresentação)",
+        "due_on": "2026-11-30T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/5"
+      }
+    },
+    {
+      "number": 6,
+      "title": "Issue: Definir cronograma e marcos do projeto",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/6",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nUtilizar datações pré-estabelecidas pelo professor como milestones e organizar as demais datas em torno desses milestones.",
+      "created_at": "2026-08-30T20:19:24Z",
+      "updated_at": "2026-10-05T15:03:58Z",
+      "closed_at": "2026-09-22T13:56:58Z",
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [
+        "Documentação"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 7,
+      "title": "Issue: Definir rotação de papéis e Responsabilidades por Frente",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/7",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nDefinir papéis e responsabilidades por frente. A periodicidade de rotação de papéis também deve ser designada.\n\n**Critério de aceitação**\n- [ ] Cada integrante tem ao menos uma frente sob sua responsabilidade, documentado no README.\n- [ ] Todos os integrantes estão cientes e de acordo com a rotação de papéis ao longo das sprints.",
+      "created_at": "2026-08-30T20:40:48Z",
+      "updated_at": "2026-10-05T15:04:06Z",
+      "closed_at": "2026-10-05T15:02:48Z",
+      "assignees": [
+        "PVictorMSI",
+        "Giih-martins"
+      ],
+      "labels": [],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 8,
+      "title": "Issue: Preparar e Ensaiar P1",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/8",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": null,
+      "created_at": "2026-08-30T20:42:20Z",
+      "updated_at": "2026-10-05T15:13:10Z",
+      "closed_at": "2026-10-05T15:03:12Z",
+      "assignees": [
+        "Giih-martins"
+      ],
+      "labels": [],
+      "milestone": {
+        "number": 2,
+        "title": "P1 (Apresentação)",
+        "due_on": "2026-09-28T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/2"
+      }
+    },
+    {
+      "number": 9,
+      "title": "Issue: Preparar e Ensaiar P2",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/9",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": null,
+      "created_at": "2026-08-30T20:42:55Z",
+      "updated_at": "2026-11-28T00:58:02Z",
+      "closed_at": "2026-11-28T00:58:02Z",
+      "assignees": [],
+      "labels": [],
+      "milestone": {
+        "number": 4,
+        "title": "P2 (Apresentação)",
+        "due_on": "2026-11-11T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/4"
+      }
+    },
+    {
+      "number": 10,
+      "title": "Issue: Configurar Github Projects",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/10",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "****Descrição**\nConfigurar board Kanban do GitHub Projects, criar labels, Milestones.**",
+      "created_at": "2026-08-30T20:44:59Z",
+      "updated_at": "2026-10-05T15:03:07Z",
+      "closed_at": "2026-10-05T15:03:07Z",
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [],
+      "milestone": {
+        "number": 2,
+        "title": "P1 (Apresentação)",
+        "due_on": "2026-09-28T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/2"
+      }
+    },
+    {
+      "number": 11,
+      "title": "Issue: Preparar e Ensaiar T",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/11",
+      "state": "open",
+      "state_reason": null,
+      "body": null,
+      "created_at": "2026-08-30T20:45:56Z",
+      "updated_at": "2026-08-30T20:45:56Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [],
+      "milestone": {
+        "number": 5,
+        "title": "T (Apresentação)",
+        "due_on": "2026-11-30T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/5"
+      }
+    },
+    {
+      "number": 12,
+      "title": "Issue: Documentar requisitos funcionais e não funcionais",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/12",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nDocumentar requisitos funcionais e não funcionais.\n\n**Critério de aceitação**\n- [ ] Documento de RF/RNF revisado e aprovado pelo grupo.",
+      "created_at": "2026-08-30T21:46:47Z",
+      "updated_at": "2026-10-05T15:07:16Z",
+      "closed_at": "2026-10-05T15:07:16Z",
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [
+        "Documentação"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 13,
+      "title": "Issue: Documentar escopo e exclusões do projeto",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/13",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nDocumentar escopo e exclusões do projeto.\n\n**Critério de aceitação**\n- [ ] Lista de recursos fora do escopo (metatables, coroutines, goto, require, varargs) documentada e comunicada ao grupo.",
+      "created_at": "2026-08-30T21:48:29Z",
+      "updated_at": "2026-10-05T15:07:25Z",
+      "closed_at": "2026-10-05T15:07:25Z",
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [
+        "Documentação"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 14,
+      "title": "Issue: Definir gramática Lua suportada",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/14",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nDefinir gramática Lua suportada.\n\n**Critério de aceitação**\n- [ ] Gramática documentada cobrindo todas as construções do escopo suportado, sem ambiguidades conhecidas na regra de precedência de operadores, utilizando o formalismo de backus-naur (BNF)",
+      "created_at": "2026-08-30T22:01:24Z",
+      "updated_at": "2026-10-05T15:07:36Z",
+      "closed_at": "2026-10-05T15:07:36Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [
+        "Documentação"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 15,
+      "title": "Issue: Definir estrutura da AST (nós e tipos)",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/15",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nDefinir estrutura da árvore de sintaxe abstrata (AST), com nós e tipos.\n\n**Critério de aceitação**\n- [ ] Estrutura de nós da AST (structs/classes em C/C++) documentada e aprovada por todas as frentes.",
+      "created_at": "2026-08-30T22:03:49Z",
+      "updated_at": "2026-09-16T03:34:15Z",
+      "closed_at": "2026-09-16T03:34:15Z",
+      "assignees": [
+        "Camile0318",
+        "Giih-martins"
+      ],
+      "labels": [
+        "Documentação"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 16,
+      "title": "Frente A — Front-end (Léxico e Sintático)",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/16",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": null,
+      "created_at": "2026-08-30T22:07:07Z",
+      "updated_at": "2026-11-28T00:58:32Z",
+      "closed_at": "2026-11-28T00:58:32Z",
+      "assignees": [],
+      "labels": [
+        "História de Usuário"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 17,
+      "title": "Frente B — Semântica ",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/17",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": null,
+      "created_at": "2026-08-30T22:09:07Z",
+      "updated_at": "2026-11-28T00:58:36Z",
+      "closed_at": "2026-11-28T00:58:36Z",
+      "assignees": [],
+      "labels": [
+        "História de Usuário"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 18,
+      "title": "Frente C — Código Intermediário",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/18",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": null,
+      "created_at": "2026-08-30T22:09:44Z",
+      "updated_at": "2026-11-28T01:07:27Z",
+      "closed_at": "2026-11-28T01:07:27Z",
+      "assignees": [],
+      "labels": [
+        "História de Usuário"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 19,
+      "title": "Frente E — Infraestrutura e Memória",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/19",
+      "state": "open",
+      "state_reason": null,
+      "body": null,
+      "created_at": "2026-08-30T22:11:56Z",
+      "updated_at": "2026-08-31T01:54:05Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [
+        "História de Usuário"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 20,
+      "title": "Issue: Escrever relatório técnico / manual do compilador",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/20",
+      "state": "open",
+      "state_reason": null,
+      "body": null,
+      "created_at": "2026-08-30T22:13:44Z",
+      "updated_at": "2026-08-30T22:13:44Z",
+      "closed_at": null,
+      "assignees": [
+        "PVictorMSI"
+      ],
+      "labels": [],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 21,
+      "title": "Implementar analisador léxico",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/21",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nImplementar analisador léxico (tokens).\n\n**Critério de aceitação**\n- [ ] Dado um .lua, o analisador gera corretamente a sequência de tokens (palavras-chave, identificadores, operadores, literais, delimitadores) para todas as construções do escopo suportado.\n",
+      "created_at": "2026-08-31T00:29:08Z",
+      "updated_at": "2026-10-05T15:07:45Z",
+      "closed_at": "2026-10-05T15:07:45Z",
+      "assignees": [
+        "PVictorMSI",
+        "Giih-martins"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 22,
+      "title": "Tratamento de erros léxicos",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/22",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTratamento de erros léxicos.",
+      "created_at": "2026-08-31T00:35:24Z",
+      "updated_at": "2026-10-08T21:18:06Z",
+      "closed_at": "2026-10-08T21:18:05Z",
+      "assignees": [
+        "ChickRicks",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 23,
+      "title": "Implementar parser (Bison) conforme gramática",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/23",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nImplementar parser (Bison) conforme gramática.\n\n**Critério de aceitação**\n- [ ] Programas Lua sintaticamente corretos (dentro do escopo) são parseados sem erros.",
+      "created_at": "2026-08-31T00:50:44Z",
+      "updated_at": "2026-10-08T21:20:41Z",
+      "closed_at": "2026-10-08T21:20:41Z",
+      "assignees": [
+        "Camile0318",
+        "PVictorMSI"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 24,
+      "title": "Tratamento de erros sintáticos",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/24",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTratamento de erros sintáticos.\n\n**Critério de aceitação**\n- [ ] Erros sintáticos são reportados com a linha aproximada, sem crash do compilador.",
+      "created_at": "2026-08-31T00:51:45Z",
+      "updated_at": "2026-10-27T23:10:14Z",
+      "closed_at": "2026-10-27T23:10:14Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 1,
+        "title": "P1 (Documentação)",
+        "due_on": "2026-09-23T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/1"
+      }
+    },
+    {
+      "number": 25,
+      "title": "Construção da AST durante o parsing",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/25",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nConstrução da AST durante o parsing.\n\n**Critério de aceitação**\n- [ ] AST reflete corretamente blocos, expressões aninhadas e chamadas de função; utilizada por todas as fases seguintes.",
+      "created_at": "2026-08-31T00:53:12Z",
+      "updated_at": "2026-11-03T12:46:32Z",
+      "closed_at": "2026-11-03T12:46:32Z",
+      "assignees": [
+        "Giih-martins",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 4,
+        "title": "P2 (Apresentação)",
+        "due_on": "2026-11-11T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/4"
+      }
+    },
+    {
+      "number": 26,
+      "title": "Implementar tabela de símbolos com escopos",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/26",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nImplementar tabela de símbolos com escopos.\n\n**Critério de aceitação**\n- [ ] Variáveis de mesmo nome em escopos diferentes (função vs. global) são tratadas como entidades distintas.",
+      "created_at": "2026-08-31T00:55:32Z",
+      "updated_at": "2026-11-03T13:34:34Z",
+      "closed_at": "2026-11-03T13:34:34Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 27,
+      "title": "Tratamento de variáveis não declaradas",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/27",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTratamento de variáveis não declaradas.\n\n**Critério de aceitação**\n- [ ] Uso de variável não declarada segue a regra definida (erro ou global implícita), sem comportamento indefinido.\n",
+      "created_at": "2026-08-31T00:59:57Z",
+      "updated_at": "2026-11-04T02:57:17Z",
+      "closed_at": "2026-11-04T02:57:17Z",
+      "assignees": [
+        "Camile0318",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 28,
+      "title": "Reportar erros semânticos",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/28",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nReportar erros semânticos.\n\n**Critério de aceitação**\n- [ ] Erros semânticos detectados geram mensagem com linha e descrição do problema.\n",
+      "created_at": "2026-08-31T01:00:49Z",
+      "updated_at": "2026-11-09T12:33:06Z",
+      "closed_at": "2026-11-09T12:33:06Z",
+      "assignees": [
+        "Camile0318",
+        "Giih-martins"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 29,
+      "title": "Gerar código para estruturas condicionais",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/29",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nGerar código para estruturas condicionais.\n\n**Critério de aceitação**\n- [ ] if/elseif/else/end é convertido para if/elif/else em Python, preservando a lógica das condições.",
+      "created_at": "2026-08-31T01:01:17Z",
+      "updated_at": "2026-09-02T18:27:56Z",
+      "closed_at": null,
+      "assignees": [
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 30,
+      "title": "Gerar código para laços de repetição",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/30",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nGerar código para laços de repetição.\n\n**Critério de aceitação**\n- [ ] while, repeat/until, for numérico e for genérico são convertidos com semântica de iteração equivalente, validada por casos de teste.",
+      "created_at": "2026-08-31T01:01:41Z",
+      "updated_at": "2026-11-24T00:31:37Z",
+      "closed_at": "2026-11-24T00:31:37Z",
+      "assignees": [
+        "Camile0318",
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 31,
+      "title": "Garantir indentação Python válida na geração",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/31",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nGarantir indentação Python válida na geração.\n\n**Critério de aceitação**\n- [ ] Código gerado passa em python -m py_compile quanto à indentação de blocos.",
+      "created_at": "2026-08-31T01:02:06Z",
+      "updated_at": "2026-11-28T01:17:54Z",
+      "closed_at": "2026-11-28T01:17:54Z",
+      "assignees": [
+        "Giih-martins",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 32,
+      "title": "Frente D — Geração Final",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/32",
+      "state": "open",
+      "state_reason": null,
+      "body": null,
+      "created_at": "2026-08-31T01:59:52Z",
+      "updated_at": "2026-08-31T01:59:52Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [
+        "História de Usuário"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 33,
+      "title": "Gerar código de três endereços para expressões",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/33",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": "**Descrição**\nGerar código de três endereços para expressões.\n\n**Critério de aceitação**\n- [ ] Expressões com mais de uma operação (ex.: a + b * c) são decompostas em instruções elementares com temporários (ex.: t1 = b * c; t2 = a + t1).",
+      "created_at": "2026-08-31T13:47:12Z",
+      "updated_at": "2026-11-28T01:02:46Z",
+      "closed_at": "2026-11-28T01:02:46Z",
+      "assignees": [
+        "PVictorMSI",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 34,
+      "title": "Preservar estrutura de blocos de controle na RI",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/34",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": "**Descrição**\nPreservar estrutura de blocos de controle na RI.\n\n**Critério de aceitação**\n- [ ] Blocos if/while/for da AST são preservados como blocos aninhados na RI, não reduzidos a rótulos/desvios soltos.",
+      "created_at": "2026-08-31T13:48:23Z",
+      "updated_at": "2026-11-28T01:03:03Z",
+      "closed_at": "2026-11-28T01:03:03Z",
+      "assignees": [
+        "PVictorMSI",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 35,
+      "title": "Gerar código Python a partir da RI",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/35",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": "**Descrição**\nGerar código Python a partir da RI.\n\n**Critério de aceitação**\n- [ ] O código Python é produzido a partir da RI, não da AST; o módulo de geração final não acessa nós da AST diretamente.",
+      "created_at": "2026-08-31T13:51:17Z",
+      "updated_at": "2026-11-28T01:03:35Z",
+      "closed_at": "2026-11-28T01:03:35Z",
+      "assignees": [
+        "PVictorMSI",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 36,
+      "title": "Traduzir operadores Lua para Python",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/36",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTraduzir operadores Lua para Python.\n\n**Critério de aceitação**\n- [ ] .., ~=, ^, and/or/not, / e // são traduzidos para os operadores Python corretos, validado por testes de execução.\n",
+      "created_at": "2026-08-31T13:51:59Z",
+      "updated_at": "2026-11-24T01:23:53Z",
+      "closed_at": "2026-11-24T01:23:53Z",
+      "assignees": [
+        "Camile0318",
+        "Giih-martins"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 37,
+      "title": "Traduzir literais",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/37",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nTraduzir literais.\n\n**Critério de aceitação**\n- [ ] nil, true/false, números e strings (simples, duplas e longas [[...]]) convertidos para os literais equivalentes em Python.\n",
+      "created_at": "2026-08-31T13:52:19Z",
+      "updated_at": "2026-09-07T13:14:28Z",
+      "closed_at": null,
+      "assignees": [
+        "ChickRicks",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 38,
+      "title": "Traduzir declaração e chamada de funções",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/38",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTraduzir declaração e chamada de funções.\n\n**Critério de aceitação**\n- [ ] function nome(args)...end é convertido para def nome(args): ... funcional em Python.\n",
+      "created_at": "2026-08-31T13:56:33Z",
+      "updated_at": "2026-11-28T00:57:48Z",
+      "closed_at": "2026-11-28T00:57:48Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 39,
+      "title": "Tratar retorno múltiplo de valores",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/39",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nTratar retorno múltiplo de valores.\n\n**Critério de aceitação**\n- [ ] return a, b é convertido para retorno de tupla em Python, recuperável corretamente na chamada.\n",
+      "created_at": "2026-08-31T13:56:58Z",
+      "updated_at": "2026-11-24T00:32:18Z",
+      "closed_at": "2026-11-24T00:32:18Z",
+      "assignees": [
+        "Camile0318",
+        "PVictorMSI"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 40,
+      "title": "Converter tables para list/dict",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/40",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nConverter tables para list/dict.\n\n**Critério de aceitação**\n- [ ] Tables usadas como array viram list; tables usadas como mapa viram dict.",
+      "created_at": "2026-08-31T13:57:11Z",
+      "updated_at": "2026-11-28T00:57:37Z",
+      "closed_at": "2026-11-28T00:57:37Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 41,
+      "title": "Reindexar tables (base 1 para base 0)",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/41",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nReindexar tables (base 1 para base 0).\n\n**Critério de aceitação**\n- [ ] t[1] em Lua é traduzido para t[0] em Python, validado por teste comparando o elemento acessado.",
+      "created_at": "2026-08-31T13:57:29Z",
+      "updated_at": "2026-11-24T00:32:44Z",
+      "closed_at": "2026-11-24T00:32:44Z",
+      "assignees": [
+        "Camile0318",
+        "Joaolramos"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 42,
+      "title": "Suportar subconjunto da biblioteca padrão",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/42",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nSuportar subconjunto da biblioteca padrão.\n\n**Critério de aceitação**\n- [ ] print(...) funciona; funções fora do subconjunto definido geram erro claro de 'não suportado'.\n",
+      "created_at": "2026-08-31T13:57:56Z",
+      "updated_at": "2026-11-28T00:57:50Z",
+      "closed_at": "2026-11-28T00:57:50Z",
+      "assignees": [
+        "PVictorMSI",
+        "Giih-martins"
+      ],
+      "labels": [
+        "RF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 43,
+      "title": "Garantir stack de implementação em C/C++",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/43",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nGarantir stack de implementação em C/C++.\n\n**Critério de aceitação**\n- [ ] Todo o código-fonte do compilador está em C ou C++.\n",
+      "created_at": "2026-08-31T14:08:15Z",
+      "updated_at": "2026-11-28T01:08:12Z",
+      "closed_at": "2026-11-28T01:08:12Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 44,
+      "title": "Configurar geração do lexer via Flex",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/44",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nConfigurar geração do lexer via Flex.\n\n**Critério de aceitação**\n- [ ] Lexer gerado a partir de um arquivo de especificação Flex (.l).",
+      "created_at": "2026-08-31T14:10:48Z",
+      "updated_at": "2026-11-28T01:07:52Z",
+      "closed_at": "2026-11-28T01:07:52Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 45,
+      "title": "Configurar geração do parser via Bison",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/45",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nConfigurar geração do parser via Bison.\n\n**Critério de aceitação**\n- [ ] Parser gerado a partir de um arquivo de especificação Bison (.y), com gramática documentada.",
+      "created_at": "2026-08-31T14:11:18Z",
+      "updated_at": "2026-11-28T01:07:56Z",
+      "closed_at": "2026-11-28T01:07:56Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 46,
+      "title": "Gerenciamento de memória da AST",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/46",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nGerenciamento de memória da AST.\n\n**Critério de aceitação**\n- [ ] Execução sob Valgrind (ou equivalente) não reporta memory leaks para os casos de teste definidos.\n",
+      "created_at": "2026-08-31T14:12:30Z",
+      "updated_at": "2026-11-28T01:07:57Z",
+      "closed_at": "2026-11-28T01:07:57Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 47,
+      "title": "Gerenciamento de memória da RI",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/47",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "body": "**Descrição**\nGerenciamento de memória da RI.\n\n**Critério de aceitação**\n- [ ] Execução sob Valgrind não reporta memory leaks relacionados às estruturas da representação intermediária.\n",
+      "created_at": "2026-08-31T14:14:06Z",
+      "updated_at": "2026-11-28T01:11:51Z",
+      "closed_at": "2026-11-28T01:11:51Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 48,
+      "title": "Organizar código em módulos desacoplados",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/48",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nOrganizar código em módulos desacoplados.\n\n**Critério de aceitação**\n- [ ] Código separado por fase (léxico, sintático, semântico, IR, geração final), sem lógica de uma fase implementada em outra.",
+      "created_at": "2026-08-31T14:14:29Z",
+      "updated_at": "2026-08-31T14:14:29Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 49,
+      "title": "Garantir robustez a entradas malformadas",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/49",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nGarantir robustez a entradas malformadas.\n\n**Critério de aceitação**\n- [ ] Nenhum caso de teste com entrada malformada produz segmentation fault.\n",
+      "created_at": "2026-08-31T14:15:56Z",
+      "updated_at": "2026-08-31T14:15:56Z",
+      "closed_at": null,
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 50,
+      "title": "Padronizar mensagens de erro",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/50",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nPadronizar mensagens de erro.\n\n**Critério de aceitação**\n- [ ] Toda mensagem de erro contém, no mínimo, o tipo do erro e a linha correspondente.",
+      "created_at": "2026-08-31T14:16:22Z",
+      "updated_at": "2026-09-07T13:20:32Z",
+      "closed_at": null,
+      "assignees": [
+        "ChickRicks"
+      ],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 51,
+      "title": "Criar Makefile de build",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/51",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nCriar Makefile de build.\n\n**Critério de aceitação**\n- [ ] make compila o projeto com sucesso em ambiente Linux limpo.",
+      "created_at": "2026-08-31T14:17:29Z",
+      "updated_at": "2026-11-28T00:59:00Z",
+      "closed_at": "2026-11-28T00:59:00Z",
+      "assignees": [],
+      "labels": [
+        "RNF"
+      ],
+      "milestone": {
+        "number": 3,
+        "title": "P2 (Documentação)",
+        "due_on": "2026-11-04T00:00:00Z",
+        "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/milestone/3"
+      }
+    },
+    {
+      "number": 52,
+      "title": "Criar suíte de testes automatizados",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/52",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nCriar suíte de testes automatizados.\n\n**Critério de aceitação**\n- [ ] Ao menos um caso de teste cobrindo cada requisito funcional (RF01–RF21).",
+      "created_at": "2026-08-31T14:18:07Z",
+      "updated_at": "2026-11-28T01:16:28Z",
+      "closed_at": "2026-11-28T01:16:28Z",
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [],
+      "milestone": null
+    },
+    {
+      "number": 53,
+      "title": "Testes de robustez com entradas malformadas",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/53",
+      "state": "open",
+      "state_reason": null,
+      "body": "**Descrição**\nTestes de robustez com entradas malformadas.\n\n**Critério de aceitação**\n- [ ] Casos de teste cobrindo erros léxicos, sintáticos e semânticos, sem causar crash.",
+      "created_at": "2026-08-31T14:19:12Z",
+      "updated_at": "2026-09-07T13:28:53Z",
+      "closed_at": null,
+      "assignees": [
+        "PVictorMSI",
+        "ChickRicks"
+      ],
+      "labels": [],
+      "milestone": null
+    },
+    {
+      "number": 54,
+      "title": "Validar saída .py com py_compile",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/54",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nValidar saída .py com py_compile.\n\n**Critério de aceitação**\n- [ ] Todos os .py gerados pelos testes passam em python -m py_compile sem erro.",
+      "created_at": "2026-08-31T14:19:59Z",
+      "updated_at": "2026-11-04T02:57:18Z",
+      "closed_at": "2026-11-04T02:57:18Z",
+      "assignees": [
+        "Camile0318",
+        "PVictorMSI"
+      ],
+      "labels": [],
+      "milestone": null
+    },
+    {
+      "number": 55,
+      "title": "Rodar Valgrind e corrigir leaks encontrados",
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/55",
+      "state": "closed",
+      "state_reason": "completed",
+      "body": "**Descrição**\nRodar Valgrind e corrigir leaks encontrados.\n\n**Critério de aceitação**\n- [ ] Relatório do Valgrind sem leaks para os casos de teste definidos.",
+      "created_at": "2026-08-31T14:20:11Z",
+      "updated_at": "2026-11-28T01:16:33Z",
+      "closed_at": "2026-11-28T01:16:33Z",
+      "assignees": [
+        "Giih-martins",
+        "Joaolramos"
+      ],
+      "labels": [],
+      "milestone": null
+    }
+  ],
+  "comments": [
+    {
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/30#issuecomment-7118160159",
+      "body": "Implementado no PR #61 (src/codegen.cpp + src/runtime_py.cpp).\n\n- while → while do Python\n- repeat/until → while True com break no fim (a condição enxerga as variáveis locais do corpo)\n- for numérico → range() quando os valores são inteiros, ou lua_range() para passo float e limite calculado (o limite é avaliado uma vez só, como no Lua)\n- for genérico → ipairs/pairs e iteradores próprios (protocolo geral do Lua)\n- break e laços aninhados funcionando; closures guardam o valor de cada volta\n\nValidado por Testes/geracao/lacos_30.lua: a saída do Python é idêntica à do Lua 5.4 (lacos_30.esperado). make check: 103/103.",
+      "created_at": "2026-11-24T00:31:37Z"
+    },
+    {
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/39#issuecomment-7118171819",
+      "body": "Implementado no PR #61 (src/codegen.cpp + src/runtime_py.cpp).\n\n- return a, b → return a, b (tupla em Python)\n- q, r = f() recupera os dois valores; valores sobrando são descartados e os que faltam viram nil\n- Chamada no último argumento ou no último campo de uma tabela expande todos os valores; nas outras posições, usa só o primeiro\n- return f(x) repassa todos os valores; select(\"#\", ...) e table.unpack funcionam\n\nValidado por Testes/geracao/retorno_multiplo_39.lua: a saída do Python é idêntica à do Lua 5.4 (retorno_multiplo_39.esperado). make check: 103/103.",
+      "created_at": "2026-11-24T00:32:18Z"
+    },
+    {
+      "html_url": "https://github.com/PVictorMSI/GRUPO2-COMP2026.2/issues/41#issuecomment-7118179241",
+      "body": "Implementado no PR #61 (src/codegen.cpp + src/runtime_py.cpp).\n\n- Tabelas usadas como lista viram list do Python, e o índice Lua k vira k - 1 (t[1] acessa t[0]) por meio de lua_get/lua_set\n- t[#t + 1] = v acrescenta no fim e t[#t] = nil remove o último\n- Índice inexistente devolve nil em vez de erro; tabelas com chaves ou esparsas viram dict e mantêm as chaves do Lua\n- table.insert, table.remove, table.sort, table.concat e ipairs funcionam com a reindexação\n\nValidado por Testes/geracao/tabelas_base1_41.lua, que compara o elemento acessado em cada posição: a saída do Python é idêntica à do Lua 5.4 (tabelas_base1_41.esperado). make check: 103/103.",
+      "created_at": "2026-11-24T00:32:44Z"
+    }
+  ],
+  "commits": [
+    {
+      "sha": "1c5e2e3bcb7de59f86bffb9cf0c527081a313a43",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "Merge pull request #65 from PVictorMSI/feat/Issue#37-traduzir-literais"
+    },
+    {
+      "sha": "4d0c362c7d37e163ee3460fc054be89b0b8b83c8",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "fix(lexer/parser): literais inteiros Lua 64-bit sem overflow (issue #37)"
+    },
+    {
+      "sha": "20b6360939e50ca107b5f2371ac89a1dcdbc5c5b",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "Merge pull request #64 from PVictorMSI/feat/Issue#31-garantir-indentacao-python"
+    },
+    {
+      "sha": "d9b50aafb6ca663887f505c651da3a6d8b2fdc6b",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "fix(test): atualiza esperado do indentacao_31b apos merge com main"
+    },
+    {
+      "sha": "3fdb786e2ae3f7afa50bec870d491a4b06176c78",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "Merge remote-tracking branch 'origin/main' into feat/Issue#31-garantir-indentacao-python"
+    },
+    {
+      "sha": "c5f128d8c55a46258ad7a404fca7bef2b9dfe283",
+      "date": "2026-11-27",
+      "author": "João Ramos",
+      "title": "test(indentacao): casos de borda para a issue #31"
+    },
+    {
+      "sha": "0f52009444a0a3f97e7ee287de7c147f961f80e6",
+      "date": "2026-11-27",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "geracao_final_funcoes_tables_bib_padrao"
+    },
+    {
+      "sha": "06f92d1f0afbd5f5b10fab26bcd3a07fb9de3aed",
+      "date": "2026-11-27",
+      "author": "ChickRicks",
+      "title": "Merge pull request #63 from PVictorMSI/testes-literais-funcoes"
+    },
+    {
+      "sha": "3887849aa922d00cb6ac076c36497caa10fa4b19",
+      "date": "2026-11-27",
+      "author": "ChickRicks",
+      "title": "Adicionando teste para tabelas"
+    },
+    {
+      "sha": "751fc60f7a4b7b41e61f6a928403665845d7746c",
+      "date": "2026-11-26",
+      "author": "ChickRicks",
+      "title": "adição de testes de funcões e literais"
+    },
+    {
+      "sha": "efae626cd2d03b19a8a36f837a30940681fcc2ae",
+      "date": "2026-11-24",
+      "author": "ChickRicks",
+      "title": "Merge branch 'testes-if-for'"
+    },
+    {
+      "sha": "e2f231d6847acf8be049b5eaaf0e8431e6577725",
+      "date": "2026-11-24",
+      "author": "ChickRicks",
+      "title": "adicionando comentários"
+    },
+    {
+      "sha": "ca275c18153ef63dcbb885d71ef9ae6e13d140ce",
+      "date": "2026-11-23",
+      "author": "ChickRicks",
+      "title": "testes de condicionais e laços"
+    },
+    {
+      "sha": "6303bff093e81d6d1b0dd717aecc189570047f38",
+      "date": "2026-11-23",
+      "author": "Giovana Martins de Brito",
+      "title": "Merge pull request #62 from PVictorMSI/feat/Issue#36-coercao-string-operadores"
+    },
+    {
+      "sha": "f15842b060075887c8008716c67ca85c1fb67e48",
+      "date": "2026-11-23",
+      "author": "Giovana Martins de Brito",
+      "title": "feat(codegen): suporta coercao de string em operacoes aritmeticas (#36)"
+    },
+    {
+      "sha": "7cd06fc2d84cd80bdb0d23dba9bac3e15734a913",
+      "date": "2026-11-23",
+      "author": "Giovana Martins de Brito",
+      "title": "feat(codegen): garante indentacao valida e pass em blocos vazios (#31)"
+    },
+    {
+      "sha": "7f9973575059e3cb19ff022105df826c7d243267",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "Merge pull request #61 from PVictorMSI/feat/gerador-python"
+    },
+    {
+      "sha": "39dfa59101596607d70eeb4569deb0a21a569fd5",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "test(codegen): py_compile e comparação com o Lua real no make check (#54)"
+    },
+    {
+      "sha": "5030ff5267a79d1fee7a8467b30c9e8721d96713",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "feat(codegen): gerador de código Python a partir da AST"
+    },
+    {
+      "sha": "54a912077ab7217cde4cafe250113f434a2dc8eb",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "feat(front-end): ajustes necessários para a geração de código"
+    },
+    {
+      "sha": "44c0eca98041abd8b91278b42a3fdc6ecf1db906",
+      "date": "2026-11-03",
+      "author": "Camile",
+      "title": "test: find_test procura 'TesteN(' para não confundir Teste1 com Teste10 em locale pt_BR"
+    },
+    {
+      "sha": "9d98b06e568b5993f6ab17677fa9b359c890ac30",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "fix(semantica): variável não declarada só quando nunca recebe valor (#27)"
+    },
+    {
+      "sha": "bc5242fccc76fd42035e2859948b38d3f63d626d",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "fix(semantica): integra #27 e #28 sem conflitos"
+    },
+    {
+      "sha": "56febfbabd274b52b919e035a57deb82044a1366",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "Merge feat/Issue#28-reportar-erros-semanticos (#28)"
+    },
+    {
+      "sha": "3ad440eebb08ae52eba4a665e135e5112b721b79",
+      "date": "2026-11-03",
+      "author": "Camile0318",
+      "title": "Merge feat/tratamento-variaveis (#27)"
+    },
+    {
+      "sha": "d8491a5615fecf23ca0f63ab40f2047ce801a3b8",
+      "date": "2026-11-03",
+      "author": "Giovana Martins de Brito",
+      "title": "test(semantica): alinha linhas esperadas nos testes semanticos"
+    },
+    {
+      "sha": "1626ced5577e8f5ee3257e8704aa083aa8063846",
+      "date": "2026-11-03",
+      "author": "Giovana Martins de Brito",
+      "title": "feat(semantica): implementa reporte de erros semanticos (#28)"
+    },
+    {
+      "sha": "8ee016cbabebc8745bda3139834fcdadbce78f8f",
+      "date": "2026-11-02",
+      "author": "João Ramos",
+      "title": "Merge pull request #60 from PVictorMSI/feat/construcao-ast-parser"
+    },
+    {
+      "sha": "45a0c49fda80428e9c0a0cc8b1e307f44718147d",
+      "date": "2026-11-02",
+      "author": "João Ramos",
+      "title": "Merge branch 'main' into feat/construcao-ast-parser - resolve conflitos"
+    },
+    {
+      "sha": "a1cb6e582091104c93a93b46d7dfb3e99bf02aca",
+      "date": "2026-11-02",
+      "author": "João Ramos",
+      "title": "feat(semantica): tratamento de variaveis nao declaradas (issue #27)"
+    },
+    {
+      "sha": "39cfd37e5495b0972fc0b82e669087319520665c",
+      "date": "2026-11-02",
+      "author": "João Ramos",
+      "title": "chore: adiciona pasta build ao gitignore"
+    },
+    {
+      "sha": "4b9a822b434d03dfc0aee75a2608c81df4ba08a5",
+      "date": "2026-11-02",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "tabela de simbolos + melhorias em testes"
+    },
+    {
+      "sha": "d646f88d64755eaa0d85173086dbf4099425d2bf",
+      "date": "2026-10-28",
+      "author": "João Ramos",
+      "title": "build: adiciona Makefile e corrige declaracao de 'linha' no lexer"
+    },
+    {
+      "sha": "0b77d8db53d640e709121667b232f30804bfca00",
+      "date": "2026-10-28",
+      "author": "João Ramos",
+      "title": "feat: construcao da AST durante o parsing"
+    },
+    {
+      "sha": "8c13ad769fd7f2663950f20ad87427b47444558c",
+      "date": "2026-10-27",
+      "author": "João Ramos",
+      "title": "Merge pull request #59 from PVictorMSI/checaLexer"
+    },
+    {
+      "sha": "c6c6f0ef7c26f9c06d08abde8f3ba6356e996e76",
+      "date": "2026-10-22",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "tratamento de erros no lexer"
+    },
+    {
+      "sha": "c9d0ddc50593361caa69d6245674bd3c2d69c424",
+      "date": "2026-10-10",
+      "author": "ChickRicks",
+      "title": "Novos testes sintáticos"
+    },
+    {
+      "sha": "9cbadbea66e28a676aed6bc0fdf8376a1b02b9ce",
+      "date": "2026-10-05",
+      "author": "João Ramos",
+      "title": "Merge pull request #58 from PVictorMSI/testes"
+    },
+    {
+      "sha": "29e9974dee1e2fdd6c75482e69c6b029609f2f76",
+      "date": "2026-10-05",
+      "author": "João Ramos",
+      "title": "Merge branch 'main' into testes - Resolve conflict in lexer.l include"
+    },
+    {
+      "sha": "3916c1d8c66d9014cd095bf897f7f88d28495fd5",
+      "date": "2026-10-05",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "Merge pull request #57 from PVictorMSI/feat/Issue#15-Definir-estrutura-da-AST-nos-e-tipos"
+    },
+    {
+      "sha": "d3756d111c240fd4943cbaaefe1f6a36cbcd8869",
+      "date": "2026-10-05",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "Merge branch 'main' into feat/Issue#15-Definir-estrutura-da-AST-nos-e-tipos"
+    },
+    {
+      "sha": "af9ad37ee94682cb182fda065e0b6d289663a8d3",
+      "date": "2026-10-03",
+      "author": "ChickRicks",
+      "title": "trocando o caminho"
+    },
+    {
+      "sha": "dcdf92bde1fc575a5f692e52ac13b35d12310c65",
+      "date": "2026-10-01",
+      "author": "Camile",
+      "title": "Implementa parser Bison completo conforme AST (Refs #23)"
+    },
+    {
+      "sha": "ef2857ccf63e03291612b303f0a4677e4455ff3d",
+      "date": "2026-09-30",
+      "author": "João Ramos",
+      "title": "feat: adiciona rastreio de tokens e tratamento de erros lexicos"
+    },
+    {
+      "sha": "07fe71e3df660dea6d8609ee26b124e7d1a4090c",
+      "date": "2026-09-23",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "documentação estrutural do projeto"
+    },
+    {
+      "sha": "7ed292b72914aa75eb3eb82e3d355a02e87fadd2",
+      "date": "2026-09-22",
+      "author": "ChickRicks",
+      "title": "Testes"
+    },
+    {
+      "sha": "bebc6aa0633e5332fe2721162dd90aa5fd61da24",
+      "date": "2026-09-22",
+      "author": "ChickRicks",
+      "title": "Branch de testes com bison falso pra testar"
+    },
+    {
+      "sha": "d62086002d188800940b47d8b43ccc024eaa19a0",
+      "date": "2026-09-22",
+      "author": "ChickRicks",
+      "title": "Corrigido lexer pra compilar corretamente"
+    },
+    {
+      "sha": "7ab04b56b9ef81204db3d974e9cf0e8653c483e8",
+      "date": "2026-09-16",
+      "author": "Camile0318",
+      "title": "Merge pull request #56 from PVictorMSI/feat/Issue#15-Definir-estrutura-da-AST-nos-e-tipos"
+    },
+    {
+      "sha": "d8309a4e7dbe93577ac8d8c9c6a772e6445a10f2",
+      "date": "2026-09-16",
+      "author": "Camile0318",
+      "title": "Update ast_design.md"
+    },
+    {
+      "sha": "ac20d9450d5c12e7f33beeffe93ad0b911ce641e",
+      "date": "2026-09-15",
+      "author": "Giovana Martins de Brito",
+      "title": "feat(ast): define estrutura de nos e tipos da AST (#15)"
+    },
+    {
+      "sha": "9fbd50a93ef00941071af483ab976b6a5f1247e3",
+      "date": "2026-09-09",
+      "author": "ChickRicks",
+      "title": "Modificado os testes para dar erro de token, corrigido o lexer.l para garantir que leia variáveis começando com _"
+    },
+    {
+      "sha": "d078c39af207d80f1ce31d6813372d758eac7112",
+      "date": "2026-09-04",
+      "author": "ChickRicks",
+      "title": "Adicionado Teste 3"
+    },
+    {
+      "sha": "24724e39cd6c476ab6d2fa318caa2cc83b113dc1",
+      "date": "2026-08-31",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "correcoes no lexer"
+    },
+    {
+      "sha": "5cce5cdbf6bd70dde28e0aaa0900f19d1c022be8",
+      "date": "2026-08-30",
+      "author": "ChickRicks",
+      "title": "Adicionado as pastas com códigos de teste"
+    },
+    {
+      "sha": "7a75b03ee84a75cbb366959980375ea11e3d3e72",
+      "date": "2026-08-26",
+      "author": "Giovana Martins de Brito",
+      "title": "lexer completo"
+    },
+    {
+      "sha": "626502673d81332e50c0da5444e531f53916818c",
+      "date": "2026-08-19",
+      "author": "PVictorMSI",
+      "title": "analisador_em_sala"
+    },
+    {
+      "sha": "d2ea90a845c3f461f524d6369bc59933e781b4e3",
+      "date": "2026-08-13",
+      "author": "PVictorMSI",
+      "title": "arquivos iniciais"
+    },
+    {
+      "sha": "caf74e7bf995fac8e33ce5a6b5d56dd719b4b2b9",
+      "date": "2026-08-12",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "Update README with project information and features"
+    },
+    {
+      "sha": "f3847a452ec36b4bb25715b620114a8801ebd2a2",
+      "date": "2026-08-12",
+      "author": "Paulo Victor Mendes Silva",
+      "title": "Initial commit"
+    }
+  ]
+}

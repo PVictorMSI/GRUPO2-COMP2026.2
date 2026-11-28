@@ -1,0 +1,116 @@
+site_name: Lua → Python | Grupo 2
+site_description: Documentação do transpilador Lua para Python, Compiladores 1, UnB/FCTE, 2026.2.
+site_url: https://pvictormsi.github.io/GRUPO2-COMP2026.2/
+repo_url: https://github.com/PVictorMSI/GRUPO2-COMP2026.2
+repo_name: PVictorMSI/GRUPO2-COMP2026.2
+edit_uri: edit/main/docs/
+copyright: Grupo 2 · Compiladores 1 · UnB/FCTE · 2026.2
+theme:
+  name: material
+  language: pt
+  font: false
+  icon:
+    logo: material/code-braces
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Ativar modo escuro
+    - scheme: slate
+      primary: deep purple
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Ativar modo claro
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+plugins:
+  - search:
+      lang: pt
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+extra_css:
+  - stylesheets/extra.css
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn
+nav:
+  - Início: index.md
+  - Projeto:
+      - Visão geral: projeto/visao-geral.md
+      - Equipe e responsabilidades: projeto/equipe.md
+      - Escopo da linguagem: projeto/escopo.md
+      - Requisitos e rastreabilidade: projeto/requisitos.md
+      - Limitações e pendências: projeto/limitacoes.md
+  - Manual:
+      - Instalação e CLI: guia/instalacao.md
+      - Exemplos: guia/exemplos.md
+      - MkDocs e publicação: guia/publicacao.md
+  - Implementação:
+      - Arquitetura: tecnico/arquitetura.md
+      - Análise léxica: tecnico/lexico.md
+      - Gramática: BNF.md
+      - Análise sintática: tecnico/sintatico.md
+      - Estrutura da AST: ast_design.md
+      - Símbolos e semântica: tecnico/semantica.md
+      - Representação intermediária: tecnico/representacao-intermediaria.md
+      - Geração Python e runtime: geracao_codigo.md
+  - Gestão:
+      - Planejamento e EAP: gestao/planejamento.md
+      - Cronograma completo: gestao/cronograma.md
+      - Catálogo de issues: gestao/issues.md
+  - Semanas:
+      - "01 · Abertura e organização": semanas/semana-01.md
+      - "02 · Linguagens formais e primeiros tokens": semanas/semana-02.md
+      - "03 · Estrutura do compilador e fase léxica": semanas/semana-03.md
+      - "04 · Gramática e parser inicial": semanas/semana-04.md
+      - "05 · Continuação do parser e erros": semanas/semana-05.md
+      - "06 · AST e tabela de símbolos": semanas/semana-06.md
+      - "07 · Semana Universitária e documentação P1": semanas/semana-07.md
+      - "08 · Primeiro ponto de controle": semanas/semana-08.md
+      - "09 · Análise semântica": semanas/semana-09.md
+      - "10 · Protótipo de representação intermediária": semanas/semana-10.md
+      - "11 · Otimização de código": semanas/semana-11.md
+      - "12 · Geração de código final": semanas/semana-12.md
+      - "13 · Consolidação para P2": semanas/semana-13.md
+      - "14 · Segundo ponto de controle": semanas/semana-14.md
+      - "15 · Implementação final I": semanas/semana-15.md
+      - "16 · Implementação final II e documentação": semanas/semana-16.md
+      - "17 · Entrevistas de entrega": semanas/semana-17.md
+      - "18 · Revisão de menção": semanas/semana-18.md
+  - Pontos de controle:
+      - Avaliação e prazos: entregas/index.md
+      - P1: entregas/p1.md
+      - P2: entregas/p2.md
+      - Entrevista final T: entregas/final.md
+      - Avaliação do compilador C: entregas/compilador.md
+  - Qualidade:
+      - Estratégia e resultados: qualidade/testes.md
+      - Valgrind: qualidade/valgrind.md
+      - Diagnósticos: qualidade/erros.md
+  - Fontes: fontes/index.md
