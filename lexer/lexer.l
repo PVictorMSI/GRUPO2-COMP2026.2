@@ -239,13 +239,13 @@ STRING_S  \'([^\'\n\\]|\\.)*\'
 
 {HEX}                   {
                           TRACE(54);
-                          yylval.intValue = (int) strtol(yytext, NULL, 16);
+                          yylval.intValue = (long long) strtol(yytext, NULL, 16);
                           return NUM;
                         }
 
 {INT}                   {
                           TRACE(54);
-                          yylval.intValue = atoi(yytext);
+                          yylval.intValue = (long long) strtoll(yytext, NULL, 10);
                           return NUM;
                         }
 

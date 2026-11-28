@@ -112,7 +112,7 @@ std::string pyString(const std::string& s) {
 }
 
 std::string pyNumber(const NumberLiteral& n) {
-    if (n.isInteger) return std::to_string(static_cast<long long>(n.value));
+    if (n.isInteger) return std::to_string(n.intVal);
     char buf[40];
     for (int prec = 15; prec <= 17; ++prec) {  // menor representação que volta ao mesmo double
         std::snprintf(buf, sizeof buf, "%.*g", prec, n.value);
