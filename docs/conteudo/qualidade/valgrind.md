@@ -12,7 +12,7 @@
 
 ![Captura da etapa Memória (Valgrind), com casos válidos e inválidos marcados como sem vazamento e sem acesso inválido](../assets/valgrind.jpeg)
 
-A captura fornecida pela equipe mostra a etapa de memória com resultados `[OK]` para entradas válidas, erros léxicos/sintáticos/semânticos e programas de geração. Ela é preservada no arquivo `docs/assets/valgrind.jpeg`.
+A captura fornecida pela equipe mostra a etapa de memória com resultados `[OK]` para entradas válidas, erros léxicos/sintáticos/semânticos e programas de geração. Ela é preservada no arquivo `docs/conteudo/assets/valgrind.jpeg`.
 
 A imagem não apresenta data, hash do commit, versão da ferramenta nem logs brutos completos. Portanto, documenta o resultado exibido para aqueles casos, sem estabelecer uma garantia para qualquer entrada ou associar automaticamente o resultado ao commit atual.
 

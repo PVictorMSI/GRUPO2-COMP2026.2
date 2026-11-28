@@ -1,9 +1,11 @@
+docs_dir: conteudo
+site_dir: site
 site_name: Lua → Python | Grupo 2
 site_description: Documentação do transpilador Lua para Python, Compiladores 1, UnB/FCTE, 2026.2.
 site_url: https://pvictormsi.github.io/GRUPO2-COMP2026.2/
 repo_url: https://github.com/PVictorMSI/GRUPO2-COMP2026.2
 repo_name: PVictorMSI/GRUPO2-COMP2026.2
-edit_uri: edit/main/docs/
+edit_uri: edit/main/docs/conteudo/
 copyright: Grupo 2 · Compiladores 1 · UnB/FCTE · 2026.2
 theme:
   name: material

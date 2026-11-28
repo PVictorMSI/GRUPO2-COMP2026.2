@@ -8,7 +8,7 @@
 | Executar a saída | Python 3.8+ |
 | Regerar referências e testes diferenciais | Lua 5.4 |
 | Analisar memória | Valgrind |
-| Construir a documentação | Python 3.9+ e `requirements-docs.txt` |
+| Construir a documentação | Python 3.9+ e `docs/requirements.txt` |
 
 ```bash
 sudo apt update

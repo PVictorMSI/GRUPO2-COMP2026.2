@@ -884,6 +884,6 @@ Rodar Valgrind e corrigir leaks encontrados.
 **Critério de aceitação**
 - [ ] Relatório do Valgrind sem leaks para os casos de teste definidos.
 
-**Evidência relacionada no repositório:** [Testes/unitarios/rodar_checks.sh](https://github.com/PVictorMSI/GRUPO2-COMP2026.2/blob/1c5e2e3bcb7de59f86bffb9cf0c527081a313a43/Testes/unitarios/rodar_checks.sh); [docs/assets/valgrind.jpeg](../assets/valgrind.jpeg).
+**Evidência relacionada no repositório:** [Testes/unitarios/rodar_checks.sh](https://github.com/PVictorMSI/GRUPO2-COMP2026.2/blob/1c5e2e3bcb7de59f86bffb9cf0c527081a313a43/Testes/unitarios/rodar_checks.sh); [docs/conteudo/assets/valgrind.jpeg](../assets/valgrind.jpeg).
 
 **Relatório documental e captura:** [Valgrind](../qualidade/valgrind.md).

@@ -42,4 +42,4 @@ Não foram encontradas atas semanais, comprovantes de formulário, notas ou peri
 
 ## Atualizações futuras
 
-Ao atualizar os registros, identifique nova data e commit; confira as issues na origem; mantenha datas de evidência separadas das datas planejadas; execute `mkdocs build --strict`. Um resultado posterior deve complementar o histórico, sem alterar retroativamente o que foi comprovado em P1 ou P2.
+Ao atualizar os registros, identifique nova data e commit; confira as issues na origem; mantenha datas de evidência separadas das datas planejadas; execute `mkdocs build --strict -f docs/mkdocs.yml`. Um resultado posterior deve complementar o histórico, sem alterar retroativamente o que foi comprovado em P1 ou P2.
