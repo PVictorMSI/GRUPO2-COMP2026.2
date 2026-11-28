@@ -24,7 +24,7 @@ const char* const kPythonKeywords[] = {
 // (locais: x_1, x_2...; globais: x_). Além desta lista, todo nome que começa com
 // "lua_" é reservado ao runtime (ver isReservedName).
 const char* const kRuntimeNames[] = {
-    "LuaError", "LuaTable", "range", "len", "isinstance", "str", "int", "float",
+    "LuaError", "LuaLib", "LuaTable", "range", "len", "isinstance", "str", "int", "float",
     "list", "dict", "tuple", "enumerate", "print", "repr", "bool", "callable",
     "chr", "ord", "id", "max", "min", "abs", "iter", "super", "sorted", "type",
     "next", "Exception", "ValueError", "TypeError", "SystemExit", "RecursionError",

@@ -38,7 +38,7 @@ nesse caso nenhum Python é gerado.
 
 | Lua | Python gerado | Por quê |
 |---|---|---|
-| `a + b`, `a - b`, `a * b`, `-a` | igual | mesma semântica para int/float |
+| `a + b`, `a - b`, `a * b`, `-a` | igual (ou `lua_add`, `lua_sub`, `lua_mul`, `lua_neg` se operando é string) | mesma semântica para int/float; coerção automática de string para número (#36) |
 | `a / b` | `a / b` se `b` é literal ≠ 0, senão `lua_div(a, b)` | no Lua `x / 0` dá `inf`/`nan`, no Python é erro |
 | `a // b`, `a % b` | `a // 2`, `a % 2` com divisor inteiro literal ≠ 0, senão `lua_idiv` / `lua_mod` | piso e sinal do divisor já iguais; diferem na divisão por zero |
 | `a ^ b` | `float(a) ** 2` (expoente inteiro ≥ 0 ou base positiva literal), senão `lua_pow(a, b)` | `^` sempre dá float; `(-8) ** (1/3)` seria complexo no Python |
@@ -119,6 +119,33 @@ sobre `return f(x)`), para não poluir o código com `lua_first` à toa. Parâme
   vetor de 3) é gerada como `dict` `{1: 10, 2: 20, 3: 30}`. Na dúvida, `dict`.
 - `math.floor` vira `lua_math["floor"]` (bibliotecas são `dict`s do runtime).
 
+## #42 — Subconjunto da biblioteca padrão
+
+O subconjunto suportado está definido em um único lugar, `src/stdlib_subset.cpp`:
+
+| Grupo | Suportado |
+|---|---|
+| básicas | `print`, `type`, `tostring`, `tonumber`, `error`, `assert`, `pcall`, `pairs`, `ipairs`, `next`, `select`, `unpack` |
+| `math` | `abs ceil floor max min sqrt exp log sin cos tan fmod tointeger type random randomseed huge pi maxinteger mininteger` |
+| `string` | `len sub upper lower rep reverse byte char find format` (também como método: `s:upper()`) |
+| `table` | `insert remove concat unpack sort` |
+| `io` | `write` |
+
+Qualquer outra função ou biblioteca padrão do Lua (`os`, `coroutine`, `setmetatable`,
+`require`, `string.gsub`, `math.foo`, `_G`...) é rejeitada **na compilação**, com código de saída 1:
+
+```
+Erro semântico na linha 5: 'os.time' não é suportado pelo lua2py (fora do subconjunto da biblioteca padrão)
+```
+
+Usos que só se conhecem na execução (`s:gsub(...)` com `s` variável, `local m = math; m.foo()`)
+dão o mesmo erro pelo runtime: as bibliotecas são `LuaLib`, um `dict` que recusa campos fora
+do subconjunto em vez de devolver `nil`. Funções que o próprio programa define com esses nomes
+(`local function setmetatable(...)`, `function string.trim(s)`) são do usuário e passam normalmente.
+
+Testes: `Testes/geracao/biblioteca_42.lua` (saída igual à do Lua) e
+`Testes/Testes errados/Teste15` e `Teste16` (erro "não suportado").
+
 ## #54 — Validação com py_compile
 
 `make check` traduz **todo** programa válido do repositório e exige que:
@@ -133,7 +160,6 @@ Para criar um teste novo: coloque `nome.lua` em `Testes/geracao/` e rode
 ## Limitações conhecidas
 
 - `pcall`/`error` não acrescentam a posição (`arquivo:linha:`) à mensagem.
-- `"10" + 1` (string convertida em número na aritmética) não é suportado.
 - Com divisor inteiro literal, `x % 3` com `x` float negativo múltiplo de 3 dá `0.0`
   em vez de `-0.0` (só o sinal do zero).
 - Comparar com `==` um número literal e uma variável que guarda `true`/`false`
@@ -141,5 +167,5 @@ Para criar um teste novo: coloque `nome.lua` em `Testes/geracao/` e rode
 - Uma função sem `return` chamada por um valor desconhecido (não pelo nome) e expandida
   (`print(callback())`) passa `nil` em vez de nenhum valor.
 - `string.find` só com busca simples (`plain`); padrões do Lua, `gsub`, `gmatch`,
-  metatabelas e corrotinas não são suportados (biblioteca padrão é a #42).
+  metatabelas e corrotinas ficam fora do subconjunto (erro "não suportado", ver #42).
 - Inteiros não dão a volta em 64 bits como no Lua.

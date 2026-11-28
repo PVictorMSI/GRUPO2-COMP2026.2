@@ -36,6 +36,22 @@ class LuaError(Exception):
         self.value = value
 )PY"},
 
+{"LuaLib", "LuaError", R"PY(
+class LuaLib(dict):
+    """Biblioteca padrão do Lua (math, string...). Ler um campo fora do
+    subconjunto suportado dá erro claro de 'não suportado' em vez de nil (#42)."""
+
+    def __init__(self, name, fields):
+        super().__init__(fields)
+        self.lua_name = name
+
+    def get(self, k, default=None):
+        if k in self:
+            return self[k]
+        raise LuaError("'%s.%s' não é suportado pelo lua2py (fora do subconjunto da biblioteca padrão)"
+                       % (self.lua_name, k))
+)PY"},
+
 {"lua_truthy", "", R"PY(
 def lua_truthy(v):
     """No Lua só nil e false são falsos: 0 e "" são verdadeiros."""
@@ -153,6 +169,50 @@ def lua_tonumber(v, base=None):
 )PY"},
 
 // ----------------------------------------------------- operadores (#36)
+{"lua_add", "LuaError lua_tonumber", R"PY(
+def lua_add(a, b):
+    """+ do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na + nb
+    return a + b
+)PY"},
+
+{"lua_sub", "LuaError lua_tonumber", R"PY(
+def lua_sub(a, b):
+    """- do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na - nb
+    return a - b
+)PY"},
+
+{"lua_mul", "LuaError lua_tonumber", R"PY(
+def lua_mul(a, b):
+    """* do Lua: converte strings para número (coerção automática)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return na * nb
+    return a * b
+)PY"},
+
+{"lua_neg", "LuaError lua_tonumber", R"PY(
+def lua_neg(a):
+    """- unário do Lua: converte string para número (coerção automática)."""
+    if isinstance(a, str):
+        na = lua_tonumber(a)
+        if na is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        return -na
+    return -a
+)PY"},
+
 {"lua_eq", "", R"PY(
 def lua_eq(a, b):
     """== do Lua: tabelas comparam identidade e true nunca é igual a 1."""
@@ -165,9 +225,14 @@ def lua_eq(a, b):
     return a == b
 )PY"},
 
-{"lua_div", "lua_pymath", R"PY(
+{"lua_div", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_div(a, b):
     """/ do Lua: sempre float, e divisão por zero dá inf/-inf/nan (não é erro)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     a, b = float(a), float(b)
     if b == 0.0:
         if a == 0.0 or a != a:
@@ -176,9 +241,14 @@ def lua_div(a, b):
     return a / b
 )PY"},
 
-{"lua_idiv", "LuaError lua_div lua_pymath", R"PY(
+{"lua_idiv", "LuaError lua_tonumber lua_div lua_pymath", R"PY(
 def lua_idiv(a, b):
     """// do Lua: piso da divisão (inteiros: erro se b == 0; floats: inf/nan)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     if isinstance(a, int) and isinstance(b, int):
         if b == 0:
             raise LuaError("attempt to perform 'n//0'")
@@ -187,9 +257,14 @@ def lua_idiv(a, b):
     return float(lua_pymath.floor(q)) if lua_pymath.isfinite(q) else q
 )PY"},
 
-{"lua_mod", "LuaError lua_pymath", R"PY(
+{"lua_mod", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_mod(a, b):
     """% do Lua: resto com o sinal do divisor (inteiros: erro se b == 0)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     if isinstance(a, int) and isinstance(b, int):
         if b == 0:
             raise LuaError("attempt to perform 'n%%0'")
@@ -203,9 +278,14 @@ def lua_mod(a, b):
     return m
 )PY"},
 
-{"lua_pow", "lua_pymath", R"PY(
+{"lua_pow", "LuaError lua_tonumber lua_pymath", R"PY(
 def lua_pow(a, b):
     """^ do Lua: sempre float; casos sem resultado real dão nan/inf (não é erro)."""
+    if isinstance(a, str) or isinstance(b, str):
+        na, nb = lua_tonumber(a), lua_tonumber(b)
+        if na is None or nb is None:
+            raise LuaError("attempt to perform arithmetic on a string value")
+        a, b = na, nb
     a, b = float(a), float(b)
     try:
         return lua_pymath.pow(a, b)
@@ -441,7 +521,7 @@ def lua_pcall(f, *args):
 )PY"},
 
 // -------------------------------- subconjunto da biblioteca padrão
-{"lua_math", "lua_pymath lua_pyrandom", R"PY(
+{"lua_math", "LuaLib lua_pymath lua_pyrandom", R"PY(
 def lua_math_floor(x):
     return lua_pymath.floor(x) if isinstance(x, float) and lua_pymath.isfinite(x) else x
 
@@ -472,7 +552,7 @@ def lua_math_random(m=None, n=None):
     return lua_pyrandom.randint(m, n)
 
 
-lua_math = {
+lua_math = LuaLib("math", {
     "abs": abs, "ceil": lua_math_ceil, "floor": lua_math_floor, "max": max, "min": min,
     "sqrt": lua_pymath.sqrt, "exp": lua_pymath.exp, "log": lua_pymath.log,
     "sin": lua_pymath.sin, "cos": lua_pymath.cos, "tan": lua_pymath.tan,
@@ -480,10 +560,10 @@ lua_math = {
     "random": lua_math_random, "randomseed": lua_pyrandom.seed,
     "huge": float("inf"), "pi": lua_pymath.pi,
     "maxinteger": 2 ** 63 - 1, "mininteger": -2 ** 63,
-}
+})
 )PY"},
 
-{"lua_string", "LuaError lua_tostring lua_tonumber", R"PY(
+{"lua_string", "LuaLib LuaError lua_tostring lua_tonumber", R"PY(
 def lua_str_sub(s, i=1, j=-1):
     n = len(s)
     if i < 0:
@@ -562,16 +642,16 @@ def lua_str_format(fmt, *args):
     return "".join(out)
 
 
-lua_string = {
+lua_string = LuaLib("string", {
     "len": lambda s: len(s.encode("utf-8")), "sub": lua_str_sub,
     "upper": lambda s: s.upper(), "lower": lambda s: s.lower(),
     "rep": lua_str_rep, "reverse": lambda s: s[::-1],
     "byte": lua_str_byte, "char": lambda *cs: "".join(chr(c) for c in cs),
     "find": lua_str_find, "format": lua_str_format,
-}
+})
 )PY"},
 
-{"lua_table", "LuaError lua_get lua_set lua_len lua_concat lua_truthy lua_pyfunctools", R"PY(
+{"lua_table", "LuaLib LuaError lua_get lua_set lua_len lua_concat lua_truthy lua_pyfunctools", R"PY(
 def lua_tbl_insert(t, *args):
     n = lua_len(t)
     if len(args) == 1:
@@ -628,14 +708,14 @@ def lua_tbl_sort(t, comp=None):
         lua_set(t, k + 1, v)
 
 
-lua_table = {
+lua_table = LuaLib("table", {
     "insert": lua_tbl_insert, "remove": lua_tbl_remove, "concat": lua_tbl_concat,
     "unpack": lua_tbl_unpack, "sort": lua_tbl_sort,
-}
+})
 lua_unpack = lua_tbl_unpack
 )PY"},
 
-{"lua_io", "lua_tostring lua_pysys", R"PY(
+{"lua_io", "LuaLib lua_tostring lua_pysys", R"PY(
 def lua_io_write(*args):
     """io.write do Lua (diferente do print, float inteiro sai sem ".0")."""
     for a in args:
@@ -645,7 +725,7 @@ def lua_io_write(*args):
             lua_pysys.stdout.write(lua_tostring(a))
 
 
-lua_io = {"write": lua_io_write}
+lua_io = LuaLib("io", {"write": lua_io_write})
 )PY"},
 
 {"lua_void", "", R"PY(

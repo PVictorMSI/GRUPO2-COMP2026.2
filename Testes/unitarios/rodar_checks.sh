@@ -132,6 +132,32 @@ errado Teste11 "Erro semântico na linha 5:"
 errado Teste12 "Erro semântico na linha 6:"
 errado Teste13 "Erro semântico na linha 3:" "variável 'z' não foi declarada"
 errado Teste14 "Erro semântico na linha 6:"
+errado Teste15 "Erro semântico na linha 5:" "'os.time' não é suportado"
+errado Teste16 "Erro semântico na linha 4:" "'setmetatable' não é suportado" \
+               "Erro semântico na linha 5:" "'string.gsub' não é suportado"
+
+# ------------------------------------- critérios: funções, tabelas e biblioteca
+echo "== Critérios de aceitação (funções, tabelas, biblioteca padrão) =="
+py=$("$LUA2PY" "$DIR/criterios_funcoes_tabelas.lua" 2>&1)
+expect "function soma(a, b) ... end vira 'def soma(a, b)'" \
+    bash -c 'echo "$1" | grep -Eq "^def soma\(a(=None)?, b(=None)?\):"' _ "$py"
+expect "local function fatorial(n) vira 'def fatorial(n)'" \
+    bash -c 'echo "$1" | grep -Eq "^def fatorial\(n(=None)?\):"' _ "$py"
+expect "tabela usada como array vira list: nums = [10, 20, 30]" \
+    bash -c 'echo "$1" | grep -Fxq "nums = [10, 20, 30]"' _ "$py"
+expect "tabela vazia usada como array vira list: pilha = []" \
+    bash -c 'echo "$1" | grep -Fxq "pilha = []"' _ "$py"
+expect "tabela usada como mapa vira dict: pessoa = {\"nome\": ...}" \
+    bash -c 'echo "$1" | grep -Fxq "pessoa = {\"nome\": \"Ana\", \"idade\": 30}"' _ "$py"
+if command -v "${PYTHON:-python3}" >/dev/null 2>&1; then
+    saida=$(echo "$py" | "${PYTHON:-python3}" 2>&1)
+    expect "funções e tabelas traduzidas funcionam no Python" \
+        test "$saida" = "$(printf '5\t120\n10\t3\tAna\t30\t3')"
+    # uso dinâmico (só se sabe na execução): erro claro do runtime, não NameError/KeyError
+    saida=$(printf 'local s = "abc"\nprint(s:gsub("b", "x"))\n' | "$LUA2PY" 2>&1 | "${PYTHON:-python3}" 2>&1)
+    expect "método fora do subconjunto (s:gsub) dá erro 'não suportado' na execução" \
+        bash -c 'echo "$1" | grep -Fq "'"'"'string.gsub'"'"' não é suportado"' _ "$saida"
+fi
 
 # ----------------------------------------------- geração de código (#54)
 # Todo programa válido é traduzido e o .py gerado precisa:
