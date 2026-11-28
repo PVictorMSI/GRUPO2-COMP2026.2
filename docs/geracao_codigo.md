@@ -111,6 +111,33 @@ sobre `return f(x)`), para não poluir o código com `lua_first` à toa. Parâme
   vetor de 3) é gerada como `dict` `{1: 10, 2: 20, 3: 30}`. Na dúvida, `dict`.
 - `math.floor` vira `lua_math["floor"]` (bibliotecas são `dict`s do runtime).
 
+## #42 — Subconjunto da biblioteca padrão
+
+O subconjunto suportado está definido em um único lugar, `src/stdlib_subset.cpp`:
+
+| Grupo | Suportado |
+|---|---|
+| básicas | `print`, `type`, `tostring`, `tonumber`, `error`, `assert`, `pcall`, `pairs`, `ipairs`, `next`, `select`, `unpack` |
+| `math` | `abs ceil floor max min sqrt exp log sin cos tan fmod tointeger type random randomseed huge pi maxinteger mininteger` |
+| `string` | `len sub upper lower rep reverse byte char find format` (também como método: `s:upper()`) |
+| `table` | `insert remove concat unpack sort` |
+| `io` | `write` |
+
+Qualquer outra função ou biblioteca padrão do Lua (`os`, `coroutine`, `setmetatable`,
+`require`, `string.gsub`, `math.foo`, `_G`...) é rejeitada **na compilação**, com código de saída 1:
+
+```
+Erro semântico na linha 5: 'os.time' não é suportado pelo lua2py (fora do subconjunto da biblioteca padrão)
+```
+
+Usos que só se conhecem na execução (`s:gsub(...)` com `s` variável, `local m = math; m.foo()`)
+dão o mesmo erro pelo runtime: as bibliotecas são `LuaLib`, um `dict` que recusa campos fora
+do subconjunto em vez de devolver `nil`. Funções que o próprio programa define com esses nomes
+(`local function setmetatable(...)`, `function string.trim(s)`) são do usuário e passam normalmente.
+
+Testes: `Testes/geracao/biblioteca_42.lua` (saída igual à do Lua) e
+`Testes/Testes errados/Teste15` e `Teste16` (erro "não suportado").
+
 ## #54 — Validação com py_compile
 
 `make check` traduz **todo** programa válido do repositório e exige que:
@@ -132,5 +159,5 @@ Para criar um teste novo: coloque `nome.lua` em `Testes/geracao/` e rode
 - Uma função sem `return` chamada por um valor desconhecido (não pelo nome) e expandida
   (`print(callback())`) passa `nil` em vez de nenhum valor.
 - `string.find` só com busca simples (`plain`); padrões do Lua, `gsub`, `gmatch`,
-  metatabelas e corrotinas não são suportados (biblioteca padrão é a #42).
+  metatabelas e corrotinas ficam fora do subconjunto (erro "não suportado", ver #42).
 - Inteiros não dão a volta em 64 bits como no Lua.

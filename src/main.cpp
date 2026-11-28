@@ -5,7 +5,8 @@
 //       ./build/lua2py programa.lua -o programa.py     grava o Python no arquivo
 //
 // Etapas: léxico -> sintático (AST) -> resolução de escopos (RF06)
-//         -> análise semântica (#27 variáveis não declaradas, #28 erros semânticos)
+//         -> análise semântica (#27 variáveis não declaradas, #28 erros semânticos,
+//            #42 biblioteca padrão fora do subconjunto)
 //         -> geração de código Python (codegen).
 // Erros vão para a saída de erro (stderr); só o código Python vai para a saída padrão.
 // Código de saída: 0 = ok, 1 = erro (léxico, sintático, semântico ou de arquivo).
@@ -19,6 +20,7 @@
 #include "parser.tab.h"
 #include "resolver.hpp"
 #include "semantic_checker.hpp"
+#include "stdlib_subset.hpp"
 
 extern FILE* yyin;
 extern int yyparse();
@@ -60,6 +62,10 @@ int main(int argc, char** argv) {
     // parâmetro duplicado (#28). Roda mesmo se a resolução já achou erros,
     // para o usuário ver todos os problemas de uma vez.
     lua2py::checkSemantics(*root);
+
+    // Funções da biblioteca padrão fora do subconjunto suportado (#42):
+    // erro claro de "não suportado" em vez de um NameError no Python gerado.
+    lua2py::checkStdlibSubset(*root, info);
 
     if (lua2py::sem_errors > 0) {            // erro semântico: o programa não deve compilar
         delete root;

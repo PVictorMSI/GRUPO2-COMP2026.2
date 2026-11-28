@@ -36,6 +36,22 @@ class LuaError(Exception):
         self.value = value
 )PY"},
 
+{"LuaLib", "LuaError", R"PY(
+class LuaLib(dict):
+    """Biblioteca padrão do Lua (math, string...). Ler um campo fora do
+    subconjunto suportado dá erro claro de 'não suportado' em vez de nil (#42)."""
+
+    def __init__(self, name, fields):
+        super().__init__(fields)
+        self.lua_name = name
+
+    def get(self, k, default=None):
+        if k in self:
+            return self[k]
+        raise LuaError("'%s.%s' não é suportado pelo lua2py (fora do subconjunto da biblioteca padrão)"
+                       % (self.lua_name, k))
+)PY"},
+
 {"lua_truthy", "", R"PY(
 def lua_truthy(v):
     """No Lua só nil e false são falsos: 0 e "" são verdadeiros."""
@@ -505,7 +521,7 @@ def lua_pcall(f, *args):
 )PY"},
 
 // -------------------------------- subconjunto da biblioteca padrão
-{"lua_math", "lua_pymath lua_pyrandom", R"PY(
+{"lua_math", "LuaLib lua_pymath lua_pyrandom", R"PY(
 def lua_math_floor(x):
     return lua_pymath.floor(x) if isinstance(x, float) and lua_pymath.isfinite(x) else x
 
@@ -536,7 +552,7 @@ def lua_math_random(m=None, n=None):
     return lua_pyrandom.randint(m, n)
 
 
-lua_math = {
+lua_math = LuaLib("math", {
     "abs": abs, "ceil": lua_math_ceil, "floor": lua_math_floor, "max": max, "min": min,
     "sqrt": lua_pymath.sqrt, "exp": lua_pymath.exp, "log": lua_pymath.log,
     "sin": lua_pymath.sin, "cos": lua_pymath.cos, "tan": lua_pymath.tan,
@@ -544,10 +560,10 @@ lua_math = {
     "random": lua_math_random, "randomseed": lua_pyrandom.seed,
     "huge": float("inf"), "pi": lua_pymath.pi,
     "maxinteger": 2 ** 63 - 1, "mininteger": -2 ** 63,
-}
+})
 )PY"},
 
-{"lua_string", "LuaError lua_tostring lua_tonumber", R"PY(
+{"lua_string", "LuaLib LuaError lua_tostring lua_tonumber", R"PY(
 def lua_str_sub(s, i=1, j=-1):
     n = len(s)
     if i < 0:
@@ -626,16 +642,16 @@ def lua_str_format(fmt, *args):
     return "".join(out)
 
 
-lua_string = {
+lua_string = LuaLib("string", {
     "len": lambda s: len(s.encode("utf-8")), "sub": lua_str_sub,
     "upper": lambda s: s.upper(), "lower": lambda s: s.lower(),
     "rep": lua_str_rep, "reverse": lambda s: s[::-1],
     "byte": lua_str_byte, "char": lambda *cs: "".join(chr(c) for c in cs),
     "find": lua_str_find, "format": lua_str_format,
-}
+})
 )PY"},
 
-{"lua_table", "LuaError lua_get lua_set lua_len lua_concat lua_truthy lua_pyfunctools", R"PY(
+{"lua_table", "LuaLib LuaError lua_get lua_set lua_len lua_concat lua_truthy lua_pyfunctools", R"PY(
 def lua_tbl_insert(t, *args):
     n = lua_len(t)
     if len(args) == 1:
@@ -692,14 +708,14 @@ def lua_tbl_sort(t, comp=None):
         lua_set(t, k + 1, v)
 
 
-lua_table = {
+lua_table = LuaLib("table", {
     "insert": lua_tbl_insert, "remove": lua_tbl_remove, "concat": lua_tbl_concat,
     "unpack": lua_tbl_unpack, "sort": lua_tbl_sort,
-}
+})
 lua_unpack = lua_tbl_unpack
 )PY"},
 
-{"lua_io", "lua_tostring lua_pysys", R"PY(
+{"lua_io", "LuaLib lua_tostring lua_pysys", R"PY(
 def lua_io_write(*args):
     """io.write do Lua (diferente do print, float inteiro sai sem ".0")."""
     for a in args:
@@ -709,7 +725,7 @@ def lua_io_write(*args):
             lua_pysys.stdout.write(lua_tostring(a))
 
 
-lua_io = {"write": lua_io_write}
+lua_io = LuaLib("io", {"write": lua_io_write})
 )PY"},
 
 {"lua_void", "", R"PY(

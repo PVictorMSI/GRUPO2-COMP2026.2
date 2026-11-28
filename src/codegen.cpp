@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "runtime_py.hpp"
+#include "stdlib_subset.hpp"
 
 namespace lua2py {
 
@@ -57,9 +58,7 @@ const Builtin* builtinFor(const Symbol* s) {
 }
 
 bool isLibrary(const Builtin* b) {
-    if (!b) return false;
-    std::string n = b->lua;
-    return n == "math" || n == "string" || n == "table" || n == "io";
+    return b && isSupportedLibrary(b->lua);
 }
 
 // Funções de biblioteca que devolvem VÁRIOS valores; as demais devolvem um só.

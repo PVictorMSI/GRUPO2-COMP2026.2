@@ -26,5 +26,6 @@ O compilador lê um arquivo de origem `.lua`, analisa sua estrutura gramatical e
 *   [ ] Operações aritméticas e lógicas básicas.
 *   [X] Estruturas condicionais (`if`, `elseif`, `else`).
 *   [X] Estruturas de repetição (`while`, `for`).
-*   [ ] Declaração de funções (opcional/a ser implementado).
-*   [ ] Tabelas/Vetores (opcional/a ser implementado).
+*   [X] Declaração e chamada de funções (`function nome(args) ... end` → `def nome(args):`).
+*   [X] Tabelas: usadas como array viram `list`; usadas como mapa viram `dict`.
+*   [X] Subconjunto da biblioteca padrão (`print`, `math`, `string`, `table`, `io.write`...); funções fora dele geram erro de "não suportado".
