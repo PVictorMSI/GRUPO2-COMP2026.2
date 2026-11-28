@@ -818,7 +818,7 @@ private:
 
     // ---------- saída ----------
 
-    void line(const std::string& s) { out_->push_back(std::string(indent_ * 4, ' ') + s); }
+    void line(const std::string& s) { out_->push_back(s.empty() ? "" : std::string(indent_ * 4, ' ') + s); }
 
     void flushPending() {
         out_->insert(out_->end(), pending_.begin(), pending_.end());
@@ -940,7 +940,9 @@ private:
             std::string c = cond(*n.condition).code;
             flushPending();
             line("if " + c + ":");
-            line("    break");
+            ++indent_;
+            line("break");
+            --indent_;
             --indent_;
             break;
         }
