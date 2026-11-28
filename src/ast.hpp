@@ -188,8 +188,10 @@ struct BoolLiteral : Expr {
 
 struct NumberLiteral : Expr {
     double value;
+    long long intVal = 0;    // valor exato para inteiros (evita perda de precisão do double acima de 2^53)
     bool isInteger = false;  // "10" (inteiro) x "10.0" (float): no Lua 5.4 são subtipos diferentes
     explicit NumberLiteral(double v) : Expr(NodeKind::NumberLiteral), value(v) {}
+    explicit NumberLiteral(long long iv) : Expr(NodeKind::NumberLiteral), value(static_cast<double>(iv)), intVal(iv), isInteger(true) {}
 };
 
 struct StringLiteral : Expr {

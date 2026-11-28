@@ -42,7 +42,7 @@ static bool isLvalue(const Expr* e) {
 %}
 
 %union {
-    int    intValue;
+    long long intValue;
     double floatValue;
     char*  strValue;             /* alocado com strdup no lexer */
     Expr*  expr;
@@ -321,7 +321,7 @@ field : LBRACKET exp RBRACKET ASSIGN exp {
 exp   : NIL                      { $$ = at(new NilLiteral()); }
       | FALSE_VAL                { $$ = at(new BoolLiteral(false)); }
       | TRUE_VAL                 { $$ = at(new BoolLiteral(true)); }
-      | NUM                      { auto* n = at(new NumberLiteral($1)); n->isInteger = true; $$ = n; }
+      | NUM                      { auto* n = at(new NumberLiteral($1)); $$ = n; }
       | NUM_FLOAT                { $$ = at(new NumberLiteral($1)); }
       | STRING                   { $$ = at(new StringLiteral($1)); free($1); }
       | VARARG                   { $$ = at(new Vararg()); }

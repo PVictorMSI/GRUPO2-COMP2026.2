@@ -1,0 +1,6 @@
+nil	true	false
+42	2147483648	9223372036854775807
+255	3735928559
+3.14	10000000000.0	-0.0025
+olá mundo	com 'aspas' simples	com
+newline	e	tab
